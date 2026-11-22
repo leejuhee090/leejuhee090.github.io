@@ -245,3 +245,8 @@ footer p { margin:4px 0; }
 .store-header > .store-menu a { padding:14px 16px; }
 .store-header .util .search-open { display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; width:auto; border-radius:8px; padding:0 12px; font-size:13px; gap:6px; }
 .store-header .util .search-open:hover { background:var(--soft); }
+
+/* 스마트스토어 썸네일 권장 1000x1000 정사각형 */
+.card .thumb { aspect-ratio:1 / 1; }
+.detail .main-img { aspect-ratio:1 / 1; }
+.cart-thumb { aspect-ratio:1 / 1; }

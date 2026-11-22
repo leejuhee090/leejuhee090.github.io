@@ -216,3 +216,7 @@ footer p { margin:4px 0; }
 .banner.dragging { cursor:grabbing; }
 .banner img { pointer-events:none; }
 .banner-track { will-change:transform; }
+
+/* 메인 대배너 비율 (카페24 몰리뉴얼 권장 PC 1852x1076, 모바일 1024x1024) */
+.banner { height:clamp(300px, 40vw, 560px); }
+@media (max-width: 640px) { .banner { height:auto; aspect-ratio:1 / 1; } }

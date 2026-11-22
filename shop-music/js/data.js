@@ -1,12 +1,12 @@
-// 악기 샘플 쇼핑몰 데이터 (직접 구성한 예시 상품, 실제 판매처 데이터 아님)
-// image: AI로 만든 이미지를 쓸 때는 images/ 폴더에 넣고 경로를 적어주세요. 없으면 자리표시 이미지를 씁니다.
+// 샘플 쇼핑몰 상품 데이터
+// image: 실제 상품 이미지를 쓸 때는 이 항목에 이미지 경로를 넣으세요. 비워두면 기본 이미지가 나옵니다.
 window.SHOP_PRODUCTS = [
-  { id: 1, name: "입문용 어쿠스틱 기타", category: "string", price: 289000, sale: 259000, tag: "BEST", color: ["#e8d2b0", "#9c6b3c"], image: "", desc: "처음 기타를 시작하는 분을 위한 어쿠스틱 기타입니다. 넥이 편하고 음색이 안정적입니다.", sold: 980 },
-  { id: 2, name: "클래식 기타 (나일론 줄)", category: "string", price: 215000, sale: null, tag: "NEW", color: ["#f0e2c6", "#b8875a"], image: "", desc: "부드러운 나일론 줄을 사용한 클래식 기타입니다. 따뜻한 음색이 특징입니다.", sold: 412 },
-  { id: 3, name: "디지털 피아노 88건반", category: "keys", price: 690000, sale: 629000, tag: "SALE", color: ["#d9d9de", "#55566a"], image: "", desc: "88건반 해머액션 디지털 피아노입니다. 연습용과 홈 연주에 적합합니다.", sold: 336 },
-  { id: 4, name: "입문용 미니 키보드 61건반", category: "keys", price: 129000, sale: null, tag: "", color: ["#dfe7f0", "#6f8aa8"], image: "", desc: "가볍고 작은 61건반 키보드입니다. 좁은 공간에서도 연습하기 좋습니다.", sold: 527 },
-  { id: 5, name: "앰프 내장 일렉 베이스", category: "string", price: 398000, sale: 359000, tag: "BEST", color: ["#e6dccf", "#7a4e3b"], image: "", desc: "그루브가 살아 있는 베이스 기타입니다. 헤드폰 연결로 조용히 연습할 수 있습니다.", sold: 644 },
-  { id: 6, name: "어린이 사이즈 바이올린 세트", category: "string", price: 189000, sale: null, tag: "NEW", color: ["#eedcc3", "#a76f43"], image: "", desc: "어린이 체격에 맞춘 1/4 사이즈 바이올린 세트입니다. 활과 케이스가 함께 들어 있습니다.", sold: 189 },
-  { id: 7, name: "탁상용 전자 메트로놈", category: "acc", price: 29000, sale: 24000, tag: "SALE", color: ["#e4e2dc", "#8a8476"], image: "", desc: "정확한 박자 연습을 위한 메트로놈입니다. 템포와 박자를 쉽게 조절할 수 있습니다.", sold: 752 },
-  { id: 8, name: "기타 튜너 클립형", category: "acc", price: 19000, sale: null, tag: "", color: ["#d9e6dd", "#5f8a6c"], image: "", desc: "클립으로 붙여 쓰는 튜너입니다. 기타, 베이스, 우쿨렐레까지 조율할 수 있습니다.", sold: 1104 }
+  { id: 1, name: "베이직 상품 A", category: "cat1", price: 39000, sale: 32000, tag: "BEST", color: ["#e9e4d8", "#b9ab8c"], image: "", desc: "가볍고 부담 없이 사용할 수 있는 베이직 상품입니다. 매일 편하게 쓰기 좋습니다.", sold: 1280 },
+  { id: 2, name: "시즌 상품 B", category: "cat1", price: 58000, sale: null, tag: "NEW", color: ["#d7dde3", "#8e9aa6"], image: "", desc: "이번 시즌에 새로 입고된 상품입니다. 부드러운 마감으로 만족도가 높습니다.", sold: 640 },
+  { id: 3, name: "프리미엄 상품 C", category: "cat2", price: 46000, sale: 41000, tag: "SALE", color: ["#dfe6dc", "#94a58e"], image: "", desc: "고급스러운 마감의 프리미엄 상품입니다. 선물용으로도 좋습니다.", sold: 912 },
+  { id: 4, name: "데일리 상품 D", category: "cat2", price: 52000, sale: null, tag: "", color: ["#cdd8e4", "#5f7790"], image: "", desc: "일상에서 자주 찾게 되는 데일리 상품입니다. 튼튼하고 관리가 쉽습니다.", sold: 455 },
+  { id: 5, name: "베스트 상품 E", category: "cat1", price: 89000, sale: 79000, tag: "BEST", color: ["#e6d6c3", "#a57d55"], image: "", desc: "많은 고객이 찾는 베스트 상품입니다. 실용성과 디자인을 모두 갖췄습니다.", sold: 1033 },
+  { id: 6, name: "패밀리 상품 F", category: "cat3", price: 27000, sale: null, tag: "NEW", color: ["#e2e0dc", "#7d7a73"], image: "", desc: "가족과 함께 사용하기 좋은 상품입니다. 가볍고 간편하게 챙길 수 있습니다.", sold: 302 },
+  { id: 7, name: "미니 상품 G", category: "cat3", price: 19000, sale: 15000, tag: "SALE", color: ["#e8d9d4", "#b07f72"], image: "", desc: "작고 가벼운 미니 상품입니다. 필요한 곳에 쉽게 가져갈 수 있습니다.", sold: 528 },
+  { id: 8, name: "스페셜 상품 H", category: "cat3", price: 34000, sale: null, tag: "", color: ["#d9d2e4", "#7f6fa0"], image: "", desc: "특별한 날을 위한 스페셜 상품입니다. 구성이 알차서 선택하기 좋습니다.", sold: 211 }
 ];

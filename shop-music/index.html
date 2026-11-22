@@ -3,29 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAMPLE MUSIC | 메인</title>
+  <title>SAMPLE SHOP | 메인</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="stylesheet" href="css/shop.css" />
 </head>
 <body>
   <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="cart.html">장바구니</a><a href="#">주문조회</a></div></div>
   <header class="header"><div class="wrap">
-    <a class="logo" href="index.html">SAMPLE MUSIC</a>
-    <nav class="gnb"><a class="on" href="index.html">홈</a><a href="list.html">전체상품</a><a href="list.html?cat=string">현악기</a><a href="list.html?cat=keys">건반악기</a><a href="list.html?cat=acc">악기 용품</a></nav>
-    <div class="util"><form class="search" action="search.html" role="search"><input type="search" name="q" placeholder="상품 검색" aria-label="상품 검색" /><button type="submit" aria-label="검색">검색</button></form><a class="cart-link" href="cart.html">장바구니 <span class="cart-count">0</span></a></div>
+    <a class="logo" href="index.html">SAMPLE SHOP</a>
+    <nav class="gnb"><a class="on" href="index.html">홈</a><a href="list.html">전체상품</a><a href="list.html?cat=cat1">카테고리 1</a><a href="list.html?cat=cat2">카테고리 2</a><a href="list.html?cat=cat3">카테고리 3</a></nav>
+    <div class="util"><button class="search-open" id="search-open" type="button" aria-label="상품 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button><a class="cart-link" href="cart.html">장바구니 <span class="cart-count">0</span></a></div>
   </div></header>
 
   <section class="banner" id="banner" aria-label="메인 배너">
     <div class="banner-track">
-      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e9e4d8'/%3E%3Ctext x='600' y='190' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%2388795e'%3EAI 배너 이미지 자리 1%3C/text%3E%3C/svg%3E" />
-        <div class="slide-cap"><div class="wrap"><h2>입문자 추천 악기 입고</h2><p>처음 시작하는 분을 위한 기타, 키보드, 바이올린을 만나보세요.</p><a class="btn-line" href="list.html">쇼핑하기</a></div></div></div>
-      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23cdd8e4'/%3E%3Ctext x='600' y='190' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%235f7790'%3EAI 배너 이미지 자리 2%3C/text%3E%3C/svg%3E" />
-        <div class="slide-cap"><div class="wrap"><h2>디지털 피아노 특가</h2><p>88건반 디지털 피아노 최대 10% 할인</p><a class="btn-line" href="list.html?cat=keys">특가 보기</a></div></div></div>
-      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e6d6c3'/%3E%3Ctext x='600' y='190' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%23a57d55'%3EAI 배너 이미지 자리 3%3C/text%3E%3C/svg%3E" />
-        <div class="slide-cap"><div class="wrap"><h2>연습용 악기 용품 모음</h2><p>메트로놈, 튜너 등 연습에 필요한 아이템</p><a class="btn-line" href="list.html?cat=acc">보러 가기</a></div></div></div>
+      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e9e4d8'/%3E%3C/svg%3E" />
+        <div class="slide-cap"><div class="wrap"><h2>신상품 입고</h2><p>새로 입고된 상품을 가장 먼저 만나보세요.</p><a class="btn-line" href="list.html">쇼핑하기</a></div></div></div>
+      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23cdd8e4'/%3E%3C/svg%3E" />
+        <div class="slide-cap"><div class="wrap"><h2>이번 주 특가</h2><p>추천 상품을 특별가로 만나보세요.</p><a class="btn-line" href="list.html?cat=cat2">특가 보기</a></div></div></div>
+      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e6d6c3'/%3E%3C/svg%3E" />
+        <div class="slide-cap"><div class="wrap"><h2>베스트 상품 모음</h2><p>고객들이 가장 많이 찾는 상품입니다.</p><a class="btn-line" href="list.html?cat=cat3">보러 가기</a></div></div></div>
     </div>
-    <button class="banner-nav prev" aria-label="이전 배너">&#8249;</button>
-    <button class="banner-nav next" aria-label="다음 배너">&#8250;</button>
     <div class="dots"></div>
   </section>
 
@@ -41,23 +39,31 @@
   </main>
 
     <section class="section"><div class="wrap">
-      <div class="section-head"><h2>영상으로 보기</h2><a href="list.html">상품 보러가기 &rsaquo;</a></div>
+      <div class="section-head"><h2>추천 영상</h2><a href="list.html">상품 보러가기 &rsaquo;</a></div>
       <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/to3sjq-CAvA" title="샘플 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <p class="video-cap">샘플 영상 (포트폴리오 전용)</p>
+      
     </div></section>
   <footer><div class="wrap">
-    <p><b>SAMPLE MUSIC</b> (포트폴리오용 예시 악기 쇼핑몰)</p>
-    <p>이 페이지는 Cafe24 쇼핑몰 구조를 참고해 직접 구성한 악기 샘플이며, 실제 판매처와 무관합니다.</p>
+    <p><b>SAMPLE SHOP</b></p>
+    <p>바로 적용 가능한 Cafe24 쇼핑몰 샘플</p>
   </div></footer>
   <div class="popup-dim" id="popup" hidden>
     <div class="popup" role="dialog" aria-modal="true" aria-labelledby="pop-title">
       <p class="pop-tag">NOTICE</p>
-      <h3 id="pop-title">신규 입고 안내</h3>
-      <p>처음 시작하는 분을 위한 기타와 키보드 신상품이 입고되었습니다.</p>
+      <h3 id="pop-title">신상품 입고 안내</h3>
+      <p>새로 입고된 상품을 만나보세요.</p>
       <div class="pop-actions">
         <label><input type="checkbox" id="pop-hide" /> 오늘 하루 보지 않기</label>
         <button id="pop-close" type="button">닫기</button>
       </div>
+    </div>
+  </div>
+  <div class="popup-dim search-dim" id="search-modal" hidden>
+    <div class="search-pop" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-top"><h3 id="search-title">상품 검색</h3><button id="search-close" type="button" aria-label="닫기">&times;</button></div>
+      <input type="search" id="search-input" placeholder="상품명을 입력하세요" aria-label="상품 검색어" autocomplete="off" />
+      <p class="search-count" id="search-count"></p>
+      <ul class="search-results" id="search-list"></ul>
     </div>
   </div>
   <div class="toast" id="toast"></div>

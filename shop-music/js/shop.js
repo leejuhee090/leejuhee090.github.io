@@ -1,10 +1,10 @@
 (function () {
   var P = window.SHOP_PRODUCTS || [];
-  var CAT = { string: "현악기", keys: "건반악기", acc: "악기 용품" };
+  var CAT = { cat1: "카테고리 1", cat2: "카테고리 2", cat3: "카테고리 3" };
   // 구성 옵션: extra는 기본 가격에 더해지는 금액
   var OPTS = [
     { label: "기본 구성", extra: 0 },
-    { label: "풀세트 (케이스·소모품 포함)", extra: 20000 }
+    { label: "추가 구성", extra: 20000 }
   ];
   var CART_KEY = "sample-music-cart";
   var POPUP_KEY = "sample-music-popup-hide";
@@ -16,14 +16,14 @@
   function byId(id) { return P.filter(function (p) { return p.id === id; })[0]; }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]; }); }
 
-  // 자리표시 이미지 (AI 이미지를 넣기 전까지 사용)
+  // 상품 이미지가 없을 때 쓰는 기본 이미지
   function placeholder(p, label) {
     var c = p.color || ["#eee", "#999"];
     var svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'>" +
       "<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='" + c[0] + "'/><stop offset='1' stop-color='" + c[1] + "'/></linearGradient></defs>" +
       "<rect width='300' height='400' fill='url(#g)'/>" +
       "<text x='150' y='190' text-anchor='middle' font-family='sans-serif' font-size='18' fill='#fff' opacity='.95'>" + (label || p.name) + "</text>" +
-      "<text x='150' y='220' text-anchor='middle' font-family='sans-serif' font-size='13' fill='#fff' opacity='.8'>AI 이미지 자리</text></svg>";
+      "</svg>";
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg).replace(/'/g, "%27");
   }
   function imgOf(p) { return p.image ? p.image : placeholder(p); }
@@ -83,8 +83,9 @@
       dots.forEach(function (d, k) { d.classList.toggle("on", k === i); });
     }
     dots.forEach(function (d, k) { d.addEventListener("click", function () { go(k); reset(); }); });
-    $(".banner-nav.prev", root).addEventListener("click", function () { go(i - 1); reset(); });
-    $(".banner-nav.next", root).addEventListener("click", function () { go(i + 1); reset(); });
+    var prev = $(".banner-nav.prev", root), next = $(".banner-nav.next", root);
+    if (prev) prev.addEventListener("click", function () { go(i - 1); reset(); });
+    if (next) next.addEventListener("click", function () { go(i + 1); reset(); });
     function reset() { clearInterval(timer); timer = setInterval(function () { go(i + 1); }, 4500); }
     go(0); reset();
   }
@@ -126,18 +127,31 @@
     render();
   }
 
-  // ---------- 검색 결과 ----------
+  // ---------- 상품 검색 팝업 ----------
   function initSearch() {
-    var box = $("#search-list"); if (!box) return;
-    var q = (new URLSearchParams(location.search).get("q") || "").trim();
-    $("#search-input").value = q;
-    var words = q.toLowerCase().split(/\s+/).filter(Boolean);
-    var list = words.length ? P.filter(function (p) {
-      var hay = (p.name + " " + p.desc + " " + (CAT[p.category] || "")).toLowerCase();
-      return words.every(function (w) { return hay.indexOf(w) >= 0; });
-    }) : [];
-    $("#search-count").textContent = q ? "검색 결과 " + list.length + "개" : "검색어를 입력해 주세요.";
-    box.innerHTML = list.length ? list.map(card).join("") : (q ? "<li class='empty'>\"" + esc(q) + "\"에 맞는 상품이 없습니다. 다른 검색어를 입력해 보세요.</li>" : "");
+    var btn = $("#search-open"), modal = $("#search-modal"); if (!btn || !modal) return;
+    var input = $("#search-input"), list = $("#search-list"), count = $("#search-count");
+    function search() {
+      var q = input.value.trim();
+      var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+      var hit = words.length ? P.filter(function (p) {
+        var hay = (p.name + " " + p.desc + " " + (CAT[p.category] || "")).toLowerCase();
+        return words.every(function (w) { return hay.indexOf(w) >= 0; });
+      }) : [];
+      if (!q) { count.textContent = "검색어를 입력해 주세요."; list.innerHTML = ""; return; }
+      count.textContent = "검색 결과 " + hit.length + "개";
+      list.innerHTML = hit.length ? hit.map(function (p) {
+        return "<li><a href='product.html?id=" + p.id + "'><img alt='' src='" + imgOf(p) + "'><span><b>" + esc(p.name) + "</b><small>" + won(p.sale || p.price) + "</small></span></a></li>";
+      }).join("") : "<li class='empty'>\"" + esc(q) + "\"에 맞는 상품이 없습니다.</li>";
+    }
+    function open() { modal.hidden = false; setTimeout(function () { input.focus(); }, 0); }
+    function close() { modal.hidden = true; }
+    btn.addEventListener("click", open);
+    $("#search-close").addEventListener("click", close);
+    modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) close(); });
+    input.addEventListener("input", search);
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") e.preventDefault(); });
   }
 
   // ---------- 상세 ----------
@@ -145,7 +159,7 @@
     var root = $("#detail"); if (!root) return;
     var id = parseInt(new URLSearchParams(location.search).get("id"), 10);
     var p = byId(id) || P[0];
-    document.title = p.name + " | SAMPLE MUSIC";
+    document.title = p.name + " | SAMPLE SHOP";
     $("#crumb-cat").textContent = CAT[p.category];
     $("#crumb-cat").href = "list.html?cat=" + p.category;
     $("#crumb-name").textContent = p.name;
@@ -243,7 +257,7 @@
       writeCart(items); render();
     });
     $("#cart-clear").addEventListener("click", function () { writeCart([]); render(); toast("장바구니를 비웠습니다."); });
-    $("#cart-order").addEventListener("click", function () { toast("샘플 페이지라 주문은 진행되지 않습니다."); });
+    $("#cart-order").addEventListener("click", function () { toast("주문 기능은 준비 중입니다."); });
     render();
   }
 

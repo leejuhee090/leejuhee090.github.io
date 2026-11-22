@@ -51,6 +51,8 @@ img { display:block; max-width:100%; }
 .price s { color:#aaa; margin-right:6px; }
 .price .sale-price { color:var(--red); font-weight:700; margin-right:4px; }
 .price b { font-weight:700; }
+.price .price-row { display:block; }
+.price .price-row.origin s { font-size:13px; }
 
 /* 목록 페이지 */
 .page-title { padding:32px 0 8px; }
@@ -233,6 +235,5 @@ footer p { margin:4px 0; }
 .card .quick { position:absolute; left:10px; right:10px; bottom:10px; z-index:3; padding:11px 0; border:0; border-radius:6px; background:var(--ink); color:#fff; font-size:13px; font-weight:700; opacity:0; transform:translateY(8px); transition:opacity .15s, transform .15s; }
 .card:hover .quick, .card:focus-within .quick { opacity:1; transform:none; }
 .card .card-info { display:block; }
-.card .desc { margin:2px 0 6px; font-size:13px; color:var(--sub); display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
 @media (hover:none) { .card .quick { opacity:1; transform:none; } }
 .empty-note { margin:0; padding:24px; text-align:center; color:var(--sub); border:1px dashed var(--line); border-radius:var(--radius); font-size:14px; }

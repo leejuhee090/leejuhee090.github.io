@@ -1,12 +1,13 @@
-// 샘플 쇼핑몰 상품 데이터
+// 가상 가구 쇼핑몰 샘플 상품 데이터 (실제 브랜드·제품과 무관한 가상 상품)
 // image: 실제 상품 이미지를 쓸 때는 이 항목에 이미지 경로를 넣으세요. 비워두면 기본 이미지가 나옵니다.
+// prompt: AI 이미지 생성에 쓴 프롬프트 (포트폴리오 설명용, 페이지에는 표시되지 않음)
 window.SHOP_PRODUCTS = [
-  { id: 1, name: "베이직 상품 A", category: "cat1", price: 39000, sale: 32000, tag: "BEST", color: ["#e9e4d8", "#b9ab8c"], image: "", desc: "가볍고 부담 없이 사용할 수 있는 베이직 상품입니다. 매일 편하게 쓰기 좋습니다.", sold: 1280 },
-  { id: 2, name: "시즌 상품 B", category: "cat1", price: 58000, sale: null, tag: "NEW", color: ["#d7dde3", "#8e9aa6"], image: "", desc: "이번 시즌에 새로 입고된 상품입니다. 부드러운 마감으로 만족도가 높습니다.", sold: 640 },
-  { id: 3, name: "프리미엄 상품 C", category: "cat2", price: 46000, sale: 41000, tag: "SALE", color: ["#dfe6dc", "#94a58e"], image: "", desc: "고급스러운 마감의 프리미엄 상품입니다. 선물용으로도 좋습니다.", sold: 912 },
-  { id: 4, name: "데일리 상품 D", category: "cat2", price: 52000, sale: null, tag: "", color: ["#cdd8e4", "#5f7790"], image: "", desc: "일상에서 자주 찾게 되는 데일리 상품입니다. 튼튼하고 관리가 쉽습니다.", sold: 455 },
-  { id: 5, name: "베스트 상품 E", category: "cat1", price: 89000, sale: 79000, tag: "BEST", color: ["#e6d6c3", "#a57d55"], image: "", desc: "많은 고객이 찾는 베스트 상품입니다. 실용성과 디자인을 모두 갖췄습니다.", sold: 1033 },
-  { id: 6, name: "패밀리 상품 F", category: "cat3", price: 27000, sale: null, tag: "NEW", color: ["#e2e0dc", "#7d7a73"], image: "", desc: "가족과 함께 사용하기 좋은 상품입니다. 가볍고 간편하게 챙길 수 있습니다.", sold: 302 },
-  { id: 7, name: "미니 상품 G", category: "cat3", price: 19000, sale: 15000, tag: "SALE", color: ["#e8d9d4", "#b07f72"], image: "", desc: "작고 가벼운 미니 상품입니다. 필요한 곳에 쉽게 가져갈 수 있습니다.", sold: 528 },
-  { id: 8, name: "스페셜 상품 H", category: "cat3", price: 34000, sale: null, tag: "", color: ["#d9d2e4", "#7f6fa0"], image: "", desc: "특별한 날을 위한 스페셜 상품입니다. 구성이 알차서 선택하기 좋습니다.", sold: 211 }
+  { id: 1, name: "원목 라운지 의자", category: "cat1", price: 129000, sale: 109000, tag: "BEST", color: ["#e9e4d8", "#b9ab8c"], image: "", desc: "원목 프레임에 곡선을 살린 라운지 의자입니다. 거실 한쪽에 두면 독서 공간이 됩니다.", sold: 1280, prompt: "original wooden lounge chair, curved oak frame, soft beige cushion, flat illustration, plain white background, 3:4" },
+  { id: 2, name: "패브릭 2인 소파", category: "cat1", price: 459000, sale: null, tag: "NEW", color: ["#d7dde3", "#8e9aa6"], image: "", desc: "부드러운 패브릭으로 마감한 2인용 소파입니다. 등받이가 낮아 공간이 넓어 보입니다.", sold: 640, prompt: "original two-seat fabric sofa, light gray upholstery, minimal legs, flat illustration, plain white background, 3:4" },
+  { id: 3, name: "화이트 수납 침대 프레임", category: "cat2", price: 389000, sale: 359000, tag: "SALE", color: ["#dfe6dc", "#94a58e"], image: "", desc: "침대 아래 서랍이 있어 수납이 편한 프레임입니다. 헤드 높이를 낮춰 깔끔하게 연출했습니다.", sold: 912, prompt: "original white storage bed frame with drawers, low headboard, flat illustration, plain background, 3:4" },
+  { id: 4, name: "슬림 협탁", category: "cat2", price: 58000, sale: null, tag: "", color: ["#cdd8e4", "#5f7790"], image: "", desc: "좁은 침실에도 어울리는 얇은 협탁입니다. 서랍 하나로 작은 물건을 정리할 수 있습니다.", sold: 455, prompt: "original slim bedside table, one drawer, light wood finish, flat illustration, plain background, 3:4" },
+  { id: 5, name: "월넛 다이닝 테이블", category: "cat1", price: 289000, sale: 259000, tag: "BEST", color: ["#e6d6c3", "#a57d55"], image: "", desc: "짙은 월넛 색상의 식탁입니다. 4인이 둘러앉아도 여유가 있는 크기입니다.", sold: 1033, prompt: "original walnut dining table, four legs, rectangular top, flat illustration, plain background, 3:4" },
+  { id: 6, name: "모던 책장", category: "cat3", price: 149000, sale: null, tag: "NEW", color: ["#e2e0dc", "#7d7a73"], image: "", desc: "오픈형 칸과 닫힌 칸을 함께 쓸 수 있는 책장입니다. 책과 소품을 나눠서 보관하기 좋습니다.", sold: 302, prompt: "original modern bookshelf, open and closed compartments, gray finish, flat illustration, plain background, 3:4" },
+  { id: 7, name: "리넨 수납함", category: "cat3", price: 19000, sale: 15000, tag: "SALE", color: ["#e8d9d4", "#b07f72"], image: "", desc: "가볍고 접을 수 있는 리넨 수납함입니다. 옷장이나 선반 어디에든 쉽게 넣을 수 있습니다.", sold: 528, prompt: "original folding linen storage box, beige, flat illustration, plain background, 3:4" },
+  { id: 8, name: "스탠드 조명", category: "cat3", price: 45000, sale: null, tag: "", color: ["#d9d2e4", "#7f6fa0"], image: "", desc: "책상이나 침대 옆에 두기 좋은 간접 조명입니다. 밝기를 세 단계로 조절할 수 있습니다.", sold: 211, prompt: "original floor standing lamp with fabric shade, minimal stand, flat illustration, plain background, 3:4" }
 ];

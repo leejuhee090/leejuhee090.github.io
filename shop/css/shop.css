@@ -238,3 +238,5 @@ footer p { margin:4px 0; }
 .card .card-info { display:block; }
 @media (hover:none) { .card .quick { opacity:1; transform:none; } }
 .empty-note { margin:0; padding:24px; text-align:center; color:var(--sub); border:1px dashed var(--line); border-radius:var(--radius); font-size:14px; }
+
+#intro-img { display:block; width:100%; height:auto; }

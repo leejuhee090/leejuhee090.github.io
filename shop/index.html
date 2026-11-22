@@ -8,24 +8,22 @@
   <link rel="stylesheet" href="css/shop.css" />
 </head>
 <body>
-  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="#">장바구니</a><a href="#">주문조회</a></div></div>
+  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="cart.html">장바구니</a><a href="#">주문조회</a></div></div>
   <header class="header"><div class="wrap">
     <a class="logo" href="index.html">SAMPLE SHOP</a>
-    <nav class="gnb"><a class="on" href="index.html">홈</a><a href="list.html">전체상품</a><a href="list.html">상의</a><a href="list.html">하의</a><a href="list.html">가방</a><a href="list.html">액세서리</a></nav>
-    <div class="util"><span>검색</span><span>장바구니 <span class="cart-count">0</span></span></div>
+    <nav class="gnb"><a class="on" href="index.html">홈</a><a href="list.html">전체상품</a><a href="list.html?cat=cat1">거실 가구</a><a href="list.html?cat=cat2">침실 가구</a><a href="list.html?cat=cat3">수납·소품</a></nav>
+    <div class="util"><button class="search-open" id="search-open" type="button" aria-label="상품 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button><a class="cart-link" href="cart.html">장바구니 <span class="cart-count">0</span></a></div>
   </div></header>
 
   <section class="banner" id="banner" aria-label="메인 배너">
     <div class="banner-track">
-      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e9e4d8'/%3E%3Ctext x='600' y='190' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%2388795e'%3EAI 배너 이미지 자리 1%3C/text%3E%3C/svg%3E" />
-        <div class="slide-cap"><div class="wrap"><h2>2026 S/S 신상품 입고</h2><p>가볍고 편안한 여름 데일리 룩을 만나보세요.</p><a class="btn-line" href="list.html">쇼핑하기</a></div></div></div>
-      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23cdd8e4'/%3E%3Ctext x='600' y='190' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%235f7790'%3EAI 배너 이미지 자리 2%3C/text%3E%3C/svg%3E" />
-        <div class="slide-cap"><div class="wrap"><h2>데님 시즌 특가</h2><p>스트레이트 데님 및 와이드 팬츠 최대 15% 할인</p><a class="btn-line" href="list.html?cat=bottoms">특가 보기</a></div></div></div>
-      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e6d6c3'/%3E%3Ctext x='600' y='190' text-anchor='middle' font-family='sans-serif' font-size='28' fill='%23a57d55'%3EAI 배너 이미지 자리 3%3C/text%3E%3C/svg%3E" />
-        <div class="slide-cap"><div class="wrap"><h2>가방 BEST 모음</h2><p>가장 많이 찾는 토트백과 크로스백</p><a class="btn-line" href="list.html?cat=bags">보러 가기</a></div></div></div>
+      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e9e4d8'/%3E%3C/svg%3E" />
+        <div class="slide-cap"><div class="wrap"><h2>신상품 입고</h2><p>새로 입고된 상품을 가장 먼저 만나보세요.</p><a class="btn-line" href="list.html">쇼핑하기</a></div></div></div>
+      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23cdd8e4'/%3E%3C/svg%3E" />
+        <div class="slide-cap"><div class="wrap"><h2>이번 주 특가</h2><p>추천 상품을 특별가로 만나보세요.</p><a class="btn-line" href="list.html?cat=cat2">특가 보기</a></div></div></div>
+      <div class="slide"><img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 380'%3E%3Crect width='1200' height='380' fill='%23e6d6c3'/%3E%3C/svg%3E" />
+        <div class="slide-cap"><div class="wrap"><h2>인기 가구 모음</h2><p>고객들이 가장 많이 찾는 가구입니다.</p><a class="btn-line" href="list.html?cat=cat3">보러 가기</a></div></div></div>
     </div>
-    <button class="banner-nav prev" aria-label="이전 배너">&#8249;</button>
-    <button class="banner-nav next" aria-label="다음 배너">&#8250;</button>
     <div class="dots"></div>
   </section>
 
@@ -40,10 +38,34 @@
     </div></section>
   </main>
 
+    <section class="section"><div class="wrap">
+      <div class="section-head"><h2>추천 영상</h2><a href="list.html">상품 보러가기 &rsaquo;</a></div>
+      <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/to3sjq-CAvA" title="샘플 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      
+    </div></section>
   <footer><div class="wrap">
-    <p><b>SAMPLE SHOP</b> (포트폴리오용 예시 쇼핑몰)</p>
-    <p>이 페이지는 Cafe24 쇼핑몰 구조를 참고해 직접 구성한 샘플이며, 실제 판매처와 무관합니다.</p>
+    <p><b>SAMPLE SHOP</b></p>
+    <p>바로 적용 가능한 Cafe24 쇼핑몰 샘플</p>
   </div></footer>
+  <div class="popup-dim" id="popup" hidden>
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+      <p class="pop-tag">NOTICE</p>
+      <h3 id="pop-title">신상품 입고 안내</h3>
+      <p>새로 입고된 상품을 만나보세요.</p>
+      <div class="pop-actions">
+        <label><input type="checkbox" id="pop-hide" /> 오늘 하루 보지 않기</label>
+        <button id="pop-close" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
+  <div class="popup-dim search-dim" id="search-modal" hidden>
+    <div class="search-pop" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-top"><h3 id="search-title">상품 검색</h3><button id="search-close" type="button" aria-label="닫기">&times;</button></div>
+      <input type="search" id="search-input" placeholder="상품명을 입력하세요" aria-label="상품 검색어" autocomplete="off" />
+      <p class="search-count" id="search-count"></p>
+      <ul class="search-results" id="search-list"></ul>
+    </div>
+  </div>
   <div class="toast" id="toast"></div>
   <script src="js/data.js"></script>
   <script src="js/shop.js"></script>

@@ -213,7 +213,7 @@
     $("#crumb-name").textContent = p.name;
     $("#main-img").src = imgOf(p);
     $("#main-img").alt = p.name;
-    $("#intro-img").src = imgOf(p);
+    $("#intro-img").src = p.detail || imgOf(p);
     $("#intro-img").alt = p.name;
     $("#p-name").textContent = p.name;
     $("#p-price").innerHTML = p.sale ? "<s>" + won(p.price) + "</s> <span class='sale-price'>" + won(p.sale) + "</span>" : won(p.price);

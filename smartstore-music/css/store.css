@@ -250,3 +250,16 @@ footer p { margin:4px 0; }
 .card .thumb { aspect-ratio:1 / 1; }
 .detail .main-img { aspect-ratio:1 / 1; }
 .cart-thumb { aspect-ratio:1 / 1; }
+
+/* 모바일 스토어 헤더: 로고 한 줄 유지, 검색은 아이콘만 */
+.store-header .logo { white-space:nowrap; }
+@media (max-width: 640px) {
+  .store-header .logo { font-size:16px; letter-spacing:.02em; }
+  .store-header .lbl { display:none; }
+  .store-header .util .search-open { padding:0 9px; }
+  .store-header .util { gap:8px; }
+  .store-header .util .cart-link { font-size:13px; }
+  .store-header > .store-info { padding:14px 0 10px; }
+  .store-avatar { width:44px; height:44px; font-size:17px; }
+  .store-name { font-size:17px; }
+}

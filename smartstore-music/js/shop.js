@@ -6,8 +6,8 @@
     { label: "기본 구성", extra: 0 },
     { label: "추가 구성", extra: 20000 }
   ];
-  var CART_KEY = "sample-music-cart";
-  var POPUP_KEY = "sample-music-popup-hide";
+  var CART_KEY = "sample-shop-cart";
+  var POPUP_KEY = "sample-shop-popup-hide";
   var SHIPPING_FEE = 3000, FREE_SHIP_OVER = 30000;
 
   function $(s, r) { return (r || document).querySelector(s); }

@@ -197,9 +197,8 @@ footer p { margin:4px 0; }
 }
 
 /* ---------- 상품 검색 팝업 ---------- */
-.search-open { width:40px; height:40px; border:1px solid var(--line); background:#fff; color:var(--ink); display:grid; place-items:center; border-radius:50%; padding:0; cursor:pointer; transition:background .15s, color .15s, border-color .15s; }
-.search-open svg { width:18px; height:18px; }
-.search-open:hover, .search-open:focus-visible { background:var(--ink); color:#fff; border-color:var(--ink); outline:none; }
+.search-open { width:36px; height:36px; border:0; background:none; color:var(--ink); display:grid; place-items:center; border-radius:50%; padding:0; cursor:pointer; }
+.search-open:hover, .search-open:focus-visible { background:var(--soft); outline:none; }
 .search-dim { z-index:70; align-items:start; padding-top:12vh; }
 .search-pop { width:min(560px, 100%); background:#fff; border-radius:14px; padding:20px; box-shadow:0 20px 50px rgba(0,0,0,.25); max-height:76vh; display:flex; flex-direction:column; }
 .search-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }

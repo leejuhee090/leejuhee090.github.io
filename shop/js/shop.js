@@ -327,7 +327,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     updateBadge();
-    initBanner(); initMain(); initList(); initSearch(); initDetail(); initCart();
+    initBanner(); initMain(); initList(); initSearch(); initDetail(); initCart(); initPopup();
     document.addEventListener("click", function (e) {
       var q = e.target.closest("[data-quick]");
       if (q) {

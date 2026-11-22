@@ -220,3 +220,19 @@ footer p { margin:4px 0; }
 /* 메인 대배너 비율 (카페24 몰리뉴얼 권장 PC 1852x1076, 모바일 1024x1024) */
 .banner { height:clamp(300px, 40vw, 560px); }
 @media (max-width: 640px) { .banner { height:auto; aspect-ratio:1 / 1; } }
+
+/* ---------- 상품 카드: 할인율, 설명, 찜·장바구니 버튼 ---------- */
+.card { position:relative; }
+.card .thumb { position:relative; }
+.card .thumb-link { position:absolute; inset:0; z-index:1; }
+.card .thumb img { pointer-events:none; }
+.card .badge { z-index:2; }
+.card .rate { position:absolute; left:10px; top:44px; z-index:2; background:#fff; color:var(--red); font-size:12px; font-weight:800; padding:3px 7px; border-radius:4px; }
+.card .wish { position:absolute; right:10px; top:10px; z-index:3; width:34px; height:34px; border-radius:50%; border:0; background:#fff; color:var(--ink); font-size:18px; line-height:1; display:grid; place-items:center; }
+.card .wish.on { color:var(--red); }
+.card .quick { position:absolute; left:10px; right:10px; bottom:10px; z-index:3; padding:11px 0; border:0; border-radius:6px; background:var(--ink); color:#fff; font-size:13px; font-weight:700; opacity:0; transform:translateY(8px); transition:opacity .15s, transform .15s; }
+.card:hover .quick, .card:focus-within .quick { opacity:1; transform:none; }
+.card .card-info { display:block; }
+.card .desc { margin:2px 0 6px; font-size:13px; color:var(--sub); display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+@media (hover:none) { .card .quick { opacity:1; transform:none; } }
+.empty-note { margin:0; padding:24px; text-align:center; color:var(--sub); border:1px dashed var(--line); border-radius:var(--radius); font-size:14px; }

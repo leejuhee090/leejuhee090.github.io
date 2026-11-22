@@ -17,3 +17,8 @@
 | product-8.jpg | 스탠드 조명 | original floor standing lamp with a fabric shade and a minimal stand, product photo, soft daylight, plain light background, no text, no logo, 3:4 |
 
 생성 후 `shop/images/` 폴더에 위 파일명으로 저장하면, 상품 데이터(`shop/js/data.js`)의 `image` 경로가 자동으로 연결됩니다.
+
+## 현재 적용된 이미지
+
+현재 페이지에는 위 프롬프트 방식이 아니라, 원본 사진 없이 Claude가 직접 그린 SVG 일러스트(`product-1.svg` ~ `product-8.svg`)가 쓰입니다.
+나중에 AI 이미지 생성 도구로 사진을 만들면 같은 파일명으로 교체하면 됩니다. 이 경우 `shop/js/data.js`의 확장자만 `.jpg` 등으로 바꾸면 됩니다.

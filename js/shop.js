@@ -1,6 +1,6 @@
 (function () {
   var P = window.SHOP_PRODUCTS || [];
-  var CAT = { cat1: "카테고리 1", cat2: "카테고리 2", cat3: "카테고리 3" };
+  var CAT = { cat1: "거실 가구", cat2: "침실 가구", cat3: "수납·소품" };
   // 구성 옵션: extra는 기본 가격에 더해지는 금액
   var OPTS = [
     { label: "기본 구성", extra: 0 },

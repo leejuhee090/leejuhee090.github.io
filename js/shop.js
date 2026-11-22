@@ -206,9 +206,7 @@
     $("#main-img").src = imgOf(p);
     $("#main-img").alt = p.name;
     $("#p-name").textContent = p.name;
-    $("#p-desc").textContent = p.desc;
     $("#p-price").innerHTML = p.sale ? "<s>" + won(p.price) + "</s> <span class='sale-price'>" + won(p.sale) + "</span>" : won(p.price);
-    $("#p-cat").textContent = CAT[p.category];
     $("#p-sold").textContent = p.sold.toLocaleString("ko-KR") + "개 구매";
     $("#intro-desc").textContent = p.desc;
     $("#spec-cat").textContent = CAT[p.category];

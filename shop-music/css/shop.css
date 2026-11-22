@@ -210,3 +210,9 @@ footer p { margin:4px 0; }
 .search-results span { display:flex; flex-direction:column; }
 .search-results small { color:var(--red); font-weight:700; margin-top:2px; }
 .search-results li.empty { padding:24px 0; text-align:center; color:var(--sub); grid-column:auto; }
+
+/* 드래그 슬라이더 */
+.banner { cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.banner.dragging { cursor:grabbing; }
+.banner img { pointer-events:none; }
+.banner-track { will-change:transform; }

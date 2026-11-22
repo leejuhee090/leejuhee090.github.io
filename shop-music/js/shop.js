@@ -83,6 +83,37 @@
       dots.forEach(function (d, k) { d.classList.toggle("on", k === i); });
     }
     dots.forEach(function (d, k) { d.addEventListener("click", function () { go(k); reset(); }); });
+    // 드래그(마우스·터치)로 슬라이드 넘기기
+    var startX = 0, dx = 0, dragging = false, moved = false;
+    function beginDrag(e) {
+      if (e.target.closest(".dots button, .slide-cap a")) return;
+      dragging = true; moved = false; dx = 0; startX = e.clientX;
+      track.style.transition = "none"; clearInterval(timer);
+      if (root.setPointerCapture) root.setPointerCapture(e.pointerId);
+    }
+    function moveDrag(e) {
+      if (!dragging) return;
+      dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) moved = true;
+      track.style.transform = "translateX(calc(-" + i * 100 + "% + " + dx + "px))";
+    }
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false; track.style.transition = "";
+      var w = root.clientWidth, step = 0;
+      if (dx < -w * 0.15) step = 1; else if (dx > w * 0.15) step = -1;
+      go(i + step); reset();
+    }
+    root.addEventListener("pointerdown", beginDrag);
+    root.addEventListener("pointermove", moveDrag);
+    root.addEventListener("pointerup", endDrag);
+    root.addEventListener("pointercancel", endDrag);
+    root.addEventListener("pointerleave", endDrag);
+    // 드래그 후에는 링크 클릭이 발생하지 않도록 막기
+    root.addEventListener("click", function (e) {
+      if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+    }, true);
+    root.addEventListener("dragstart", function (e) { e.preventDefault(); });
     var prev = $(".banner-nav.prev", root), next = $(".banner-nav.next", root);
     if (prev) prev.addEventListener("click", function () { go(i - 1); reset(); });
     if (next) next.addEventListener("click", function () { go(i + 1); reset(); });
@@ -175,7 +206,7 @@
     $("#spec-id").textContent = "SAMPLE-" + String(p.id).padStart(4, "0");
 
     var opt = $("#opt"), qty = 1;
-    opt.innerHTML = "<option value=''>[필수] 구성 선택</option>" + OPTS.map(function (o, k) {
+    opt.innerHTML = "<option value=''>[필수] 옵션 선택</option>" + OPTS.map(function (o, k) {
       return "<option value='" + k + "'>" + o.label + (o.extra ? " (+" + o.extra.toLocaleString("ko-KR") + "원)" : "") + "</option>";
     }).join("");
     function selected() { return opt.value === "" ? -1 : parseInt(opt.value, 10); }

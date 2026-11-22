@@ -59,15 +59,25 @@
 
   // ---------- 카드 ----------
   function card(p) {
+    var rate = p.sale ? Math.round((p.price - p.sale) / p.price * 100) : 0;
     var badge = "";
-    if (p.sale) badge = "<span class='badge sale'>" + (p.tag || "SALE") + "</span>";
-    else if (p.tag) badge = "<span class='badge'>" + p.tag + "</span>";
+    if (p.tag) badge = "<span class='badge" + (p.sale ? " sale" : "") + "'>" + p.tag + "</span>";
     var price = p.sale
       ? "<s>" + won(p.price) + "</s><span class='sale-price'>" + won(p.sale) + "</span>"
       : "<b>" + won(p.price) + "</b>";
-    return "<li><a class='card' href='product.html?id=" + p.id + "'>" +
-      "<div class='thumb'>" + badge + "<img loading='lazy' alt='" + esc(p.name) + "' src='" + imgOf(p) + "'></div>" +
-      "<p class='name'>" + esc(p.name) + "</p><p class='price'>" + price + "</p></a></li>";
+    var rateHtml = rate ? "<span class='rate'>" + rate + "%</span>" : "";
+    return "<li class='card'>" +
+      "<div class='thumb'>" +
+        "<a class='thumb-link' href='product.html?id=" + p.id + "' aria-label='" + esc(p.name) + " 상세보기'><img loading='lazy' alt='" + esc(p.name) + "' src='" + imgOf(p) + "'></a>" +
+        badge + rateHtml +
+        "<button class='wish' type='button' aria-label='찜하기' data-wish='" + p.id + "'>&#9825;</button>" +
+        "<button class='quick' type='button' data-quick='" + p.id + "'>장바구니 담기</button>" +
+      "</div>" +
+      "<a class='card-info' href='product.html?id=" + p.id + "'>" +
+        "<p class='name'>" + esc(p.name) + "</p>" +
+        "<p class='desc'>" + esc(p.desc) + "</p>" +
+        "<p class='price'>" + price + "</p>" +
+      "</a></li>";
   }
 
   // ---------- 배너 ----------
@@ -311,5 +321,22 @@
   document.addEventListener("DOMContentLoaded", function () {
     updateBadge();
     initBanner(); initMain(); initList(); initSearch(); initDetail(); initCart(); initPopup();
+    document.addEventListener("click", function (e) {
+      var q = e.target.closest("[data-quick]");
+      if (q) {
+        e.preventDefault();
+        var id = parseInt(q.getAttribute("data-quick"), 10);
+        addToCart(id, 0, 1);
+        toast((byId(id) || {}).name + " 1개를 장바구니에 담았습니다.");
+        return;
+      }
+      var w = e.target.closest("[data-wish]");
+      if (w) {
+        e.preventDefault();
+        w.classList.toggle("on");
+        w.innerHTML = w.classList.contains("on") ? "&#9829;" : "&#9825;";
+        toast(w.classList.contains("on") ? "찜 목록에 담았습니다." : "찜을 해제했습니다.");
+      }
+    });
   });
 })();

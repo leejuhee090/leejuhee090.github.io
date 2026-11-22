@@ -63,8 +63,8 @@
     var badge = "";
     if (p.tag) badge = "<span class='badge" + (p.sale ? " sale" : "") + "'>" + p.tag + "</span>";
     var price = p.sale
-      ? "<s>" + won(p.price) + "</s><span class='sale-price'>" + won(p.sale) + "</span>"
-      : "<b>" + won(p.price) + "</b>";
+      ? "<span class='price-row origin'><s>" + won(p.price) + "</s></span><span class='price-row'><span class='sale-price'>" + won(p.sale) + "</span></span>"
+      : "<span class='price-row'><b>" + won(p.price) + "</b></span>";
     var rateHtml = rate ? "<span class='rate'>" + rate + "%</span>" : "";
     return "<li class='card'>" +
       "<div class='thumb'>" +
@@ -75,8 +75,7 @@
       "</div>" +
       "<a class='card-info' href='product.html?id=" + p.id + "'>" +
         "<p class='name'>" + esc(p.name) + "</p>" +
-        "<p class='desc'>" + esc(p.desc) + "</p>" +
-        "<p class='price'>" + price + "</p>" +
+        "<div class='price'>" + price + "</div>" +
       "</a></li>";
   }
 

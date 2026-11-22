@@ -27,6 +27,14 @@
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg).replace(/'/g, "%27");
   }
   function imgOf(p) { return p.image ? p.image : placeholder(p); }
+  // 이미지 파일이 아직 없으면 같은 자리에 자리표시 이미지를 보여 줌
+  document.addEventListener("error", function (e) {
+    var t = e.target;
+    if (t && t.tagName === "IMG" && !t.getAttribute("data-fb")) {
+      t.setAttribute("data-fb", "1");
+      t.src = placeholder({ name: t.alt || "상품" });
+    }
+  }, true);
 
   // ---------- 장바구니 (브라우저 localStorage, 실패해도 페이지는 동작) ----------
   function readCart() {
@@ -205,6 +213,8 @@
     $("#crumb-name").textContent = p.name;
     $("#main-img").src = imgOf(p);
     $("#main-img").alt = p.name;
+    $("#intro-img").src = imgOf(p);
+    $("#intro-img").alt = p.name;
     $("#p-name").textContent = p.name;
     $("#p-price").innerHTML = p.sale ? "<s>" + won(p.price) + "</s> <span class='sale-price'>" + won(p.sale) + "</span>" : won(p.price);
     $("#p-sold").textContent = p.sold.toLocaleString("ko-KR") + "개 구매";

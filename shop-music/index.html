@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="css/shop.css" />
 </head>
 <body>
-  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="#">장바구니</a><a href="#">주문조회</a></div></div>
+  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="cart.html">장바구니</a><a href="#">주문조회</a></div></div>
   <header class="header"><div class="wrap">
     <a class="logo" href="index.html">SAMPLE MUSIC</a>
     <nav class="gnb"><a class="on" href="index.html">홈</a><a href="list.html">전체상품</a><a href="list.html?cat=string">현악기</a><a href="list.html?cat=keys">건반악기</a><a href="list.html?cat=acc">악기 용품</a></nav>
-    <div class="util"><span>검색</span><span>장바구니 <span class="cart-count">0</span></span></div>
+    <div class="util"><form class="search" action="search.html" role="search"><input type="search" name="q" placeholder="상품 검색" aria-label="상품 검색" /><button type="submit" aria-label="검색">검색</button></form><a class="cart-link" href="cart.html">장바구니 <span class="cart-count">0</span></a></div>
   </div></header>
 
   <section class="banner" id="banner" aria-label="메인 배너">
@@ -49,6 +49,17 @@
     <p><b>SAMPLE MUSIC</b> (포트폴리오용 예시 악기 쇼핑몰)</p>
     <p>이 페이지는 Cafe24 쇼핑몰 구조를 참고해 직접 구성한 악기 샘플이며, 실제 판매처와 무관합니다.</p>
   </div></footer>
+  <div class="popup-dim" id="popup" hidden>
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+      <p class="pop-tag">NOTICE</p>
+      <h3 id="pop-title">신규 입고 안내</h3>
+      <p>처음 시작하는 분을 위한 기타와 키보드 신상품이 입고되었습니다.</p>
+      <div class="pop-actions">
+        <label><input type="checkbox" id="pop-hide" /> 오늘 하루 보지 않기</label>
+        <button id="pop-close" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
   <div class="toast" id="toast"></div>
   <script src="js/data.js"></script>
   <script src="js/shop.js"></script>

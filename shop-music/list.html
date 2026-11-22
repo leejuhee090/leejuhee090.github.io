@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="css/shop.css" />
 </head>
 <body>
-  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="#">장바구니</a><a href="#">주문조회</a></div></div>
+  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="cart.html">장바구니</a><a href="#">주문조회</a></div></div>
   <header class="header"><div class="wrap">
     <a class="logo" href="index.html">SAMPLE MUSIC</a>
     <nav class="gnb"><a href="index.html">홈</a><a class="on" href="list.html">전체상품</a><a href="list.html?cat=string">현악기</a><a href="list.html?cat=keys">건반악기</a><a href="list.html?cat=acc">악기 용품</a></nav>
-    <div class="util"><span>검색</span><span>장바구니 <span class="cart-count">0</span></span></div>
+    <div class="util"><form class="search" action="search.html" role="search"><input type="search" name="q" placeholder="상품 검색" aria-label="상품 검색" /><button type="submit" aria-label="검색">검색</button></form><a class="cart-link" href="cart.html">장바구니 <span class="cart-count">0</span></a></div>
   </div></header>
 
   <main class="wrap">

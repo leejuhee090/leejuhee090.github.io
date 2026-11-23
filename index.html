@@ -57,15 +57,15 @@
       html:not(.dark) .bg-blob-brand,
       html:not(.dark) .bg-blob-violet,
       html:not(.dark) .bg-stage-brand,
-      html:not(.dark) .bg-stage-violet {
+      html:not(.dark) .bg-stage-violet :not(#components *) {
         background-image: radial-gradient(60% 60% at 50% 50%, rgba(195, 207, 107, 0.4), transparent 70%) !important;
       }
       html:not(.dark) button[role="switch"][aria-checked="true"],
-      html:not(.dark) [aria-checked="true"].bg-brand {
+      html:not(.dark) [aria-checked="true"].bg-brand :not(#components *) {
         background-image: none !important;
         background-color: #0c1a0c !important;
       }
-      html:not(.dark) [class*="bg-[linear-gradient"] {
+      html:not(.dark) [class*="bg-[linear-gradient"] :not(#components *) {
         background-image: linear-gradient(135deg, #c3cf6b, #a9c46a) !important;
       }
       html:not(.dark) .max-\[640px\]\:bg-ios-wallpaper {
@@ -111,21 +111,68 @@
       html.dark .bg-blob-brand,
       html.dark .bg-blob-violet,
       html.dark .bg-stage-brand,
-      html.dark .bg-stage-violet {
+      html.dark .bg-stage-violet :not(#components *) {
         background-image: none !important;
       }
       html.dark [aria-checked="true"].bg-brand,
-      html.dark button[role="switch"][aria-checked="true"] {
+      html.dark button[role="switch"][aria-checked="true"] :not(#components *) {
         background-image: none !important;
         background-color: var(--color-brand) !important;
       }
-      html.dark [class*="bg-[linear-gradient"] {
+      html.dark [class*="bg-[linear-gradient"] :not(#components *) {
         background-image: none !important;
         background-color: var(--color-brand) !important;
         color: var(--color-text-on-brand);
       }
       html.dark .max-\[640px\]\:bg-ios-wallpaper {
         background-image: none !important;
+      }
+    </style>
+    <style id="restore-components">
+      /* 공통 컴포넌트 섹션은 원래 색 그대로 유지 */
+      :root:not(.dark) #components {
+        --color-blob-brand: rgba(0, 122, 255, .16);
+        --color-blob-violet: rgba(175, 82, 222, .14);
+        --color-border-default: rgba(60, 60, 67, .29);
+        --color-brand: #007aff;
+        --color-brand-accent: #5ac8fa;
+        --color-brand-subtle: rgba(0, 122, 255, .1);
+        --color-brand-tint: rgba(0, 122, 255, .12);
+        --color-chart-1: #007aff;
+        --color-chart-2: #34c759;
+        --color-chart-3: #af52de;
+        --color-surface-card: #ffffff;
+        --color-surface-muted: #e5e5ea;
+        --color-surface-page: #f2f2f7;
+        --color-surface-raised: #ffffff;
+        --color-surface-stage: #f2f2f7;
+        --color-surface-sunken: #e5e5ea;
+        --color-text-on-brand: #ffffff;
+        --color-text-primary: #000000;
+        --color-text-secondary: rgba(60, 60, 67, .6);
+        --color-text-tertiary: #8e8e93;
+      }
+      html.dark #components {
+        --color-blob-brand: rgba(10, 132, 255, .28);
+        --color-blob-violet: rgba(191, 90, 242, .2);
+        --color-border-default: rgba(84, 84, 88, .65);
+        --color-brand: #0a84ff;
+        --color-brand-accent: #64d2ff;
+        --color-brand-subtle: rgba(10, 132, 255, .14);
+        --color-brand-tint: rgba(10, 132, 255, .18);
+        --color-chart-1: #0a84ff;
+        --color-chart-2: #30d158;
+        --color-chart-3: #bf5af2;
+        --color-surface-card: #1c1c1e;
+        --color-surface-muted: #2c2c2e;
+        --color-surface-page: #000000;
+        --color-surface-raised: #2c2c2e;
+        --color-surface-stage: #2c2c2e;
+        --color-surface-sunken: #000000;
+        --color-text-on-brand: #ffffff;
+        --color-text-primary: #ffffff;
+        --color-text-secondary: rgba(235, 235, 245, .6);
+        --color-text-tertiary: #8e8e93;
       }
     </style>
   </head>

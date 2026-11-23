@@ -1,9 +1,10 @@
-# 상품 이미지 프롬프트 (AI 생성 샘플)
+# 상품 이미지 작업 기록
 
-샘플 쇼핑몰에 쓰는 이미지는 AI로 생성한 이미지입니다. 실제 브랜드나 제품 사진을 참고하지 않았습니다.
-페이지에도 "AI로 작업된 이미지입니다"로 표기합니다.
+상품 이미지는 직접 포토샵으로 작업한 사진입니다. 아래 프롬프트 표는 AI 생성을 검토했을 때의 참고 자료이며, 현재 페이지에는 쓰이지 않습니다.
 
-공통 조건: 제품 사진 스타일, 부드러운 자연광, 단색 밝은 배경, 글자와 로고 없음, 3:4 세로 비율
+현재 연결된 파일: `shop/js/data.js`의 `image` 항목 (`images/product-1.png` ~ `product-8.png`, 상세는 `product-N-detail.png`).
+
+## 참고용 프롬프트 (미사용)
 
 | 파일명 | 상품 | 프롬프트 |
 |---|---|---|
@@ -17,8 +18,3 @@
 | product-8.jpg | 스탠드 조명 | original floor standing lamp with a fabric shade and a minimal stand, product photo, soft daylight, plain light background, no text, no logo, 3:4 |
 
 생성 후 `shop/images/` 폴더에 위 파일명으로 저장하면, 상품 데이터(`shop/js/data.js`)의 `image` 경로가 자동으로 연결됩니다.
-
-## 현재 적용된 이미지
-
-현재 페이지에는 위 프롬프트 방식이 아니라, 원본 사진 없이 Claude가 직접 그린 SVG 일러스트(`product-1.svg` ~ `product-8.svg`)가 쓰입니다.
-나중에 AI 이미지 생성 도구로 사진을 만들면 같은 파일명으로 교체하면 됩니다. 이 경우 `shop/js/data.js`의 확장자만 `.jpg` 등으로 바꾸면 됩니다.

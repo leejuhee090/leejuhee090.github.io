@@ -22,6 +22,57 @@
       button[aria-label="화면 테마 전환"] > span[aria-hidden="true"]::after { transform: translateX(17px); }
       html.dark button[aria-label="화면 테마 전환"] > span[aria-hidden="true"]::after { transform: translateX(0); }
     </style>
+      <style id="light-theme-vibrant">
+      /* 라이트 테마: 전달받은 'Vibrant' 디자인 색상 (보라/검정 그라데이션 제거) */
+      :root:not(.dark) {
+        --color-brand: #0c1a0c;
+        --color-brand-accent: #c3cf6b;
+        --color-brand-tint: rgba(12, 26, 12, 0.08);
+        --color-brand-subtle: rgba(12, 26, 12, 0.06);
+        --color-chart-3: #a9c46a;
+        --color-surface-page: #fbfcf7;
+        --color-surface-card: #ffffff;
+        --color-surface-muted: #eef2e6;
+        --color-surface-raised: #ffffff;
+        --color-surface-sunken: #eef2e6;
+        --color-surface-stage: #f6f8ef;
+        --color-text-primary: #0c1a0c;
+        --color-text-secondary: #3f4f3c;
+        --color-text-tertiary: #6b7a68;
+        --color-border-default: rgba(12, 26, 12, 0.18);
+        --color-blob-brand: rgba(195, 207, 107, 0.45);
+        --color-blob-violet: rgba(195, 207, 107, 0.35);
+      }
+      html:not(.dark) body {
+        background: #fbfcf7 radial-gradient(90% 60% at 100% 35%, rgba(230, 226, 150, 0.55), transparent 70%),
+                    radial-gradient(70% 55% at 0% 85%, rgba(160, 230, 215, 0.45), transparent 70%);
+        color: #0c1a0c;
+      }
+      html:not(.dark) .bg-hero-title,
+      html:not(.dark) [class*="bg-hero-title"] {
+        background-image: none !important;
+        color: #0c1a0c !important;
+        -webkit-text-fill-color: #0c1a0c;
+      }
+      html:not(.dark) .bg-blob-brand,
+      html:not(.dark) .bg-blob-violet,
+      html:not(.dark) .bg-stage-brand,
+      html:not(.dark) .bg-stage-violet {
+        background-image: radial-gradient(60% 60% at 50% 50%, rgba(195, 207, 107, 0.4), transparent 70%) !important;
+      }
+      html:not(.dark) button[role="switch"][aria-checked="true"],
+      html:not(.dark) [aria-checked="true"].bg-brand {
+        background-image: none !important;
+        background-color: #0c1a0c !important;
+      }
+      html:not(.dark) [class*="bg-[linear-gradient"] {
+        background-image: linear-gradient(135deg, #c3cf6b, #a9c46a) !important;
+      }
+      html:not(.dark) .max-\[640px\]\:bg-ios-wallpaper {
+        background-image: radial-gradient(60% 40% at 15% 0%, rgba(160, 230, 215, 0.45), transparent 70%),
+                          radial-gradient(55% 45% at 95% 35%, rgba(230, 226, 150, 0.55), transparent 70%) !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

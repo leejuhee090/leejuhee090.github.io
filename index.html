@@ -74,39 +74,39 @@
       }
     </style>
       <style id="dark-theme-byewind">
-      /* 다크 테마: 전달받은 다크 대시보드 디자인 (그라데이션 없이 단색, 연한 블루 포인트) */
+      /* 다크 테마: 눈부심을 줄이고 WCAG 대비(본문 4.5:1 이상)를 맞춘 색 */
       html.dark {
-        --color-brand: #b7cfe2;
-        --color-brand-accent: #8fb3d1;
-        --color-brand-tint: rgba(207, 230, 247, 0.14);
-        --color-brand-subtle: rgba(207, 230, 247, 0.1);
-        --color-chart-3: #9fcdf0;
+        --color-brand: #8fb8d6;
+        --color-brand-accent: #6f9ec0;
+        --color-brand-tint: rgba(143, 184, 214, 0.14);
+        --color-brand-subtle: rgba(143, 184, 214, 0.1);
+        --color-chart-1: #5f8fb8;
+        --color-chart-2: #7aa6c9;
+        --color-chart-3: #6f9ec0;
         --color-surface-page: #1c1c1e;
-        --color-surface-card: #2a2a2c;
-        --color-surface-muted: #2f2f32;
-        --color-surface-raised: #333336;
-        --color-surface-sunken: #242426;
-        --color-surface-stage: #232325;
-        --color-text-primary: #f2f2f4;
-        --color-text-secondary: rgba(235, 235, 245, 0.7);
-        --color-text-tertiary: #8e8e93;
+        --color-surface-card: #26262a;
+        --color-surface-muted: #2c2c31;
+        --color-surface-raised: #2c2c31;
+        --color-surface-sunken: #202023;
+        --color-surface-stage: #222225;
+        --color-text-primary: #e9e9ee;
+        --color-text-secondary: #b4b4bd;
+        --color-text-tertiary: #9a9aa3;
         --color-border-default: rgba(255, 255, 255, 0.12);
+        --color-text-on-brand: #111418;
         --color-blob-brand: transparent;
         --color-blob-violet: transparent;
-        --color-text-on-brand: #111418;
-        --color-chart-1: #6f9fc9;
-        --color-chart-2: #8fb8d9;
       }
       html.dark body {
         background: #1c1c1e;
         background-image: none;
-        color: #f2f2f4;
+        color: #e9e9ee;
       }
       html.dark .bg-hero-title,
       html.dark [class*="bg-hero-title"] {
         background-image: none !important;
-        color: #f2f2f4 !important;
-        -webkit-text-fill-color: #f2f2f4;
+        color: #e9e9ee !important;
+        -webkit-text-fill-color: #e9e9ee;
       }
       html.dark .bg-blob-brand,
       html.dark .bg-blob-violet,
@@ -117,11 +117,12 @@
       html.dark [aria-checked="true"].bg-brand,
       html.dark button[role="switch"][aria-checked="true"] {
         background-image: none !important;
-        background-color: #cfe6f7 !important;
+        background-color: var(--color-brand) !important;
       }
       html.dark [class*="bg-[linear-gradient"] {
         background-image: none !important;
-        background-color: #b7cfe2 !important;
+        background-color: var(--color-brand) !important;
+        color: var(--color-text-on-brand);
       }
       html.dark .max-\[640px\]\:bg-ios-wallpaper {
         background-image: none !important;

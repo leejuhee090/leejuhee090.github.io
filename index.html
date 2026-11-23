@@ -28,10 +28,18 @@
     <script>
       (function () {
         var ID = "wireflow-embed";
+        // 홈 화면에서만 보이도록 한다 (#/project/... 상세 화면에서는 숨김)
+        function onHome() {
+          return !/^#\/project\//.test(window.location.hash);
+        }
+        function sync() {
+          var el = document.getElementById(ID);
+          if (el) el.style.display = onHome() ? "" : "none";
+        }
         function inject() {
-          if (document.getElementById(ID)) return true;
           var target = document.getElementById("components");
-          if (!target || !target.parentNode) return false;
+          if (!target || !target.parentNode) return;
+          if (document.getElementById(ID)) return;
           var sec = document.createElement("section");
           sec.id = ID;
           sec.style.cssText = "padding:48px 0;background:#fff";
@@ -40,10 +48,14 @@
             '<iframe src="design/portfolio-redesign.html" title="포트폴리오 메인·상세 와이어플로" loading="lazy" style="width:100%;height:720px;border:1px solid #e5e5ea;border-radius:12px;background:#fff"></iframe>' +
             "</div>";
           target.parentNode.insertBefore(sec, target);
-          return true;
         }
-        if (inject()) return;
-        var mo = new MutationObserver(function () { if (inject()) mo.disconnect(); });
+        function update() {
+          inject();
+          sync();
+        }
+        update();
+        window.addEventListener("hashchange", update);
+        var mo = new MutationObserver(update);
         mo.observe(document.body, { childList: true, subtree: true });
       })();
     </script>

@@ -3,15 +3,48 @@
   "title": "포트폴리오 메인·상세 리디자인",
   "goal": "방문자가 경력과 프로젝트를 훑고 상세를 본 뒤 연락처까지 찾는다.",
   "start": "home",
-  "stages": ["메인", "프로젝트", "상세"],
-  "vars": {"filter": "전체", "project": "NH농협 그룹웨어"},
-  "source": {"note": "사용자가 보낸 리디자인 시안(스톤 라이트 / 차콜 다크, 보라색 없음)과 기존 포트폴리오 항목을 기준으로 작성"},
+  "stages": [
+    "메인",
+    "프로젝트",
+    "상세"
+  ],
+  "vars": {
+    "filter": "전체",
+    "project": "NH농협 그룹웨어"
+  },
+  "source": {
+    "note": "사용자가 보낸 리디자인 시안(스톤 라이트 / 차콜 다크, 보라색 없음)과 기존 포트폴리오 항목을 기준으로 작성"
+  },
   "review": {
     "locale": "ko",
     "requirements": [
-      {"id": "req-filter", "group": "프로젝트", "screen": "projects", "action": "filter-react", "title": "기술 필터", "expected": "React 필터를 누르면 목록이 React 프로젝트로 좁혀진다.", "origin": "source"},
-      {"id": "req-open-detail", "group": "프로젝트", "screen": "projects", "action": "open-nh", "title": "카드에서 상세 열기", "expected": "프로젝트 카드를 누르면 해당 프로젝트 상세가 열린다.", "origin": "source"},
-      {"id": "req-back", "group": "상세", "screen": "detail", "action": "back-projects", "title": "목록으로 돌아가기", "expected": "상세에서 목록으로 돌아가도 선택했던 필터가 유지된다.", "origin": "inferred"}
+      {
+        "id": "req-filter",
+        "group": "프로젝트",
+        "screen": "projects",
+        "action": "filter-react",
+        "title": "기술 필터",
+        "expected": "React 필터를 누르면 목록이 React 프로젝트로 좁혀진다.",
+        "origin": "source"
+      },
+      {
+        "id": "req-open-detail",
+        "group": "프로젝트",
+        "screen": "projects",
+        "action": "open-nh",
+        "title": "카드에서 상세 열기",
+        "expected": "프로젝트 카드를 누르면 해당 프로젝트 상세가 열린다.",
+        "origin": "source"
+      },
+      {
+        "id": "req-back",
+        "group": "상세",
+        "screen": "detail",
+        "action": "back-projects",
+        "title": "목록으로 돌아가기",
+        "expected": "상세에서 목록으로 돌아가도 선택했던 필터가 유지된다.",
+        "origin": "inferred"
+      }
     ],
     "audit": {
       "journeys": [
@@ -19,27 +52,54 @@
           "title": "필터 후 상세 보고 돌아오기",
           "start": "home",
           "steps": [
-            {"action": "see-projects", "screen": "projects"},
-            {"action": "filter-react", "screen": "projects", "vars": {"filter": "React"}, "requirement": "req-filter"},
-            {"action": "open-nh", "screen": "detail", "vars": {"project": "NH농협 그룹웨어"}, "requirement": "req-open-detail"},
-            {"action": "back-projects", "screen": "projects", "vars": {"filter": "React"}, "requirement": "req-back"}
+            {
+              "action": "see-projects",
+              "screen": "projects"
+            },
+            {
+              "action": "filter-react",
+              "screen": "projects",
+              "vars": {
+                "filter": "React"
+              },
+              "requirement": "req-filter"
+            },
+            {
+              "action": "open-nh",
+              "screen": "detail",
+              "vars": {
+                "project": "NH농협 그룹웨어"
+              },
+              "requirement": "req-open-detail"
+            },
+            {
+              "action": "back-projects",
+              "screen": "projects",
+              "vars": {
+                "filter": "React"
+              },
+              "requirement": "req-back"
+            }
           ]
         },
         {
           "title": "연락처 확인하고 메인으로",
           "start": "home",
           "steps": [
-            {"action": "see-contact", "screen": "contact"},
-            {"action": "back-home", "screen": "home"}
+            {
+              "action": "see-contact",
+              "screen": "contact"
+            },
+            {
+              "action": "back-home",
+              "screen": "home"
+            }
           ]
         }
       ]
     }
   },
-  "decisions": [
-    {"screen": "home", "question": "기본 테마를 라이트로 할지 다크로 할지 정해야 해요. 시안은 두 가지를 모두 제시합니다."},
-    {"screen": "detail", "question": "상세를 별도 URL(/project/:id)로 분리할지, 현재처럼 같은 페이지 안에서 보여 줄지 정해야 해요."}
-  ],
+  "decisions": [],
   "screens": [
     {
       "id": "home",
@@ -51,14 +111,42 @@
       "ui": {
         "bar": "이주희",
         "blocks": [
-          {"type": "text", "label": "공공기관, 대기업 이커머스, 금융, 증권, SI에서 운영·구축 퍼블리싱을 해왔어요."},
-          {"type": "rows", "rows": [{"label": "경력", "value": "8년"}, {"label": "참여 프로젝트", "value": "23건"}]}
+          {
+            "type": "text",
+            "label": "공공기관, 대기업 이커머스, 금융, 증권, SI에서 운영·구축 퍼블리싱을 해왔어요."
+          },
+          {
+            "type": "rows",
+            "rows": [
+              {
+                "label": "경력",
+                "value": "8년"
+              },
+              {
+                "label": "참여 프로젝트",
+                "value": "23건"
+              }
+            ]
+          }
         ]
       },
       "actions": [
-        {"id": "see-projects", "label": "프로젝트 보기", "to": "projects"},
-        {"id": "see-career", "label": "경력 보기", "to": "career"},
-        {"id": "see-contact", "label": "연락처", "to": "contact", "kind": "secondary"}
+        {
+          "id": "see-projects",
+          "label": "프로젝트 보기",
+          "to": "projects"
+        },
+        {
+          "id": "see-career",
+          "label": "경력 보기",
+          "to": "career"
+        },
+        {
+          "id": "see-contact",
+          "label": "연락처",
+          "to": "contact",
+          "kind": "secondary"
+        }
       ]
     },
     {
@@ -70,12 +158,37 @@
       "body": "2017년부터 23개 프로젝트에 참여했어요.",
       "ui": {
         "blocks": [
-          {"type": "rows", "rows": [{"label": "퍼블리싱 경력", "value": "8년"}, {"label": "Vue · React 작업", "value": "5건"}, {"label": "웹접근성 취득", "value": "2회"}]}
+          {
+            "type": "rows",
+            "rows": [
+              {
+                "label": "퍼블리싱 경력",
+                "value": "8년"
+              },
+              {
+                "label": "Vue · React 작업",
+                "value": "5건"
+              },
+              {
+                "label": "웹접근성 취득",
+                "value": "2회"
+              }
+            ]
+          }
         ]
       },
       "actions": [
-        {"id": "see-process", "label": "작업 방식 보기", "to": "process"},
-        {"id": "back-home", "label": "메인", "to": "home", "kind": "back"}
+        {
+          "id": "see-process",
+          "label": "작업 방식 보기",
+          "to": "process"
+        },
+        {
+          "id": "back-home",
+          "label": "메인",
+          "to": "home",
+          "kind": "back"
+        }
       ]
     },
     {
@@ -86,8 +199,17 @@
       "origin": "source",
       "body": "기존 소스 확인 → 규칙 합의 → 검토와 백업 → 인계와 접근성 순서로 작업해요.",
       "actions": [
-        {"id": "see-projects", "label": "프로젝트 보기", "to": "projects"},
-        {"id": "back-career", "label": "경력", "to": "career", "kind": "back"}
+        {
+          "id": "see-projects",
+          "label": "프로젝트 보기",
+          "to": "projects"
+        },
+        {
+          "id": "back-career",
+          "label": "경력",
+          "to": "career",
+          "kind": "back"
+        }
       ]
     },
     {
@@ -99,11 +221,28 @@
       "body": "메일이나 GitHub로 연락할 수 있어요.",
       "ui": {
         "blocks": [
-          {"type": "rows", "rows": [{"label": "이메일", "value": "leejuhee090@gmail.com"}, {"label": "GitHub", "value": "github.com/leejuhee090"}]}
+          {
+            "type": "rows",
+            "rows": [
+              {
+                "label": "이메일",
+                "value": "leejuhee090@gmail.com"
+              },
+              {
+                "label": "GitHub",
+                "value": "github.com/leejuhee090"
+              }
+            ]
+          }
         ]
       },
       "actions": [
-        {"id": "back-home", "label": "메인", "to": "home", "kind": "back"}
+        {
+          "id": "back-home",
+          "label": "메인",
+          "to": "home",
+          "kind": "back"
+        }
       ]
     },
     {
@@ -117,11 +256,46 @@
         "bar": "프로젝트"
       },
       "actions": [
-        {"id": "open-nh", "label": "NH농협 그룹웨어", "to": "detail", "set": {"project": "NH농협 그룹웨어"}},
-        {"id": "open-kiwoom", "label": "키움증권 퇴직연금 MTS", "to": "detail", "set": {"project": "키움증권 퇴직연금 MTS"}},
-        {"id": "filter-all", "label": "전체", "to": "projects", "set": {"filter": "전체"}, "kind": "secondary"},
-        {"id": "filter-react", "label": "React", "to": "projects", "set": {"filter": "React"}, "kind": "secondary"},
-        {"id": "back-home", "label": "메인", "to": "home", "kind": "back"}
+        {
+          "id": "open-nh",
+          "label": "NH농협 그룹웨어",
+          "to": "detail",
+          "set": {
+            "project": "NH농협 그룹웨어"
+          }
+        },
+        {
+          "id": "open-kiwoom",
+          "label": "키움증권 퇴직연금 MTS",
+          "to": "detail",
+          "set": {
+            "project": "키움증권 퇴직연금 MTS"
+          }
+        },
+        {
+          "id": "filter-all",
+          "label": "전체",
+          "to": "projects",
+          "set": {
+            "filter": "전체"
+          },
+          "kind": "secondary"
+        },
+        {
+          "id": "filter-react",
+          "label": "React",
+          "to": "projects",
+          "set": {
+            "filter": "React"
+          },
+          "kind": "secondary"
+        },
+        {
+          "id": "back-home",
+          "label": "메인",
+          "to": "home",
+          "kind": "back"
+        }
       ]
     },
     {
@@ -133,13 +307,42 @@
       "body": "{{project}}의 역할, 기간, 작업 포인트를 차분한 카드로 보여 줘요.",
       "ui": {
         "blocks": [
-          {"type": "rows", "rows": [{"label": "고객사", "value": "프로젝트별로 표시"}, {"label": "기간", "value": "프로젝트별로 표시"}, {"label": "담당", "value": "프로젝트별로 표시"}]},
-          {"type": "text", "label": "작업 포인트와 스타일 / 코드 기준을 이어서 보여 줘요."}
+          {
+            "type": "rows",
+            "rows": [
+              {
+                "label": "고객사",
+                "value": "프로젝트별로 표시"
+              },
+              {
+                "label": "기간",
+                "value": "프로젝트별로 표시"
+              },
+              {
+                "label": "담당",
+                "value": "프로젝트별로 표시"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "label": "작업 포인트와 스타일 / 코드 기준을 이어서 보여 줘요."
+          }
         ]
       },
       "actions": [
-        {"id": "back-projects", "label": "프로젝트 목록", "to": "projects", "kind": "back"},
-        {"id": "see-contact", "label": "연락처", "to": "contact", "kind": "secondary"}
+        {
+          "id": "back-projects",
+          "label": "프로젝트 목록",
+          "to": "projects",
+          "kind": "back"
+        },
+        {
+          "id": "see-contact",
+          "label": "연락처",
+          "to": "contact",
+          "kind": "secondary"
+        }
       ]
     }
   ],
@@ -149,10 +352,31 @@
       "title": "필터 후 상세 보고 돌아오기",
       "start": "home",
       "steps": [
-        {"action": "see-projects", "screen": "projects"},
-        {"action": "filter-react", "screen": "projects", "vars": {"filter": "React"}},
-        {"action": "open-nh", "screen": "detail", "vars": {"project": "NH농협 그룹웨어"}},
-        {"action": "back-projects", "screen": "projects", "vars": {"filter": "React"}}
+        {
+          "action": "see-projects",
+          "screen": "projects"
+        },
+        {
+          "action": "filter-react",
+          "screen": "projects",
+          "vars": {
+            "filter": "React"
+          }
+        },
+        {
+          "action": "open-nh",
+          "screen": "detail",
+          "vars": {
+            "project": "NH농협 그룹웨어"
+          }
+        },
+        {
+          "action": "back-projects",
+          "screen": "projects",
+          "vars": {
+            "filter": "React"
+          }
+        }
       ]
     }
   ]

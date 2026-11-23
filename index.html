@@ -175,6 +175,23 @@
         --color-text-tertiary: #8e8e93;
       }
     </style>
+    <style id="career-method-palette">
+      /* 경력 · 작업 방식 차트: 서로 구분되는 색 (다크/라이트 각각, 대비 3:1 이상) */
+      html.dark #career, html.dark #method {
+        --color-chart-1: #5b9bd5;
+        --color-chart-2: #4fb8a8;
+        --color-chart-3: #e3b04b;
+        --color-chart-4: #e07a6a;
+        --color-chart-5: #9a9ea8;
+      }
+      :root:not(.dark) #career, :root:not(.dark) #method {
+        --color-chart-1: #2f6fb3;
+        --color-chart-2: #2a9d8f;
+        --color-chart-3: #c58a1b;
+        --color-chart-4: #c8553d;
+        --color-chart-5: #7a7f88;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

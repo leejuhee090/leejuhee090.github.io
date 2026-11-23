@@ -1253,6 +1253,22 @@ dialog h3 { font-size: .95rem; }
 .canvas[data-overview] .screen-label { font-size: var(--screen-label-size); }
 .canvas[data-overview] .screen-label span { font-size: .8em; }
 </style>
+<style id="viewer-fixes">
+  /* 읽기 전용 뷰어: 배치 편집 기능 숨김 */
+  #experimental-layout, #layout-toolbar, #layout-edit, #number-preview, #reset-layout { display: none !important; }
+  /* 캔버스 더보기 패널: 폭이 줄어드는 문제 수정 */
+  .canvas-more { position: relative; }
+  .canvas-more .canvas-more-panel {
+    position: absolute; top: calc(100% + 8px); right: 0; bottom: auto; left: auto; z-index: 30;
+    display: grid; gap: 7px; width: max-content; min-width: 220px; max-width: min(320px, 90vw);
+    padding: 9px; max-height: 65vh; overflow: auto;
+  }
+  .canvas-more-panel select { width: 100%; }
+  .canvas-more-panel button { width: 100%; text-align: left; }
+  @media (max-width: 650px) {
+    .canvas-more .canvas-more-panel { right: 0; left: auto; }
+  }
+</style>
 </head>
 <body>
   <div class="workspace">

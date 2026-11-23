@@ -18,8 +18,9 @@ interface ProjectItem {
   codeExample: string;
 }
 
-// 와이어플로 리뷰 결과(design/portfolio-redesign.html)를 페이지 안에서 바로 보여 줍니다.
-const WIREFLOW_SRC = "/design/portfolio-redesign.html";
+// 와이어플로 리뷰 결과를 페이지 안에서 바로 보여 줍니다.
+// portfolio-src/public/design/ 에 있는 파일이 빌드 결과(dist/design/)로 함께 복사됩니다.
+const WIREFLOW_SRC = "./design/portfolio-redesign.html";
 
 const CLIENTS = [
   "삼성",
@@ -315,7 +316,7 @@ export const PortfolioPage: React.FC = () => {
                 loading="lazy"
               />
               <div className="p-wireflow__foot">
-                <span>스킬: wireflow-review · 흐름 검증 체크 0건</span>
+                <span>wireflow-review 스킬 적용 결과</span>
                 <a className="p-wireflow__open" href={WIREFLOW_SRC} target="_blank" rel="noreferrer">
                   새 탭에서 열기 ↗
                 </a>

@@ -50,7 +50,7 @@
   height: 2rem;
   border-radius: 50%;
   background-color: var(--point);
-  background-image: url(../img/common/ic_input_error.svg);
+  background-image: url(img/common/ic_input_error.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -62,7 +62,7 @@
   transform: translateY(-50%);
   width: 2rem;
   height: 2rem;
-  background-image: url(../img/common/ic_input_correct.svg);
+  background-image: url(img/common/ic_input_correct.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -137,7 +137,7 @@
   top: 50%;
   right: 1rem;
   margin-top: -10px;
-  background-image: url(../img/common/arr_select.svg);
+  background-image: url(img/common/arr_select.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -195,7 +195,7 @@
 .custom-select-box:not(.textSelect) .options-list li:focus {
   background-color: var(--primary-10);
   outline: none;
-  background-image: url(../img/common/ic_select_check.svg);
+  background-image: url(img/common/ic_select_check.svg);
   background-repeat: no-repeat;
   background-position: 1rem 0.6rem;
 }
@@ -208,7 +208,7 @@
 }
 .custom-select-box:not(.textSelect) .options-list li.act-index {
   background-color: var(--primary-10);
-  background-image: url(../img/common/ic_select_check.svg);
+  background-image: url(img/common/ic_select_check.svg);
   background-repeat: no-repeat;
   background-position: 1rem 0.6rem;
 }
@@ -263,7 +263,7 @@ input[type='text'].datepicker-input {
   width: 100%;
   padding: 0 3.6rem 0 1.2rem;
   cursor: pointer;
-  background-image: url(../img/common/ic_datepicker.svg);
+  background-image: url(img/common/ic_datepicker.svg);
   background-repeat: no-repeat;
   background-position: right 0.8rem center;
   background-size: 2rem;
@@ -273,7 +273,7 @@ input[type='text'].datepicker-input {
 input[type='text'].datepicker-input:disabled {
   background-color: var(--gray-5);
   border-color: var(--gray-20);
-  background-image: url(../img/common/ic_datepicker_dis.svg);
+  background-image: url(img/common/ic_datepicker_dis.svg);
   pointer-events: none;
   cursor: default;
 }
@@ -434,17 +434,17 @@ input[type='text'].datepicker-input:disabled {
   left: 0;
 }
 .datepicker .arrow-btn.year-prev::after {
-  background: url(../img/common/ic_arrow_cd_select_d.svg) no-repeat center;
+  background: url(img/common/ic_arrow_cd_select_d.svg) no-repeat center;
 }
 .datepicker .arrow-btn.mon-prev::after {
-  background: url(../img/common/ic_arrow_cd_select_s.svg) no-repeat center;
+  background: url(img/common/ic_arrow_cd_select_s.svg) no-repeat center;
 }
 .datepicker .arrow-btn.year-next::after {
-  background: url(../img/common/ic_arrow_cd_select_d.svg) no-repeat center;
+  background: url(img/common/ic_arrow_cd_select_d.svg) no-repeat center;
   transform: rotate(180deg);
 }
 .datepicker .arrow-btn.mon-next::after {
-  background: url(../img/common/ic_arrow_cd_select_s.svg) no-repeat center;
+  background: url(img/common/ic_arrow_cd_select_s.svg) no-repeat center;
   transform: rotate(180deg);
 }
 .datepicker .cd-custom-select {
@@ -501,7 +501,7 @@ input[type='text'].datepicker-input:disabled {
   top: 50%;
   right: 0.4rem;
   display: block;
-  background-image: url(../img/common/ic_arr_ta.svg);
+  background-image: url(img/common/ic_arr_ta.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -550,7 +550,7 @@ input[type='text'].datepicker-input:disabled {
 }
 .datepicker .options .selected-opt.focused {
   background-color: var(--primary-10);
-  background-image: url(../img/common/ic_select_check.svg);
+  background-image: url(img/common/ic_select_check.svg);
   background-repeat: no-repeat;
   background-position: 1rem 0.6rem;
 }
@@ -563,7 +563,7 @@ input[type='text'].datepicker-input:disabled {
 .datepicker .options div.focused {
   background-color: var(--primary-10);
   background-color: var(--primary-10);
-  background-image: url(../img/common/ic_select_check.svg);
+  background-image: url(img/common/ic_select_check.svg);
   background-repeat: no-repeat;
   background-position: 1rem 0.6rem;
 }
@@ -582,7 +582,7 @@ input[type='text'].datepicker-input:disabled {
   color: var(--gray-40);
 }
 .cd-custom-select-area:has(.open) .cd-custom-select:not(.open) .selected::after {
-  background-image: url(../img/common/ic_arr_ta_gray.svg);
+  background-image: url(img/common/ic_arr_ta_gray.svg);
 }
 .datepicker.dp-ym .dtDropdown {
   border-radius: 0.6rem 0.6rem 0 0;
@@ -721,6 +721,9 @@ input[type='text'].datepicker-input:disabled {
 .main-lTop .today-total-blue .custom-select-box {
   color: var(--font-color-base);
 }
+
+
+/* 원본 미디어쿼리 규칙 */
 
 /* 상세 페이지 데모 레이아웃 */
 #cui-demo { display: grid; gap: 16px; grid-template-columns: 1fr; }

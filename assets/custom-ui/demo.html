@@ -27,6 +27,14 @@
   #PC .demo-block .datepicker.dp-ym .ym-months > .options { position: static !important; display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 4px 6px; max-height: none !important; overflow: visible !important; border: 0 !important; background: transparent !important; box-shadow: none !important; }
   #PC .demo-block .datepicker.dp-ym .ym-months .options > * { text-align: center; padding: 10px 0; border-radius: 999px; font-size: 14px; color: #222; cursor: pointer; }
   #PC .demo-block .datepicker.dp-ym .ym-months .options > .selected-opt { background: #3b6fd6 !important; color: #fff !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months > .options { padding: 0 !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months { margin: 0 !important; padding: 0 !important; }
+  @media (max-width: 480px) {
+    #PC .demo-row { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; gap: 12px; }
+    #PC .demo-block { flex: 0 0 86%; scroll-snap-align: start; }
+    #PC .demo-block .datepicker .dtDropdown { max-width: 100% !important; }
+    #PC .demo-group h6::after { content: '  ← 옆으로 밀어서 보기'; font-weight: 400; color: #888; font-size: 11px; }
+  }
   @media (max-width: 480px) { #PC { padding: 8px; } }
 </style>
 </head>

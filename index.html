@@ -331,7 +331,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     <style id="work-carousel">
       /* 03 프로젝트: 가운데 카드를 강조하고 양옆 카드는 작아져 뒤로 물러나는 목록 */
       .wk-carousel { position: relative; }
-      .wk-stage { position: relative; width: 100%; overflow: hidden; touch-action: pan-y; }
+      .wk-stage { position: relative; width: 100%; overflow: hidden; touch-action: pan-y; padding-top: 24px; }
       .wk-stage.wk-stage--ready > * {
         position: absolute !important; top: 0; left: 50%; flex: none !important;
         width: min(320px, 80vw) !important;
@@ -350,6 +350,12 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         cursor: pointer; transition: background-color 200ms ease, opacity 200ms ease;
       }
       .wk-carousel-btn:hover { background: rgba(255, 255, 255, 0.94); color: #0a0a0a; }
+      .wk-soon {
+        display: flex; align-items: center; justify-content: center; text-align: center;
+        min-height: 420px; padding: 24px; box-sizing: border-box; border-radius: 14px;
+        border: 1px dashed rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.03);
+        color: rgba(255, 255, 255, 0.6); font-size: 14px; letter-spacing: 0.02em;
+      }
       .wk-carousel-btn[disabled] { opacity: 0.3; pointer-events: none; }
       .wk-carousel-btn--prev { left: 4px; }
       .wk-carousel-btn--next { right: 4px; }
@@ -370,6 +376,12 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         function enhance(track) {
           if (track.dataset.wk) return;
           track.dataset.wk = '1';
+          for (var k = 0; k < 2; k++) {
+            var soon = document.createElement('div');
+            soon.className = 'wk-soon';
+            soon.textContent = '추후 업데이트 예정';
+            track.insertBefore(soon, track.firstChild);
+          }
           var items = Array.prototype.slice.call(track.children);
           if (items.length < 2) return;
           var wrap = track.parentElement;
@@ -379,7 +391,8 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           track.parentElement.insertBefore(stage, track);
           items.forEach(function (it) { stage.appendChild(it); });
           track.remove();
-          var active = 0;
+          var active = Math.max(0, items.length - (items.length - 2 > 0 ? items.length - 2 : 0) - 0);
+          active = 2;
           var dots = document.createElement('div');
           dots.className = 'wk-dots';
           items.forEach(function (_, i) {
@@ -412,7 +425,8 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
               var ad = Math.abs(d);
               var pos = POS[Math.min(ad, 2)];
               var x = d === 0 ? 0 : Math.sign(d) * (ad === 1 ? unit : unit * 1.75);
-              it.style.transform = 'translateX(-50%) translateX(' + x + 'px) scale(' + pos.s + ')';
+              var lift = d === 0 ? -18 : 0;
+              it.style.transform = 'translateX(-50%) translateX(' + x + 'px) translateY(' + lift + 'px) scale(' + pos.s + ')';
               it.style.opacity = ad > 2 ? '0' : String(pos.o);
               it.style.zIndex = String(pos.z);
               it.style.pointerEvents = ad > 2 ? 'none' : 'auto';
@@ -451,6 +465,21 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
             if (moved) { stage.dataset.drag = '1'; setTimeout(function () { delete stage.dataset.drag; }, 0); }
           });
           stage.addEventListener('click', function (e) { if (stage.dataset.drag) { e.preventDefault(); e.stopPropagation(); } }, true);
+          // 마우스 휠: 가로·세로 휠 모두 한 장씩 넘긴다 (연속 휠은 한 번만 반응)
+          var wheelAcc = 0, wheelLock = 0;
+          stage.addEventListener('wheel', function (e) {
+            var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+            var now = Date.now();
+            if (now < wheelLock) { e.preventDefault(); return; }
+            wheelAcc += d;
+            if (Math.abs(wheelAcc) > 40) {
+              var dir = wheelAcc > 0 ? 1 : -1;
+              var before = active;
+              wheelAcc = 0;
+              go(active + dir);
+              if (active !== before) { e.preventDefault(); wheelLock = now + 650; }
+            }
+          }, { passive: false });
           window.addEventListener('resize', layout);
           layout();
         }

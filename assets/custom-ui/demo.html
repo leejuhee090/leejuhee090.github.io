@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>직접 만든 셀렉트·캘린더 데모</title>
+<link rel="stylesheet" href="admin/css/reset.css">
+<link rel="stylesheet" href="admin/css/common.css">
+<style>
+  .demo-group { margin-bottom: 20px; }
+  .demo-group h6 { font-size: 13px; margin: 0 0 8px; color: #222; }
+  .demo-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+  .demo-block { width: 300px; max-width: 100%; }
+  .demo-block .custom-select-box { width: 100% !important; }
+  .demo-block .datepicker { display: block; position: relative; height: auto !important; }
+  .demo-block .datepicker .dtDropdown { position: static !important; display: block !important; width: 100% !important; max-width: 300px !important; box-sizing: border-box; padding: 12px; margin-top: 6px; overflow: hidden; }
+  .demo-block .datepicker.error .datepicker-input { border-color: #e5484d !important; }
+  #PC .demo-block .datepicker .datepicker-header { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin: 0 0 12px; min-height: 32px; }
+  #PC .demo-block .arrow-btn-area { display: flex; align-items: center; gap: 2px; flex: none; }
+  #PC .demo-block .cd-custom-select-area { display: flex; align-items: center; justify-content: center; gap: 6px; flex: 1 1 auto; min-width: 0; }
+  #PC .demo-block .cd-custom-select { position: relative; flex: 0 1 auto; min-width: 84px; }
+  #PC .demo-block .datepicker-footer { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; }
+  #PC .demo-block .datepicker.dp-ym .ym-head { margin-bottom: 10px; }
+  #PC .demo-block .datepicker.dp-ym .yearSel .options { display: none !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months { position: static !important; display: block !important; width: 100%; height: auto !important; border: 0 !important; background: transparent !important; box-shadow: none !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months > .selected { display: none !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months > .options { position: static !important; display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 4px 6px; max-height: none !important; overflow: visible !important; border: 0 !important; background: transparent !important; box-shadow: none !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months .options > * { text-align: center; padding: 10px 0; border-radius: 999px; font-size: 14px; color: #222; cursor: pointer; }
+  #PC .demo-block .datepicker.dp-ym .ym-months .options > .selected-opt { background: #3b6fd6 !important; color: #fff !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months > .options { padding: 0 !important; }
+  #PC .demo-block .datepicker.dp-ym .ym-months { margin: 0 !important; padding: 0 !important; }
+  @media (max-width: 480px) {
+    #PC .demo-row { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; gap: 12px; }
+    #PC .demo-block { flex: 0 0 86%; scroll-snap-align: start; }
+    #PC .demo-block .datepicker .dtDropdown { max-width: 100% !important; }
+    #PC .demo-group h6::after { content: '  ← 옆으로 밀어서 보기'; font-weight: 400; color: #888; font-size: 11px; }
+  }
+  /* PC: 블록 4개를 한 줄에 전부 표시 */
+  @media (min-width: 700px) {
+    #PC { padding: 8px 0; }
+    #PC .demo-row { flex-wrap: wrap; gap: 16px; overflow: visible; }
+    #PC .demo-block { flex: 0 0 calc(50% - 8px); min-width: 0; width: auto; max-width: none; }
+    #PC .demo-block .datepicker .dtDropdown { max-width: 100% !important; width: 100% !important; }
+    #PC .demo-block .datepicker { max-width: 100% !important; width: 100% !important; }
+    #PC .demo-block .datepicker-header { gap: 2px; }
+    #PC .demo-block .cd-custom-select { min-width: 0; }
+  }
+  @media (max-width: 480px) { #PC { padding: 8px; } }
+</style>
+</head>
+<body>
+<div id="PC">
+<div class="demo-group"><h6>셀렉트</h6><div class="demo-row"><div class="demo-block"><p class="demo-cap">기본 (체크 표시)</p><div class="custom-select-box " role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0"><label class="visually-hidden">선택</label><div class="selected-option" role="textbox" aria-readonly="true"><span>선택1</span></div><ul class="options-list" role="listbox"><li role="option" data-value="선택1" tabindex="-1">선택1</li><li role="option" data-value="선택2" tabindex="-1">선택2</li><li role="option" data-value="선택3" tabindex="-1">선택3</li><li role="option" data-value="선택4" tabindex="-1">선택4</li><li role="option" data-value="선택5" tabindex="-1">선택5</li></ul></div></div><div class="demo-block"><p class="demo-cap">텍스트 선택 (textSelect)</p><div class="custom-select-box textSelect" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0"><label class="visually-hidden">선택</label><div class="selected-option" role="textbox" aria-readonly="true"><span>선택1</span></div><ul class="options-list" role="listbox"><li role="option" data-value="선택1" tabindex="-1">선택1</li><li role="option" data-value="선택2" tabindex="-1">선택2</li><li role="option" data-value="선택3" tabindex="-1">선택3</li><li role="option" data-value="선택4" tabindex="-1">선택4</li><li role="option" data-value="선택5" tabindex="-1">선택5</li></ul></div></div></div></div><div class="demo-group"><h6>캘린더</h6><div class="demo-row"><div class="demo-block"><p class="demo-cap">기본 (YYYY-MM-DD)</p><div class="datepicker open dp" style="max-width:300px;width:100%"><input type="text" class="datepicker-input" placeholder="YYYY-MM-DD" readonly/><div class="dtDropdown"><div class="datepicker-header"><div class="arrow-btn-area"><button class="arrow-btn year-prev" title="이전 연도">이전 연도</button><button class="arrow-btn mon-prev" title="이전 월">이전 월</button></div><div class="cd-custom-select-area"><div class="cd-custom-select yearSel" tabindex="0"><div class="selected"></div><div class="options"></div></div><div class="cd-custom-select monSel" tabindex="0"><div class="selected"></div><div class="options"></div></div></div><div class="arrow-btn-area"><button class="arrow-btn mon-next" title="다음 월">다음 월</button><button class="arrow-btn year-next" title="다음 연도">연도</button></div></div><div class="datepicker-grid"><div class="day-label">일</div><div class="day-label">월</div><div class="day-label">화</div><div class="day-label">수</div><div class="day-label">목</div><div class="day-label">금</div><div class="day-label">토</div><div class="days-container"></div></div><div class="datepicker-footer"><button class="today-button">Today</button><span class="today-date"></span></div></div></div></div><div class="demo-block"><p class="demo-cap">연·월 선택 (YYYY-MM)</p><div class="datepicker open dp dp-ym" style="max-width:300px;width:100%"><input type="text" class="datepicker-input" placeholder="YYYY-MM" readonly/><div class="dtDropdown"><div class="datepicker-header ym-head"><div class="arrow-btn-area"><button class="arrow-btn year-prev" title="이전 연도">이전 연도</button></div><div class="cd-custom-select-area"><div class="cd-custom-select yearSel" tabindex="0"><div class="selected"></div><div class="options"></div></div></div><div class="arrow-btn-area"><button class="arrow-btn year-next" title="다음 연도">연도</button></div></div><div class="cd-custom-select monSel ym-months" tabindex="0"><div class="selected"></div><div class="options"></div></div></div></div></div></div></div>
+</div>
+<script src="admin/js/ui.js"></script>
+</body>
+</html>

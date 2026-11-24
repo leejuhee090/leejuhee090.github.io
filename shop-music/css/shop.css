@@ -1,0 +1,128 @@
+:root { --ink:#1d1d1f; --sub:#6e6e73; --line:#e5e5ea; --bg:#fff; --soft:#f6f6f8; --accent:#111; --red:#e0412f; --radius:10px; }
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; }
+body { font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; color:var(--ink); background:var(--bg); font-size:15px; line-height:1.5; -webkit-text-size-adjust:100%; }
+a { color:inherit; text-decoration:none; }
+button, select { font:inherit; cursor:pointer; }
+img { display:block; max-width:100%; }
+.wrap { width:min(1140px, calc(100% - 32px)); margin:0 auto; }
+
+/* 상단 */
+.topbar { font-size:12px; color:var(--sub); background:var(--soft); }
+.topbar .wrap { display:flex; justify-content:flex-end; gap:16px; padding:6px 0; }
+.header { border-bottom:1px solid var(--line); position:sticky; top:0; background:#fff; z-index:10; }
+.header .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
+.logo { font-weight:800; font-size:20px; letter-spacing:.04em; }
+.gnb { display:flex; gap:22px; font-weight:600; }
+.gnb a:hover, .gnb a.on { color:var(--red); }
+.util { display:flex; gap:14px; align-items:center; font-size:13px; color:var(--sub); }
+.cart-count { display:inline-grid; place-items:center; min-width:18px; height:18px; border-radius:9px; background:var(--red); color:#fff; font-size:11px; padding:0 5px; margin-left:2px; }
+
+/* 배너 슬라이드 */
+.banner { position:relative; overflow:hidden; height:380px; background:var(--soft); }
+.banner-track { display:flex; height:100%; transition:transform .5s ease; }
+.slide { flex:0 0 100%; position:relative; height:100%; }
+.slide img { width:100%; height:100%; object-fit:cover; }
+.slide-cap { position:absolute; left:0; right:0; bottom:0; padding:28px 0 56px; color:#fff; background:linear-gradient(transparent, rgba(0,0,0,.45)); }
+.slide-cap .wrap h2 { margin:0 0 6px; font-size:30px; }
+.slide-cap .wrap p { margin:0 0 14px; opacity:.92; }
+.btn-line { display:inline-block; padding:10px 18px; border:1px solid #fff; color:#fff; border-radius:999px; font-size:14px; }
+.banner-nav { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; border:0; background:rgba(255,255,255,.85); font-size:18px; }
+.banner-nav.prev { left:16px; } .banner-nav.next { right:16px; }
+.dots { position:absolute; bottom:18px; left:0; right:0; display:flex; justify-content:center; gap:8px; }
+.dots button { width:9px; height:9px; border-radius:50%; border:0; background:rgba(255,255,255,.55); padding:0; }
+.dots button.on { background:#fff; }
+
+/* 섹션 */
+.section { padding:48px 0; }
+.section-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:20px; }
+.section-head h2 { margin:0; font-size:22px; }
+.section-head a { font-size:14px; color:var(--sub); }
+
+/* 상품 목록 */
+.grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:24px 18px; list-style:none; padding:0; margin:0; }
+.card { display:block; }
+.card .thumb { position:relative; aspect-ratio:3/4; border-radius:var(--radius); overflow:hidden; background:var(--soft); }
+.card .thumb img { width:100%; height:100%; object-fit:cover; }
+.badge { position:absolute; left:10px; top:10px; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; background:var(--ink); color:#fff; }
+.badge.sale { background:var(--red); }
+.card .name { margin:10px 0 4px; font-size:14px; font-weight:600; }
+.price { font-size:14px; }
+.price s { color:#aaa; margin-right:6px; }
+.price .sale-price { color:var(--red); font-weight:700; margin-right:4px; }
+.price b { font-weight:700; }
+
+/* 목록 페이지 */
+.page-title { padding:32px 0 8px; }
+.page-title h1 { margin:0 0 4px; font-size:26px; }
+.page-title p { margin:0; color:var(--sub); font-size:14px; }
+.tabs { display:flex; gap:8px; flex-wrap:wrap; margin:20px 0; }
+.tabs button { padding:8px 16px; border:1px solid var(--line); background:#fff; border-radius:999px; font-size:14px; }
+.tabs button.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+.toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; font-size:14px; color:var(--sub); }
+.toolbar select { padding:6px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; }
+.empty { padding:60px 0; text-align:center; color:var(--sub); }
+
+/* 상세 페이지 */
+.crumb { font-size:13px; color:var(--sub); padding:24px 0 12px; }
+.detail { display:grid; grid-template-columns:1fr 1fr; gap:48px; padding-bottom:32px; }
+.detail .main-img { border-radius:var(--radius); overflow:hidden; aspect-ratio:3/4; background:var(--soft); }
+.detail .main-img img { width:100%; height:100%; object-fit:cover; }
+.detail h1 { font-size:24px; margin:0 0 8px; }
+.detail .lead { color:var(--sub); margin:0 0 18px; }
+.detail .price-big { font-size:26px; font-weight:800; margin-bottom:6px; }
+.detail .price-big .sale-price { color:var(--red); }
+.detail .meta { font-size:13px; color:var(--sub); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:12px 0; margin:18px 0; }
+.field { margin-bottom:14px; }
+.field label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
+.field select { width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:6px; background:#fff; }
+.qty { display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+.qty button { width:38px; height:38px; border:0; background:#fff; font-size:16px; }
+.qty span { min-width:44px; display:grid; place-items:center; font-weight:600; }
+.total { display:flex; justify-content:space-between; padding:16px 0; font-size:16px; border-top:1px solid var(--line); margin-top:8px; }
+.total b { font-size:20px; }
+.buy { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.buy button { padding:15px; border-radius:6px; border:1px solid var(--ink); font-size:15px; font-weight:700; background:#fff; }
+.buy button.primary { background:var(--ink); color:#fff; }
+.tabs-detail { display:flex; border-bottom:1px solid var(--line); margin-top:12px; position:sticky; top:64px; background:#fff; z-index:5; }
+.tabs-detail a { flex:1; text-align:center; padding:14px 0; font-weight:600; color:var(--sub); border-bottom:2px solid transparent; }
+.tabs-detail a.on { color:var(--ink); border-color:var(--ink); }
+.info-block { padding:40px 0; border-bottom:1px solid var(--line); }
+.info-block h3 { margin:0 0 14px; font-size:18px; }
+.info-block p { margin:0 0 12px; color:#333; }
+.info-block ul { padding-left:18px; margin:0; color:#333; }
+.info-block li { margin-bottom:6px; }
+.info-table { width:100%; border-collapse:collapse; font-size:14px; }
+.info-table th, .info-table td { border-top:1px solid var(--line); padding:12px 8px; text-align:left; vertical-align:top; }
+.info-table th { width:30%; background:var(--soft); font-weight:600; }
+.related { padding:40px 0 60px; }
+
+
+/* 영상 영역 */
+.video-wrap { position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; background:#000; }
+.video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-cap { margin:12px 0 0; font-size:13px; color:var(--sub); }
+
+/* 토스트 */
+.toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:12px 18px; border-radius:8px; font-size:14px; opacity:0; transition:.3s; pointer-events:none; z-index:50; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+footer { border-top:1px solid var(--line); background:var(--soft); padding:28px 0; font-size:12px; color:var(--sub); }
+footer p { margin:4px 0; }
+
+/* 반응형 */
+@media (max-width: 960px) {
+  .grid { grid-template-columns:repeat(3, 1fr); }
+  .detail { gap:24px; }
+}
+@media (max-width: 640px) {
+  .gnb { display:none; }
+  .topbar { display:none; }
+  .banner { height:300px; }
+  .slide-cap .wrap h2 { font-size:21px; }
+  .grid { grid-template-columns:repeat(2, 1fr); gap:20px 12px; }
+  .detail { grid-template-columns:1fr; }
+  .detail .main-img { aspect-ratio:1/1; }
+  .tabs-detail { top:56px; }
+  .header .wrap { height:56px; }
+}

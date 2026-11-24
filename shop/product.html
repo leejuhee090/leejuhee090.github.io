@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>상품 상세 | SAMPLE SHOP</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="css/shop.css" />
+</head>
+<body>
+  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="cart.html">장바구니</a><a href="#">주문조회</a></div></div>
+  <header class="header"><div class="wrap">
+    <a class="logo" href="index.html">SAMPLE SHOP</a>
+    <nav class="gnb"><a href="index.html">홈</a><a href="list.html">전체상품</a><a href="list.html?cat=cat1">거실 가구</a><a href="list.html?cat=cat2">침실 가구</a><a href="list.html?cat=cat3">수납·소품</a></nav>
+    <div class="util"><button class="search-open" id="search-open" type="button" aria-label="상품 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button><a class="cart-link" href="cart.html">장바구니 <span class="cart-count">0</span></a></div>
+  </div></header>
+
+  <main class="wrap" id="detail">
+    <p class="crumb"><a href="index.html">홈</a> &gt; <a id="crumb-cat" href="list.html">상품</a> &gt; <span id="crumb-name"></span></p>
+    <div class="detail">
+      <div>
+        <div class="main-img"><img id="main-img" alt="" /></div>
+        <p class="ai-note">AI로 작업된 이미지입니다.</p>
+      </div>
+      <div>
+        <h1 id="p-name"></h1>
+        <div class="price-big" id="p-price"></div>
+        <div class="meta">
+          <div>판매 누적 <span id="p-sold"></span></div>
+          <div>배송비 3,000원 (30,000원 이상 무료배송)</div>
+        </div>
+        <div class="field"><label for="opt">옵션</label><select id="opt"></select></div>
+        <div class="field"><label>수량</label>
+          <div class="qty"><button id="qty-minus" aria-label="수량 감소">−</button><span id="qty">1</span><button id="qty-plus" aria-label="수량 증가">+</button></div>
+        </div>
+        <div class="total"><span>총 상품금액</span><b id="total"></b></div>
+        <div class="buy">
+          <button id="btn-cart">장바구니</button>
+          <button class="primary" id="btn-buy">바로구매</button>
+        </div>
+      </div>
+    </div>
+
+    <nav class="tabs-detail">
+      <a href="#sec-info" class="on">상품상세</a>
+      <a href="#sec-spec">상품정보</a>
+      <a href="#sec-review">후기</a>
+      <a href="#sec-qna">Q&amp;A</a>
+    </nav>
+    <section class="info-block" id="sec-info">
+      <h3>상품 영상</h3>
+      <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/to3sjq-CAvA" title="샘플 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      
+      <h3>상품 소개</h3>
+      <p id="intro-desc"></p>
+      
+      
+      <div class="main-img" style="max-width:520px;margin:20px auto 0"><img id="intro-img" alt="" /></div>
+      <p class="ai-note" style="text-align:center;max-width:520px;margin-left:auto;margin-right:auto">AI로 작업된 이미지입니다.</p>
+    </section>
+    <section class="info-block" id="sec-spec">
+      <h3>상품 정보</h3>
+      <table class="info-table">
+        <tr><th>상품 분류</th><td id="spec-cat"></td></tr>
+        <tr><th>상품 구성</th><td>상품 상세 페이지 참고</td></tr>
+        <tr><th>취급 시 주의</th><td>습기와 직사광선을 피해 보관해 주세요.</td></tr>
+        <tr><th>원산지</th><td>상품 상세 페이지 참고</td></tr>
+        <tr><th>상품 번호</th><td id="spec-id"></td></tr>
+        <tr><th>결제 정보</th><td>판매가 기준 결제, 할인가가 있으면 할인가로 계산</td></tr>
+        <tr><th>판매자 정보</th><td>샘플 쇼핑몰 운영자 (포트폴리오용 예시)</td></tr>
+      </table>
+    </section>
+    <section class="info-block" id="sec-ship">
+      <h3>배송 · 교환 · 반품</h3>
+      <ul>
+        <li>결제 완료 후 평일 기준 1~3일 내 출고됩니다.</li>
+        <li>단순 변심은 수령 후 7일 이내 교환·반품이 가능합니다. 왕복 배송비는 고객 부담입니다.</li>
+        <li>상품 하자의 경우 배송비는 판매자가 부담합니다.</li>
+      </ul>
+    </section>
+
+    <section class="info-block" id="sec-review">
+      <h3>상품 사용후기</h3>
+      <p class="empty-note">등록된 사용후기가 없습니다.</p>
+    </section>
+    <section class="info-block" id="sec-qna">
+      <h3>상품 Q&amp;A</h3>
+      <p class="empty-note">등록된 질문이 없습니다. 궁금한 점은 고객센터 게시판을 이용해 주세요.</p>
+    </section>
+    <section class="related">
+      <div class="section-head"><h2>관련 상품</h2><a href="list.html">전체보기 &rsaquo;</a></div>
+      <ul class="grid" id="related-list"></ul>
+    </section>
+  </main>
+
+  <footer><div class="wrap">
+    <p><b>SAMPLE SHOP</b></p>
+    <p>바로 적용 가능한 Cafe24 쇼핑몰 샘플</p>
+  </div></footer>
+  <div class="popup-dim search-dim" id="search-modal" hidden>
+    <div class="search-pop" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-top"><h3 id="search-title">상품 검색</h3><button id="search-close" type="button" aria-label="닫기">&times;</button></div>
+      <input type="search" id="search-input" placeholder="상품명을 입력하세요" aria-label="상품 검색어" autocomplete="off" />
+      <p class="search-count" id="search-count"></p>
+      <ul class="search-results" id="search-list"></ul>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="js/data.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

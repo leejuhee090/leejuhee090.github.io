@@ -1,0 +1,783 @@
+/* 직접 만든 셀렉트·캘린더 스타일 (관리자포털 common.css 에서 해당 규칙만 추출, #PC 접두어 제거) */
+#cui-demo {
+  --c-bg: #fff; --c-line: #d6d6db; --c-text: #222; --c-brand: #3b6fd6;
+}
+.tilde-list > .custom-select-box {
+  flex: 1;
+}
+.custom-select-box.size-m .selected-option {
+  height: 4rem;
+}
+.datepicker.size-m input[type='text'].datepicker-input {
+  height: 4rem;
+}
+.custom-select-box.size-b .selected-option {
+  height: 4.8rem;
+}
+.datepicker.size-b input[type='text'].datepicker-input {
+  height: 4.8rem;
+}
+.custom-input-boxArea {
+  display: inline-block;
+}
+.custom-input-box {
+  position: relative;
+  border: 1px solid var(--line-input);
+  border-radius: 0.4rem;
+  min-height: 3rem;
+  height: 100%;
+}
+.custom-input-box input {
+  border: none;
+  width: 100%;
+  min-height: 3rem;
+  height: 100%;
+}
+.custom-input-box:has(.clear-btn, .error-circle, .correct-chk, .sch-btn) input[type='text'] {
+  padding-right: 48px;
+}
+.custom-input-boxArea.error-input .custom-input-box,
+.custom-input-boxArea.error-input > input[type='text'] {
+  border-color: red;
+}
+.custom-input-boxArea.error-input .custom-input-box .error-circle {
+  display: block;
+  position: absolute;
+  right: 1.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--point);
+  background-image: url(img/common/ic_input_error.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.custom-input-boxArea.correct-input .custom-input-box .correct-chk {
+  display: block;
+  position: absolute;
+  right: 1.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  background-image: url(img/common/ic_input_correct.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.custom-input-box input:disabled + button {
+  pointer-events: none;
+  cursor: default;
+}
+.custom-input-box.typingType {
+  display: flex;
+  align-items: center;
+}
+.custom-input-box.typingType .clear-btn {
+  margin-right: 40px;
+}
+.custom-input-box.typingType .typingBox {
+  padding-right: 1.2rem;
+}
+.ip_email_input .custom-input-box {
+  border: none;
+}
+.ip_email_box .custom-select-box {
+  width: 16rem;
+}
+.ip_email_box .custom-select-box .selected-option {
+  height: 4rem;
+}
+.ip_phone_box .custom-select-box {
+  width: 120px;
+}
+.data-regist .ip_phone_box .custom-select-box {
+  width: 100px;
+}
+.ip_phone_box .custom-select-box .selected-option {
+  height: 4rem;
+}
+.ip_phone_box .custom-input-box {
+  flex: 1;
+}
+.custom-select-box {
+  position: relative;
+  width: 240px;
+  font-family: sans-serif;
+  user-select: none;
+  position: relative;
+}
+.custom-select-box .selected-option {
+  padding: 0.5rem 4rem 0.5rem 1.2rem;
+  height: 3.2rem;
+  color: var(--gray-50);
+}
+.custom-select-box.readonly .selected-option {
+  background-color: var(--gray-5);
+  border-color: var(--gray-20);
+  color: var(--gray-80);
+}
+.custom-select-box.disabled .selected-option {
+  background-color: var(--gray-5);
+  border-color: var(--gray-20);
+  color: var(--gray-50);
+}
+.custom-select-box.disabled,
+.custom-select-box.readonly {
+  pointer-events: none;
+  cursor: default;
+}
+.custom-select-box .selected-option::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  margin-top: -10px;
+  background-image: url(img/common/arr_select.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.custom-select-box.disabled .selected-option::after,
+.custom-select-box.readonly .selected-option::after {
+  opacity: 0.6;
+}
+.selected-option.filled {
+  color: var(--gray-80);
+  font-weight: var(--font-weight-medium);
+}
+.selected-option {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--gray-20);
+  border-radius: 0.4rem;
+  background: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.selected-option > span {
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.selected-option.open {
+  border-color: var(--gray-60);
+}
+.selected-option.open::after {
+  transform: rotate(180deg);
+}
+.options-list {
+  min-width: 120px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0.8rem 0 0 0;
+  padding: 0.8rem;
+  max-height: 30.7rem;
+  overflow-y: auto;
+  list-style: none;
+  border-radius: 0.4rem;
+  border: 1px solid var(--gray-60);
+  background: var(--white);
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.custom-select-box:has(.open) .options-list {
+  display: block;
+}
+.custom-select-box:not(.textSelect) .options-list li:focus {
+  background-color: var(--primary-10);
+  outline: none;
+  background-image: url(img/common/ic_select_check.svg);
+  background-repeat: no-repeat;
+  background-position: 1rem 0.6rem;
+}
+.options-list li {
+  padding: 0.6rem 0.6rem 0.6rem 4rem;
+  cursor: pointer;
+  min-height: 3.2rem;
+  border-radius: 0.4rem;
+  text-align: left !important;
+}
+.custom-select-box:not(.textSelect) .options-list li.act-index {
+  background-color: var(--primary-10);
+  background-image: url(img/common/ic_select_check.svg);
+  background-repeat: no-repeat;
+  background-position: 1rem 0.6rem;
+}
+.custom-select-box:not(.textSelect) .options-list li:hover {
+  background-repeat: no-repeat;
+  background-position: 1rem 0.6rem;
+}
+.options-list li:hover {
+  background-color: var(--primary-10);
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.custom-select-box.textSelect {
+  width: auto;
+  color: initial;
+}
+.custom-select-box.textSelect .selected-option > span {
+  line-height: 1.5;
+}
+.custom-select-box.textSelect .selected-option {
+  border: 0;
+  padding: 0 2.2rem 0 0;
+}
+.custom-select-box.textSelect .selected-option::after {
+  right: 0;
+}
+.custom-select-box.textSelect .options-list li {
+  padding: 0.6rem;
+}
+.custom-select-box.textSelect .selected-option {
+  color: var(--gray-80);
+}
+.datepicker {
+  position: relative;
+  max-width: 53.8rem;
+  border-radius: 6px;
+  background: var(--white);
+}
+.datepicker.open .dtDropdown {
+  display: block;
+}
+input[type='text'].datepicker-input {
+  width: 100%;
+  padding: 0 3.6rem 0 1.2rem;
+  cursor: pointer;
+  background-image: url(img/common/ic_datepicker.svg);
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 2rem;
+  background-color: var(--white);
+  height: 3.2rem;
+}
+input[type='text'].datepicker-input:disabled {
+  background-color: var(--gray-5);
+  border-color: var(--gray-20);
+  background-image: url(img/common/ic_datepicker_dis.svg);
+  pointer-events: none;
+  cursor: default;
+}
+/* input[type="text"].datepicker-input.error-datepicker {border-color: var(--point);}
+*/
+.size-m input[type='text'].datepicker-input,
+.size-b input[type='text'].datepicker-input {
+  background-size: 2.4rem;
+}
+.datepicker.error input[type='text'].datepicker-input {
+  border-color: var(--line-error);
+}
+.datepicker.open input[type='text'].datepicker-input {
+  border-color: var(--gray-60);
+}
+.datepicker .datepicker-input:focus {
+  outline: none;
+}
+.datepicker .dtDropdown {
+  width: 29.8rem;
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--white);
+  border: 1px solid var(--gray-60);
+  border-radius: 0.6rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+.datepicker .datepicker.open .dtDropdown {
+  display: block;
+}
+.datepicker .datepicker-header {
+  padding: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--gray-10);
+  height: 6.4rem;
+}
+.datepicker .arrow-btn,
+.datepicker .cd-custom-select {
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.datepicker .cd-custom-select-area {
+  display: flex;
+  gap: 8px;
+}
+.datepicker .arrow-btn {
+  width: 2.4rem;
+  font-size: 1.2rem;
+}
+.datepicker .select-wrap {
+  display: flex;
+  gap: 4px;
+}
+.datepicker .select-wrap select {
+  padding: 4px;
+  font-size: 0.9rem;
+  border: 1px solid var(--gray-20);
+  border-radius: 4px;
+  background: var(--white);
+  cursor: pointer;
+}
+.datepicker .datepicker-grid {
+  padding: 1.1rem 1.9rem 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+.datepicker .day-label {
+  text-align: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  line-height: 3rem;
+}
+.datepicker .datepicker-grid .days-container {
+  display: contents;
+}
+.datepicker .day {
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
+  line-height: 3rem;
+  padding: 0;
+}
+.datepicker .day:hover {
+  background: var(--primary-10);
+}
+.datepicker .day.today {
+  border: 0.1rem solid var(--primary-60);
+}
+.datepicker .day.selected {
+  background: var(--primary-60);
+  color: var(--white);
+}
+.datepicker .datepicker-footer {
+  margin: 1.6rem 1.5rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  justify-content: center;
+  background-color: var(--gray-5);
+  border-radius: 0.4rem;
+}
+.datepicker .datepicker-footer .today-button {
+  min-width: 4.5rem;
+  height: 2.4rem;
+  padding: 0 0.5rem;
+  line-height: 2.3rem;
+  font-size: var(--font-caption);
+  background-color: var(--white);
+  border: 1px solid var(--gray-60);
+  border-radius: 0.4rem;
+  display: inline-block;
+}
+.datepicker .datepicker-footer .today-date {
+  margin-left: 8px;
+}
+.datepicker .controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.datepicker .arrow-btn-area {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.datepicker .arrow-btn {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  width: 1.6rem;
+  height: 1.6rem;
+  position: relative;
+  text-indent: -9999px;
+}
+.datepicker .arrow-btn::after {
+  content: '';
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.datepicker .arrow-btn.year-prev::after {
+  background: url(img/common/ic_arrow_cd_select_d.svg) no-repeat center;
+}
+.datepicker .arrow-btn.mon-prev::after {
+  background: url(img/common/ic_arrow_cd_select_s.svg) no-repeat center;
+}
+.datepicker .arrow-btn.year-next::after {
+  background: url(img/common/ic_arrow_cd_select_d.svg) no-repeat center;
+  transform: rotate(180deg);
+}
+.datepicker .arrow-btn.mon-next::after {
+  background: url(img/common/ic_arrow_cd_select_s.svg) no-repeat center;
+  transform: rotate(180deg);
+}
+.datepicker .cd-custom-select {
+  background: var(--white);
+  cursor: pointer;
+  user-select: none;
+}
+.datepicker .cd-custom-select .selected {
+  width: 100%;
+  padding: 0.6rem 2.4rem 0.6rem 0.8rem;
+  position: relative;
+  border: 1px solid var(--gray-20);
+  border-radius: 0.4rem;
+}
+.datepicker .cd-custom-select.open .selected {
+  border-color: var(--gray-60);
+}
+.cd-custom-select-area:has(.open) .cd-custom-select:not(.open) .selected {
+  background-color: var(--gray-5);
+  color: var(--gray-50);
+}
+.datepicker .cd-custom-select.yearSel .selected {
+  width: 9.2rem;
+}
+.datepicker .options-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0.8rem 0 0 0;
+  padding: 0.8rem;
+  max-height: 29.8rem;
+  overflow-y: auto;
+  list-style: none;
+  border-radius: 0.4rem;
+  border: 1px solid #ccc;
+  background: var(--white);
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+}
+.datepicker .cd-custom-select-box[aria-expanded='true'] .options-list {
+  display: block;
+}
+.datepicker .cd-custom-select.monSel .selected {
+  min-width: 4.6rem;
+}
+.datepicker .cd-custom-select .selected::after {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  margin-top: -1rem;
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  display: block;
+  background-image: url(img/common/ic_arr_ta.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.datepicker .cd-custom-select.open .selected::after {
+  transform: rotate(180deg);
+}
+.datepicker .cd-custom-select .options {
+  display: none;
+  position: absolute;
+  position: absolute;
+  top: 63px;
+  bottom: -1px;
+  height: calc(100% - 62px);
+  width: calc(100% + 0.2rem);
+  margin-left: -0.1rem;
+  margin-right: -0.1rem;
+  overflow-y: auto;
+  border-radius: 0 0 0.6rem 0.6rem;
+  border: 1px solid var(--gray-60);
+  border-top-color: var(--gray-20);
+  background: var(--white);
+  z-index: 20;
+}
+.datepicker .cd-custom-select.open .options {
+  display: block;
+}
+.datepicker .options {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.8rem;
+  overflow-y: auto;
+  list-style: none;
+  border-radius: 0.4rem;
+  border: 1px solid #ccc;
+  background: var(--white);
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+}
+.datepicker .custom-select-box[aria-expanded='true'] .options {
+  display: block;
+}
+.datepicker .options .selected-opt.focused {
+  background-color: var(--primary-10);
+  background-image: url(img/common/ic_select_check.svg);
+  background-repeat: no-repeat;
+  background-position: 1rem 0.6rem;
+}
+.datepicker .options div {
+  padding: 0.6rem 0.6rem 0.6rem 4rem;
+  cursor: pointer;
+  min-height: 3.2rem;
+  border-radius: 0.4rem;
+}
+.datepicker .options div.focused {
+  background-color: var(--primary-10);
+  background-color: var(--primary-10);
+  background-image: url(img/common/ic_select_check.svg);
+  background-repeat: no-repeat;
+  background-position: 1rem 0.6rem;
+}
+.datepicker .options div:hover {
+  background-color: var(--primary-10);
+}
+.datepicker .day.prev-month-day,
+.datepicker .day.next-month-day {
+  color: var(--gray-40);
+}
+.datepicker .day.prev-month-day:hover,
+.datepicker .day.next-month-day:hover {
+  background: none;
+}
+.cd-custom-select-area:has(.open) .cd-custom-select:not(.open) .selected {
+  color: var(--gray-40);
+}
+.cd-custom-select-area:has(.open) .cd-custom-select:not(.open) .selected::after {
+  background-image: url(img/common/ic_arr_ta_gray.svg);
+}
+.datepicker.dp-ym .dtDropdown {
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+.datepicker.dp-ym .cd-custom-select-area:has(.open) .cd-custom-select:not(.open) .selected {
+  background-color: var(--white);
+  color: var(--gray-80);
+}
+.datepicker.dp-ym .cd-custom-select.monSel .options {
+  display: flex !important;
+  height: 305px !important;
+  padding: 3.2rem 1.8rem;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  z-index: 1;
+}
+.datepicker.dp-ym.open .dtDropdown:has(.cd-custom-select.open) {
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+.datepicker.dp-ym .datepicker-header {
+  border-bottom: 0;
+}
+.datepicker.dp-ym .cd-custom-select.open .options {
+  height: 305px;
+}
+.datepicker.dp-ym .cd-custom-select.monSel.open .options {
+  display: flex;
+}
+.datepicker.dp-ym .cd-custom-select.monSel .options div {
+  width: 7.6rem;
+  display: inline-flex;
+  height: 3.6rem;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3.6rem;
+}
+.datepicker.dp-ym .cd-custom-select.monSel .options div.focused {
+  background-color: var(--primary-60);
+  color: var(--white);
+}
+.datepicker.dp-ym .cd-custom-select.monSel .options div:hover {
+  background-color: var(--primary-10);
+  color: var(--gray-80);
+}
+.datepicker.dp-ym .cd-custom-select.monSel .options .selected-opt.focused {
+  background-image: none;
+}
+.datepicker.dp-ym .monSel .options .selected-opt {
+  background-color: var(--primary-60);
+  color: var(--white);
+}
+.data-regist .custom-select-box {
+  width: 100%;
+}
+.data-regist .fx-col .custom-select-box,
+.data-regist div[class^='fx-col'] .custom-select-box {
+  width: auto;
+}
+.data-list-top > dl dd .datepicker {
+  font-size: var(--font-size-default);
+  color: var(--gray-80);
+  margin-left: 0.6rem;
+}
+.data-list-top > dl dd:has(.datepicker)::before {
+  display: none;
+}
+.list-regist tbody td > .custom-select-box {
+  width: 100%;
+}
+.list-regist tbody td .input-list .custom-select-box {
+  width: 120px;
+}
+.list-regist tbody td .input-list.onlysearchBox .custom-select-box {
+  width: 26rem;
+}
+.list-regist .datepicker {
+  position: relative;
+  flex: 1;
+}
+.list-regist .custom-select-box .selected-option {
+  height: 3.2rem;
+}
+.list-regist .custom-select-box .selected-option {
+  height: 3.2rem;
+}
+.list-regist .datepicker input[type='text'].datepicker-input {
+  height: 3.2rem;
+}
+.data-regist .ip_phone_box .custom-input-boxArea {
+  width: 30%;
+}
+.data-regist td > .custom-input-boxArea {
+  width: 100%;
+  height: 3.2rem;
+}
+.data-regist td > .custom-select-box {
+  max-width: 56.6rem;
+}
+.modal .data-regist td > .custom-select-box {
+  max-width: initial;
+  width: 100%;
+}
+.data-regist td > .single-select .custom-select-box {
+  width: 100%;
+}
+.data-regist td .datepicker {
+  width: 26rem;
+}
+/* .data-regist td > .custom-select-box {width: auto;}
+*/
+.data-regist .ip_phone_box .custom-select-box .selected-option {
+  height: 3.2rem;
+}
+.modal .infoFlexBox dd .custom-input-boxArea {
+  flex: initial;
+}
+.modal .tilde-list .datepicker {
+  width: 160px;
+}
+.modal .list-regist tbody td .input-list.onlysearchBox .custom-select-box {
+  width: 30%;
+}
+.type-half > .custom-select-box {
+  width: calc(50% - 0.4rem);
+}
+.infoFlexBox dd .custom-input-boxArea {
+  flex: 1;
+}
+.infoFlexBox dd > .custom-select-box {
+  width: 100%;
+}
+.infoFlexBox dd .fx-col .custom-select-box {
+  flex: 1;
+}
+.main-lTop .today-total-blue .custom-select-box {
+  color: var(--font-color-base);
+}
+
+
+/* 원본 미디어쿼리 규칙 */
+
+/* 상세 페이지 데모 레이아웃 */
+#cui-demo { display: grid; gap: 16px; grid-template-columns: 1fr; }
+#cui-demo .cui-col { display: grid; gap: 10px; min-width: 0; }
+#cui-demo h5 { font-size: 13px; font-weight: 700; color: inherit; margin: 0; }
+#cui-demo .cui-demo-box { background: #fff; border: 1px solid #d6d6db; border-radius: 10px; padding: 14px; color: #222; }
+#cui-demo .cui-src { margin: 0; max-height: 260px; overflow: auto; background: #111; color: #e6e6e6; border-radius: 10px; padding: 12px; font: 11px/1.6 ui-monospace, Menlo, monospace; white-space: pre; }
+@media (min-width: 900px) { #cui-demo { grid-template-columns: 1fr 1fr; } }
+
+/* 데모 캘린더: 펼친 달력이 아래 블록을 밀거나 겹치지 않도록 띄움 */
+#cui-demo .datepicker { position: relative; }
+#cui-demo .datepicker .dtDropdown {
+  position: absolute; left: 0; top: calc(100% + 6px); z-index: 30; width: 300px; max-width: 100%;
+  background: #fff; border: 1px solid #d6d6db; border-radius: 10px; padding: 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.18); display: none;
+}
+#cui-demo .datepicker.open .dtDropdown { display: block; }
+#cui-demo .datepicker-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+#cui-demo .datepicker-grid .day-label { text-align: center; font-size: 12px; color: #888; padding: 4px 0; }
+#cui-demo .datepicker-grid .days-container { display: contents; }
+#cui-demo .datepicker-grid .days-container > * { text-align: center; font-size: 13px; padding: 6px 0; cursor: pointer; border-radius: 6px; color: #222; }
+#cui-demo .datepicker-grid .days-container > *:hover { background: #eef2fb; }
+#cui-demo .datepicker-grid .days-container > .selected { background: #3b6fd6; color: #fff; }
+#cui-demo .datepicker-grid .days-container > .prev-month-day, #cui-demo .datepicker-grid .days-container > .next-month-day { color: #bbb; }
+#cui-demo .datepicker-header { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px; }
+#cui-demo .datepicker-footer { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 12px; color: #555; }
+#cui-demo .datepicker-input { width: 100%; height: 36px; border: 1px solid #c6c6c8; border-radius: 8px; padding: 0 12px; background: #fff; color: #222; box-sizing: border-box; }
+
+/* 데모 캘린더 보정: 폭, 화살표 버튼, 연/월 셀렉트 */
+#cui-demo .datepicker .dtDropdown { width: min(300px, calc(100vw - 80px)); right: auto; }
+#cui-demo .arrow-btn { width: 28px; height: 28px; border: 0; border-radius: 6px; background: #f2f2f5; color: #222; cursor: pointer; font-size: 0; padding: 0; flex: none; }
+#cui-demo .arrow-btn::before { font-size: 16px; line-height: 28px; display: block; }
+#cui-demo .year-prev::before, #cui-demo .mon-prev::before { content: '‹'; }
+#cui-demo .year-next::before, #cui-demo .mon-next::before { content: '›'; }
+#cui-demo .arrow-btn-area { display: flex; gap: 4px; flex: none; }
+#cui-demo .cd-custom-select-area { display: flex; gap: 4px; flex: 1; min-width: 0; }
+#cui-demo .cd-custom-select { position: relative; flex: 1; min-width: 0; height: 28px; line-height: 28px; border: 1px solid #d6d6db; border-radius: 6px; padding: 0 8px; font-size: 13px; color: #222; background: #fff; cursor: pointer; }
+#cui-demo .cd-custom-select .options { display: none; position: absolute; top: 100%; left: 0; right: 0; max-height: 180px; overflow: auto; background: #fff; border: 1px solid #d6d6db; border-radius: 6px; z-index: 40; }
+#cui-demo .cd-custom-select.open .options { display: block; }
+#cui-demo .cd-custom-select .options div { padding: 4px 8px; }
+#cui-demo .cd-custom-select .options div:hover { background: #eef2fb; }
+#cui-demo .datepicker-grid .days-container > .today { font-weight: 700; }
+#cui-demo .datepicker-footer .today-button { border: 1px solid #c6c6c8; background: #fff; border-radius: 6px; padding: 2px 8px; font-size: 12px; cursor: pointer; color: #222; }
+/* iframe 데모가 들어가므로 셀렉트 열에 넓게 */
+#cui-demo { grid-template-columns: 1fr; }
+@media (min-width: 900px) { #cui-demo { grid-template-columns: 1.4fr 1fr; } }
+#cui-select .cui-frame { display: block; width: 100%; height: 980px; border: 1px solid #d6d6db; border-radius: 10px; background: #fff; }
+@media (min-width: 900px) { #cui-select .cui-frame { height: 820px; } }
+#cui-select .cui-frame { height: auto; min-height: 300px; }
+@media (min-width: 900px) { #cui-select .cui-frame { height: auto; min-height: 300px; } }
+
+/* 상세 페이지: PC에서는 데모를 본문 전체 폭으로 표시 (블록 4개가 한 줄) */
+#cui-demo { grid-template-columns: 1fr !important; }
+#cui-demo > .cui-col:first-child { grid-column: 1 / -1; }
+
+/* 소스 제목은 페이지 테마 색을 따름 */
+#cui-demo h5 { color: var(--color-text-primary, inherit); }

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>상품 상세 | SAMPLE MUSIC</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="css/shop.css" />
+</head>
+<body>
+  <div class="topbar"><div class="wrap"><a href="#">로그인</a><a href="#">회원가입</a><a href="#">장바구니</a><a href="#">주문조회</a></div></div>
+  <header class="header"><div class="wrap">
+    <a class="logo" href="index.html">SAMPLE MUSIC</a>
+    <nav class="gnb"><a href="index.html">홈</a><a href="list.html">전체상품</a><a href="list.html?cat=string">현악기</a><a href="list.html?cat=keys">건반악기</a><a href="list.html?cat=acc">악기 용품</a></nav>
+    <div class="util"><span>검색</span><span>장바구니 <span class="cart-count">0</span></span></div>
+  </div></header>
+
+  <main class="wrap" id="detail">
+    <p class="crumb"><a href="index.html">홈</a> &gt; <a id="crumb-cat" href="list.html">상품</a> &gt; <span id="crumb-name"></span></p>
+    <div class="detail">
+      <div class="main-img"><img id="main-img" alt="" /></div>
+      <div>
+        <p class="lead" id="p-cat"></p>
+        <h1 id="p-name"></h1>
+        <p class="lead" id="p-desc"></p>
+        <div class="price-big" id="p-price"></div>
+        <div class="meta">
+          <div>판매 누적 <span id="p-sold"></span></div>
+          <div>배송비 3,000원 (30,000원 이상 무료배송)</div>
+        </div>
+        <div class="field"><label for="opt">옵션</label><select id="opt"></select></div>
+        <div class="field"><label>수량</label>
+          <div class="qty"><button id="qty-minus" aria-label="수량 감소">−</button><span id="qty">1</span><button id="qty-plus" aria-label="수량 증가">+</button></div>
+        </div>
+        <div class="total"><span>총 상품금액</span><b id="total"></b></div>
+        <div class="buy">
+          <button id="btn-cart">장바구니</button>
+          <button class="primary" id="btn-buy">바로구매</button>
+        </div>
+      </div>
+    </div>
+
+    <nav class="tabs-detail">
+      <a href="#sec-info" class="on">상품상세</a>
+      <a href="#sec-spec">상품정보</a>
+      <a href="#sec-ship">배송/교환</a>
+    </nav>
+    <section class="info-block" id="sec-info">
+      <h3>상품 영상</h3>
+      <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/to3sjq-CAvA" title="샘플 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <p class="video-cap">샘플 영상 (포트폴리오 전용)</p>
+      <h3>상품 소개</h3>
+      <p id="intro-desc"></p>
+      <p>처음 시작하는 분도 쉽게 다룰 수 있도록 구성한 악기입니다. 사용 후에는 케이스에 보관해 주세요.</p>
+      <p>아래 상세 이미지는 AI로 만든 이미지 자리입니다. 실제 이미지가 준비되면 이 자리를 교체하세요.</p>
+      <div class="main-img" style="max-width:520px;margin-top:20px"><img alt="상세 이미지 자리" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 800'%3E%3Crect width='600' height='800' fill='%23f0eee9'/%3E%3Ctext x='300' y='400' text-anchor='middle' font-family='sans-serif' font-size='24' fill='%23888'%3E상세 이미지 자리%3C/text%3E%3C/svg%3E" /></div>
+    </section>
+    <section class="info-block" id="sec-spec">
+      <h3>상품 정보</h3>
+      <table class="info-table">
+        <tr><th>상품 분류</th><td id="spec-cat"></td></tr>
+        <tr><th>소재</th><td>목재, 금속 등 (샘플 정보)</td></tr>
+        <tr><th>세탁 방법</th><td>습기와 직사광선을 피해 보관</td></tr>
+        <tr><th>제조국</th><td>대한민국 (샘플 정보)</td></tr>
+        <tr><th>상품 번호</th><td id="spec-id"></td></tr>
+      </table>
+    </section>
+    <section class="info-block" id="sec-ship">
+      <h3>배송 · 교환 · 반품</h3>
+      <ul>
+        <li>결제 완료 후 평일 기준 1~3일 내 출고됩니다.</li>
+        <li>단순 변심은 수령 후 7일 이내 교환·반품이 가능합니다. 왕복 배송비는 고객 부담입니다.</li>
+        <li>상품 하자의 경우 배송비는 판매자가 부담합니다.</li>
+      </ul>
+    </section>
+
+    <section class="related">
+      <div class="section-head"><h2>관련 상품</h2><a href="list.html">전체보기 &rsaquo;</a></div>
+      <ul class="grid" id="related-list"></ul>
+    </section>
+  </main>
+
+  <footer><div class="wrap">
+    <p><b>SAMPLE MUSIC</b> (포트폴리오용 예시 악기 쇼핑몰)</p>
+    <p>이 페이지는 Cafe24 쇼핑몰 구조를 참고해 직접 구성한 악기 샘플이며, 실제 판매처와 무관합니다.</p>
+  </div></footer>
+  <div class="toast" id="toast"></div>
+  <script src="js/data.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이주희 포트폴리오</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css" />
-    <script type="module" crossorigin src="/assets/index-CK2SbqWJ.js?v=6"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DKh0H5sx.css?v=6">
+    <script type="module" crossorigin src="/assets/index-Ajc3QKXz.js?v=7"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CACxsV76.css?v=7">
     <style>
       button[aria-label="화면 테마 전환"] > span[aria-hidden="true"] {
         position: relative; display: inline-block; width: 38px; height: 21px; border-radius: 999px;
@@ -839,12 +839,25 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           // 섹션이 화면 아래에서 위로 지나가는 동안 0 → 1
           var p = (vh - r.top) / (vh + r.height);
           p = Math.max(0, Math.min(1, p));
+          if (done) return;
+          // 섹션을 한 번 지나가면 제자리에 세우고 끝낸다 — 오르내릴 때마다 다시 움직이지 않게
+          if (p >= 0.98) {
+            done = true;
+            targets.forEach(function (t) {
+              t.style.transition = '';
+              t.style.transform = '';
+            });
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+            return;
+          }
           var y = (0.5 - p) * 70;
           targets.forEach(function (t) {
             t.style.transition = 'none';
             t.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
           });
         }
+        var done = false;
         function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', onScroll);
@@ -869,7 +882,12 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         function inject() {
           var target = document.getElementById("components");
           if (!target || !target.parentNode) return;
-          if (document.getElementById(ID)) return;
+          var made = document.getElementById(ID);
+          if (made) {
+            // 상세에 갔다 오면 React가 다시 그리면서 자리가 맨 위로 밀린다 → 제자리로 되돌린다
+            if (made.nextElementSibling !== target) target.parentNode.insertBefore(made, target);
+            return;
+          }
           var sec = document.createElement("section");
           sec.id = ID;
           sec.style.cssText = "padding:48px 0;background:#fff";

@@ -328,6 +328,99 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
       })();
     </script>
+    <style id="work-carousel">
+      /* 03 프로젝트 카드 캐러셀: 좌우 버튼과 마우스 드래그로 카드 넘기기 */
+      .wk-carousel { position: relative; }
+      .wk-carousel-btn {
+        position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+        width: 40px; height: 40px; border-radius: 50%; padding: 0;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(20, 22, 28, 0.55); color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        cursor: pointer; transition: background-color 200ms ease, opacity 200ms ease;
+      }
+      .wk-carousel-btn:hover { background: rgba(255, 255, 255, 0.94); color: #0a0a0a; }
+      .wk-carousel-btn[disabled] { opacity: 0.3; pointer-events: none; }
+      .wk-carousel-btn--prev { left: -8px; }
+      .wk-carousel-btn--next { right: -8px; }
+      .wk-carousel-track { cursor: grab; user-select: none; }
+      .wk-carousel-track.is-dragging { cursor: grabbing; scroll-snap-type: none !important; }
+      .wk-carousel-track.is-dragging * { pointer-events: none; }
+      @media (max-width: 640px) {
+        .wk-carousel-btn { width: 34px; height: 34px; }
+        .wk-carousel-btn--prev { left: 0; }
+        .wk-carousel-btn--next { right: 0; }
+      }
+    </style>
+    <script>
+      (function () {
+        function enhance(track) {
+          if (track.dataset.wk) return;
+          track.dataset.wk = '1';
+          track.classList.add('wk-carousel-track');
+          var wrap = track.parentElement;
+          wrap.classList.add('wk-carousel');
+          function step(dir) {
+            var first = track.firstElementChild;
+            var w = first ? first.getBoundingClientRect().width + 14 : track.clientWidth * 0.8;
+            track.scrollBy({ left: dir * w, behavior: 'smooth' });
+          }
+          var prev = document.createElement('button');
+          prev.type = 'button'; prev.className = 'wk-carousel-btn wk-carousel-btn--prev';
+          prev.setAttribute('aria-label', '이전 프로젝트');
+          prev.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          var next = document.createElement('button');
+          next.type = 'button'; next.className = 'wk-carousel-btn wk-carousel-btn--next';
+          next.setAttribute('aria-label', '다음 프로젝트');
+          next.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          prev.addEventListener('click', function () { step(-1); });
+          next.addEventListener('click', function () { step(1); });
+          wrap.appendChild(prev); wrap.appendChild(next);
+          function sync() {
+            var max = track.scrollWidth - track.clientWidth - 2;
+            prev.disabled = track.scrollLeft <= 2;
+            next.disabled = track.scrollLeft >= max;
+          }
+          track.addEventListener('scroll', sync, { passive: true });
+          window.addEventListener('resize', sync);
+          sync();
+          // 마우스 드래그
+          var down = false, startX = 0, startLeft = 0, moved = false;
+          track.addEventListener('pointerdown', function (e) {
+            if (e.pointerType !== 'mouse') return;
+            down = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
+          });
+          window.addEventListener('pointermove', function (e) {
+            if (!down) return;
+            var dx = e.clientX - startX;
+            if (!moved && Math.abs(dx) > 5) { moved = true; track.classList.add('is-dragging'); }
+            if (moved) track.scrollLeft = startLeft - dx;
+          });
+          window.addEventListener('pointerup', function () {
+            if (!down) return;
+            down = false;
+            if (moved) {
+              track.classList.remove('is-dragging');
+              track.dataset.justDragged = '1';
+              setTimeout(function () { delete track.dataset.justDragged; }, 0);
+            }
+          });
+          track.addEventListener('click', function (e) {
+            if (track.dataset.justDragged) { e.preventDefault(); e.stopPropagation(); }
+          }, true);
+        }
+        function scan() {
+          var work = document.getElementById('work');
+          if (!work) return false;
+          var tracks = work.querySelectorAll('.snap-x');
+          tracks.forEach(enhance);
+          return tracks.length > 0;
+        }
+        var t = setInterval(function () { if (scan()) clearInterval(t); }, 150);
+        setTimeout(function () { clearInterval(t); }, 8000);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

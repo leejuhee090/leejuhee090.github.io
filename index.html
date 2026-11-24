@@ -532,6 +532,52 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         setTimeout(function () { clearInterval(t); }, 20000);
       })();
     </script>
+    <style id="skill-usage">
+      /* 사용 기술 칩에 마우스를 올리면, 라이브러리를 어디에서 썼는지 말풍선으로 보여준다 */
+      ul[aria-label="기술"] > li { position: relative; }
+      .skill-tip {
+        position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 30;
+        transform: translate(-50%, 4px); opacity: 0; pointer-events: none;
+        width: max-content; max-width: 280px; padding: 9px 12px; border-radius: 10px;
+        background: rgba(20, 22, 28, 0.94); color: #ffffff; font-size: 12.5px; line-height: 1.5;
+        text-align: left; white-space: normal; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+        transition: opacity 160ms ease, transform 160ms ease;
+      }
+      .skill-tip::after {
+        content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+        border: 6px solid transparent; border-top-color: rgba(20, 22, 28, 0.94);
+      }
+      ul[aria-label="기술"] > li:hover .skill-tip,
+      ul[aria-label="기술"] > li:focus-within .skill-tip {
+        opacity: 1; transform: translate(-50%, 0);
+      }
+      @media (hover: none) { .skill-tip { display: none; } }
+    </style>
+    <script>
+      (function () {
+        var USAGE = {"ag-Grid": "NH농협 그룹웨어: 게시판 목록 표에 사용, 셀 렌더러 커스터마이징", "sbGrid": "국가통합바이오빅데이터: 기존 운영에 없던 라이브러리를 새로 적용 (그리드)", "sbChart": "국가통합바이오빅데이터: 기존 운영에 없던 라이브러리를 새로 적용 (차트)", "kupload": "국가통합바이오빅데이터: 기존 운영에 없던 라이브러리를 새로 적용 (파일 업로드)", "ECharts": "국가통합바이오빅데이터 Vue 설정: 차트 라이브러리로 설정 (화면은 정적 퍼블리싱)", "Swiper": "메인 슬라이드 화면 구현", "Slick": "슬라이더 샘플 화면 정리 (Slick 방식)", "fullPage.js": "바이오 참여자 메인: 전체 페이지형 스크롤 구성", "dnd-kit": "드래그 정렬: 카드를 끌어서 순서 변경 (공통 컴포넌트 예시)", "MXML": "키움증권 퇴직연금 MTS: 마크업 개발자의 MXML 화면에 JavaScript 적용", "REST API": "고려해운·글로비스 내부전산: 관리자 페이지 REST API 연동, 데이터 바인딩", "Replicate API": "MyVoiceApp: GPT-SoVITS 음성 합성 호출", "Expo": "MyVoiceApp 모바일 앱 개발 도구", "React Native": "MyVoiceApp 모바일 앱 (Expo 기반)", "Pinia": "Vue 3 프로젝트 설정 (상태 관리)", "Vite": "Vue 3 · React 프로젝트 빌드 도구", "Tailwind CSS": "Vue 3 프로젝트 설정 (유틸리티 CSS)", "Selectric": "사용 내용 확인 필요", "jQuery UI": "사용 내용 확인 필요", "FullCalendar": "사용 내용 확인 필요", "styled-components": "사용 내용 확인 필요"};
+        function attach() {
+          var list = document.querySelector('ul[aria-label="기술"]');
+          if (!list) return false;
+          Array.prototype.forEach.call(list.children, function (li) {
+            if (li.dataset.tip) return;
+            var name = (li.textContent || '').trim().replace(/\s+(상|중|하)$/, '');
+            var text = USAGE[name];
+            if (!text) return;
+            li.dataset.tip = '1';
+            li.tabIndex = 0;
+            var tip = document.createElement('span');
+            tip.className = 'skill-tip';
+            tip.setAttribute('role', 'tooltip');
+            tip.textContent = text;
+            li.appendChild(tip);
+          });
+          return true;
+        }
+        var t = setInterval(function () { if (attach()) clearInterval(t); }, 200);
+        setTimeout(function () { clearInterval(t); }, 10000);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

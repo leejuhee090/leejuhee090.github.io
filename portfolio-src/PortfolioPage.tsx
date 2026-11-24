@@ -190,7 +190,7 @@ export const PortfolioPage: React.FC = () => {
               <div className="p-stat-card">
                 <div className="p-stat-card__num">5건</div>
                 <div className="p-stat-card__label">Vue · React 작업</div>
-                <div className="p-stat-card__sub">금융 3 · 내부전산 2</div>
+                <div className="p-stat-card__sub">금융 3 | 내부전산 2</div>
               </div>
               <div className="p-stat-card">
                 <div className="p-stat-card__num">2회</div>

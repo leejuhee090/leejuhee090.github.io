@@ -331,6 +331,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     <style id="work-carousel">
       /* 03 프로젝트: 가운데 카드를 강조하고 양옆 카드는 작아져 뒤로 물러나는 목록 */
       .wk-carousel { position: relative; }
+      .wk-stage-wrap { position: relative; }
       .wk-stage { position: relative; width: 100%; overflow: hidden; touch-action: pan-y; padding-top: 24px; }
       .wk-stage.wk-stage--ready > * {
         position: absolute !important; top: 0; left: 50%; flex: none !important;
@@ -411,7 +412,11 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           var next = btn('wk-carousel-btn--next', '다음 프로젝트', 'M9 5l7 7-7 7');
           prev.addEventListener('click', function () { go(active - 1); });
           next.addEventListener('click', function () { go(active + 1); });
-          stage.after(dots); stage.after(next); stage.after(prev);
+          var sw = document.createElement('div');
+          sw.className = 'wk-stage-wrap';
+          stage.parentElement.insertBefore(sw, stage);
+          sw.appendChild(stage); sw.appendChild(prev); sw.appendChild(next);
+          sw.parentElement.insertBefore(dots, sw.nextSibling);
           stage.classList.add('wk-stage--ready');
           function measure() {
             var h = 0;

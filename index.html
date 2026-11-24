@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이주희 포트폴리오</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css" />
-    <script type="module" crossorigin src="/assets/index-B8PSEl4n.js?v=4"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DVJ6wf9P.css?v=3">
+    <script type="module" crossorigin src="/assets/index-6mvL4PaA.js?v=5"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DKh0H5sx.css?v=5">
     <style>
       button[aria-label="화면 테마 전환"] > span[aria-hidden="true"] {
         position: relative; display: inline-block; width: 38px; height: 21px; border-radius: 999px;
@@ -383,31 +383,38 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           { x: 0.74, s: 0.86, o: 0.55, z: 2 },
           { x: 1.3,  s: 0.74, o: 0.25, z: 1 }
         ];
+        var teardown = null;
         function enhance(track) {
           if (track.dataset.wk) return;
           track.dataset.wk = '1';
+          // React가 그린 카드는 건드리지 않는다. 복제본으로 캐러셀을 만들고 원본 목록은 숨긴다.
+          // 원본을 옮기거나 지우면 분류를 바꿀 때 React가 removeChild 오류로 멈춘다.
+          var cards = Array.prototype.slice.call(track.children);
+          if (cards.length < 2) { track.dataset.wk = ''; return; }
+          var items = [];
           for (var k = 0; k < 2; k++) {
             var soon = document.createElement('div');
             soon.className = 'wk-soon';
             soon.textContent = '추후 업데이트 예정';
-            track.insertBefore(soon, track.firstChild);
+            items.push(soon);
           }
-          var items = Array.prototype.slice.call(track.children);
-          if (items.length < 2) return;
+          cards.forEach(function (c) { items.push(c.cloneNode(true)); });
           var wrap = track.parentElement;
           wrap.classList.add('wk-carousel');
           var stage = document.createElement('div');
           stage.className = 'wk-stage';
-          track.parentElement.insertBefore(stage, track);
+          wrap.insertBefore(stage, track);
           items.forEach(function (it) { stage.appendChild(it); });
-          track.remove();
+          track.style.display = 'none';
           var active = Math.max(0, items.length - (items.length - 2 > 0 ? items.length - 2 : 0) - 0);
           active = 2;
           var dots = document.createElement('div');
           dots.className = 'wk-dots';
           items.forEach(function (_, i) {
+            if (i < 2) return; // 추후 업데이트 예정 카드(0, 1)로는 점으로도 가지 않는다
             var d = document.createElement('button');
-            d.type = 'button'; d.setAttribute('aria-label', (i + 1) + '번째 프로젝트');
+            d.type = 'button'; d.setAttribute('aria-label', (i - 1) + '번째 프로젝트');
+            d.dataset.index = String(i);
             d.addEventListener('click', function () { go(i); });
             dots.appendChild(d);
           });
@@ -426,6 +433,17 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           stage.parentElement.insertBefore(sw, stage);
           sw.appendChild(stage); sw.appendChild(prev); sw.appendChild(next);
           sw.parentElement.insertBefore(dots, sw.nextSibling);
+          var dead = false, ioRef = null;
+          teardown = function () {
+            dead = true;
+            if (ioRef) ioRef.disconnect();
+            if (sw.parentElement) sw.remove();
+            if (dots.parentElement) dots.remove();
+            wrap.classList.remove('wk-carousel');
+            track.style.display = '';
+            track.dataset.wk = '';
+            teardown = null;
+          };
           // 마지막 카드 오른쪽의 카드형 버튼: 같은 레이어(스테이지 안)에 두고, 높이는 마지막 카드와 같게 맞춘다
           var latest = document.createElement('button');
           latest.type = 'button'; latest.className = 'wk-latest-card';
@@ -485,11 +503,12 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
               latest.style.zIndex = '4';
               latest.style.pointerEvents = 'auto';
             }
-            [].forEach.call(dots.children, function (d, i) { d.setAttribute('aria-current', i === active ? 'true' : 'false'); });
+            [].forEach.call(dots.children, function (d) { d.setAttribute('aria-current', Number(d.dataset.index) === active ? 'true' : 'false'); });
             measure();
           }
           function go(i) {
-            active = Math.max(0, Math.min(items.length - 1, i));
+            // 추후 업데이트 예정 카드(0, 1)에는 멈추지 않는다 — 점·휠·드래그 모두
+            active = Math.max(2, Math.min(items.length - 1, i));
             layout();
           }
           // 옆 카드를 누르면 그 카드를 가운데로
@@ -530,7 +549,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
               if (active !== before) { e.preventDefault(); wheelLock = now + 650; }
             }
           }, { passive: false });
-          window.addEventListener('resize', layout);
+          window.addEventListener('resize', function () { if (!dead) layout(); });
           // 등장 액션: 03 섹션에 스크롤이 닿을 때마다 카드가 가운데에 모였다가 좌우로 펼쳐진다
           var intro = false, introTimer = null;
           function gather() {
@@ -554,10 +573,12 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           }
           if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
+              if (dead) return;
               entries.forEach(function (en) {
                 if (en.isIntersecting && en.intersectionRatio >= 0.2) enter();
               });
             }, { threshold: [0, 0.2] });
+            ioRef = io;
             io.observe(document.getElementById('work') || stage);
             gather();
           } else {
@@ -569,7 +590,21 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           var work = document.getElementById('work');
           if (!work) return false;
           var tracks = work.querySelectorAll('.snap-x');
-          tracks.forEach(enhance);
+          tracks.forEach(function (track) {
+            enhance(track);
+            if (track.dataset.wkWatch) return;
+            track.dataset.wkWatch = '1';
+            // 분류 버튼을 누르면 React가 카드 목록을 새로 그린다 → 캐러셀을 다시 만든다.
+            // 여러 번에 나눠 그리므로 조금 기다렸다가 한 번만 다시 만든다
+            var rebuildTimer = null;
+            new MutationObserver(function () {
+              clearTimeout(rebuildTimer);
+              rebuildTimer = setTimeout(function () {
+                if (teardown) teardown();
+                enhance(track);
+              }, 80);
+            }).observe(track, { childList: true });
+          });
           return tracks.length > 0;
         }
         var t = setInterval(function () { if (scan()) clearInterval(t); }, 150);
@@ -736,47 +771,32 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       })();
     </script>
     <style id="code-reveal">
-      /* 코드 패널: 한 줄씩 나타나며, 위로 되돌아가기 전까지 그대로 유지 */
+      /* 코드 패널: 한 줄씩 나타나고, 한 번 끝나면 새로고침 전까지 그대로 둔다 */
       .wk-code-line { clip-path: inset(0 100% 0 0); }
       .wk-code-line.is-on { clip-path: inset(0 0 0 0); transition: clip-path 620ms steps(26, end); }
       @media (prefers-reduced-motion: reduce) { .wk-code-line { opacity: 1; transform: none; transition: none; } }
     </style>
     <script>
       (function () {
-        var timers = [];
-        var resets = [];
-        var lastY = window.scrollY;
-        window.addEventListener('scroll', function () {
-          var y = window.scrollY;
-          if (y < lastY - 2) resets.forEach(function (r) { r(); }); // 휠을 위로 올리면 다시 숨긴다
-          lastY = y;
-        }, { passive: true });
         function setup(box) {
           if (box.dataset.codeReveal) return;
           var lines = Array.prototype.slice.call(box.children);
           if (lines.length < 2) return;
           box.dataset.codeReveal = '1';
           lines.forEach(function (l) { l.classList.add('wk-code-line'); });
-          var typed = false;
-          function hideAll() {
-            timers.forEach(clearTimeout); timers = [];
-            lines.forEach(function (l) { l.classList.remove('is-on'); l.style.transitionDelay = '0ms'; });
-            typed = false;
-          }
-          // 화면에 들어서면 한 줄씩 코딩하듯 타이핑되고, 위로 올려 패널이 아래로 빠질 때까지 유지한다
+          // 화면에 들어서면 한 줄씩 코딩하듯 타이핑된다. 다 찍히면 감시를 끊어
+          // 스크롤을 올리든 내리든 다시 숨기지 않는다 (새로고침해야 처음부터)
           function type() {
-            if (typed) return;
-            typed = true;
             lines.forEach(function (l, i) {
-              timers.push(setTimeout(function () { l.classList.add('is-on'); }, 150 + i * 700));
+              setTimeout(function () { l.classList.add('is-on'); }, 150 + i * 700);
             });
           }
-          resets.push(hideAll);
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (en) {
-              var top = en.boundingClientRect.top;
-              if (top > window.innerHeight) { hideAll(); return; } // 위로 올려 아래로 빠짐 → 다시 준비
-              if (en.isIntersecting && en.intersectionRatio >= 0.25) type();
+              if (en.isIntersecting && en.intersectionRatio >= 0.25) {
+                type();
+                io.disconnect();
+              }
             });
           }, { threshold: [0, 0.25] });
           io.observe(box);
@@ -934,23 +954,28 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
 })();
 </script>
 <style id="detail-nav-middle">
-  /* 이전/다음 버튼: 상세 본문(article.block) 세로 가운데 좌우에 배치 */
-  article.block { position: relative; }
-  .detail-nav-top { position: absolute !important; top: 50% !important; left: 0 !important; right: 0 !important; width: auto !important; height: 0 !important; transform: translateY(-50%); padding: 0 !important; display: flex !important; justify-content: space-between !important; align-items: center; pointer-events: none; z-index: 5; }
+  /* 이전/다음 버튼: 본문 바깥 좌우 여백에 화면 세로 가운데로 둔다.
+     버튼은 body 바로 아래에 두고 CSS로만 배치한다 — React가 그리는 DOM 안으로
+     옮기면 화면을 다시 그릴 때 removeChild 오류가 난다. */
+  :root {
+    --nav-chip: 56px;
+    --nav-gap: 12px;
+    --nav-pad: clamp(16px, 4vw, 54px);
+    --nav-outer: max(0px, (100vw - 1440px) / 2);
+    /* 여백이 모자라면 그만큼 본문을 안쪽으로 들여 버튼 자리를 만든다 */
+    --nav-inset: max(0px, var(--nav-chip) + var(--nav-gap) - var(--nav-pad) - var(--nav-outer));
+    /* 버튼은 본문 글 칸 바로 바깥에 붙인다 */
+    --nav-edge: max(4px, var(--nav-outer) + var(--nav-pad) + var(--nav-inset) - var(--nav-chip) - var(--nav-gap));
+  }
+  .detail-nav-top { position: fixed !important; top: 50% !important; left: var(--nav-edge) !important; right: var(--nav-edge) !important; width: auto !important; height: 0 !important; transform: translateY(-50%); padding: 0 !important; display: flex !important; justify-content: space-between !important; align-items: center; pointer-events: none; z-index: 2000; }
   .detail-nav-top .detail-nav-chip { pointer-events: auto; }
   .detail-nav-top .detail-nav-chip[style*="hidden"] { pointer-events: none; }
-</style>
-<script id="detail-nav-middle-js">
-(function () {
-  function place() {
-    var nav = document.querySelector('.detail-nav-top');
-    var article = document.querySelector('article.block');
-    if (nav && article && nav.parentElement !== article) article.appendChild(nav);
+  body.is-detail article.block { padding-left: var(--nav-inset); padding-right: var(--nav-inset); }
+  @media (max-width: 480px) {
+    :root { --nav-chip: 38px; --nav-gap: 8px; }
+    .detail-nav-top .detail-nav-chip { width: 38px; height: 38px; }
+    .detail-nav-top .detail-nav-chip-icon svg { width: 16px; height: 16px; }
   }
-  new MutationObserver(place).observe(document.body, { childList: true, subtree: true });
-  window.addEventListener('hashchange', place);
-  place();
-})();
-</script>
+</style>
 </body>
 </html>

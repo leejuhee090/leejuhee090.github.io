@@ -440,7 +440,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
             function step() {
               if (active <= 2) { sweeping = false; return; } // 최근 프로젝트 카드(인덱스 2)에서 멈춘다
               go(active - 1);
-              setTimeout(step, 110);
+              setTimeout(step, 60);
             }
             step();
           });

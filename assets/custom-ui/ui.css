@@ -729,3 +729,38 @@ input[type='text'].datepicker-input:disabled {
 #cui-demo .cui-demo-box { background: #fff; border: 1px solid #d6d6db; border-radius: 10px; padding: 14px; color: #222; }
 #cui-demo .cui-src { margin: 0; max-height: 260px; overflow: auto; background: #111; color: #e6e6e6; border-radius: 10px; padding: 12px; font: 11px/1.6 ui-monospace, Menlo, monospace; white-space: pre; }
 @media (min-width: 900px) { #cui-demo { grid-template-columns: 1fr 1fr; } }
+
+/* 데모 캘린더: 펼친 달력이 아래 블록을 밀거나 겹치지 않도록 띄움 */
+#cui-demo .datepicker { position: relative; }
+#cui-demo .datepicker .dtDropdown {
+  position: absolute; left: 0; top: calc(100% + 6px); z-index: 30; width: 300px; max-width: 100%;
+  background: #fff; border: 1px solid #d6d6db; border-radius: 10px; padding: 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.18); display: none;
+}
+#cui-demo .datepicker.open .dtDropdown { display: block; }
+#cui-demo .datepicker-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+#cui-demo .datepicker-grid .day-label { text-align: center; font-size: 12px; color: #888; padding: 4px 0; }
+#cui-demo .datepicker-grid .days-container { display: contents; }
+#cui-demo .datepicker-grid .days-container > * { text-align: center; font-size: 13px; padding: 6px 0; cursor: pointer; border-radius: 6px; color: #222; }
+#cui-demo .datepicker-grid .days-container > *:hover { background: #eef2fb; }
+#cui-demo .datepicker-grid .days-container > .selected { background: #3b6fd6; color: #fff; }
+#cui-demo .datepicker-grid .days-container > .prev-month-day, #cui-demo .datepicker-grid .days-container > .next-month-day { color: #bbb; }
+#cui-demo .datepicker-header { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px; }
+#cui-demo .datepicker-footer { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 12px; color: #555; }
+#cui-demo .datepicker-input { width: 100%; height: 36px; border: 1px solid #c6c6c8; border-radius: 8px; padding: 0 12px; background: #fff; color: #222; box-sizing: border-box; }
+
+/* 데모 캘린더 보정: 폭, 화살표 버튼, 연/월 셀렉트 */
+#cui-demo .datepicker .dtDropdown { width: min(300px, calc(100vw - 80px)); right: auto; }
+#cui-demo .arrow-btn { width: 28px; height: 28px; border: 0; border-radius: 6px; background: #f2f2f5; color: #222; cursor: pointer; font-size: 0; padding: 0; flex: none; }
+#cui-demo .arrow-btn::before { font-size: 16px; line-height: 28px; display: block; }
+#cui-demo .year-prev::before, #cui-demo .mon-prev::before { content: '‹'; }
+#cui-demo .year-next::before, #cui-demo .mon-next::before { content: '›'; }
+#cui-demo .arrow-btn-area { display: flex; gap: 4px; flex: none; }
+#cui-demo .cd-custom-select-area { display: flex; gap: 4px; flex: 1; min-width: 0; }
+#cui-demo .cd-custom-select { position: relative; flex: 1; min-width: 0; height: 28px; line-height: 28px; border: 1px solid #d6d6db; border-radius: 6px; padding: 0 8px; font-size: 13px; color: #222; background: #fff; cursor: pointer; }
+#cui-demo .cd-custom-select .options { display: none; position: absolute; top: 100%; left: 0; right: 0; max-height: 180px; overflow: auto; background: #fff; border: 1px solid #d6d6db; border-radius: 6px; z-index: 40; }
+#cui-demo .cd-custom-select.open .options { display: block; }
+#cui-demo .cd-custom-select .options div { padding: 4px 8px; }
+#cui-demo .cd-custom-select .options div:hover { background: #eef2fb; }
+#cui-demo .datepicker-grid .days-container > .today { font-weight: 700; }
+#cui-demo .datepicker-footer .today-button { border: 1px solid #c6c6c8; background: #fff; border-radius: 6px; padding: 2px 8px; font-size: 12px; cursor: pointer; color: #222; }

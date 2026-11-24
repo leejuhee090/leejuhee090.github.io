@@ -361,6 +361,9 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       .wk-carousel-btn--prev { left: 4px; }
       .wk-carousel-btn--next { right: 4px; }
       .wk-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+      .wk-latest { display: block; margin: 14px auto 0; padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: rgba(20,22,28,.6); color: #fff; font-size: 13px; cursor: pointer; }
+      .wk-latest:hover { background: rgba(255,255,255,.94); color: #0a0a0a; }
+      .wk-latest[hidden] { display: none; }
       .wk-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.28); cursor: pointer; }
       .wk-dots button[aria-current="true"] { background: #ffffff; }
       @media (max-width: 640px) {
@@ -417,6 +420,11 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           stage.parentElement.insertBefore(sw, stage);
           sw.appendChild(stage); sw.appendChild(prev); sw.appendChild(next);
           sw.parentElement.insertBefore(dots, sw.nextSibling);
+          var latest = document.createElement('button');
+          latest.type = 'button'; latest.className = 'wk-latest'; latest.hidden = true;
+          latest.textContent = '<< 최근 프로젝트';
+          latest.addEventListener('click', function () { go(2); });
+          dots.parentElement.insertBefore(latest, dots.nextSibling);
           stage.classList.add('wk-stage--ready');
           function measure() {
             var h = 0;
@@ -441,6 +449,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
             });
             prev.disabled = active === 0;
             next.disabled = active === items.length - 1;
+            latest.hidden = active !== items.length - 1;
             [].forEach.call(dots.children, function (d, i) { d.setAttribute('aria-current', i === active ? 'true' : 'false'); });
             measure();
           }
@@ -648,6 +657,10 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     <style id="method-card-height">
       /* 작업 방식 카드: 기본 높이 300px */
       section#method [class*="rounded-2xl"][class*="border-border"][class*="bg-surface-card"][class*="pb-[22px]"] { min-height: 300px; }
+    </style>
+    <style id="card-thumb-bg">
+      /* 카드 썸네일 기본 배경: 흰색 */
+      [class*="bg-[linear-gradient(135deg,var(--color-surface-muted)"] { background-color: #ffffff !important; background-image: none !important; }
     </style>
   </head>
   <body>

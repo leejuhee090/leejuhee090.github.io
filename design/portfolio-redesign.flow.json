@@ -44,6 +44,78 @@
         "title": "목록으로 돌아가기",
         "expected": "상세에서 목록으로 돌아가도 선택했던 필터가 유지된다.",
         "origin": "inferred"
+      },
+      {
+        "id": "int-enter",
+        "group": "인터랙션",
+        "screen": "home",
+        "title": "메인 섹션은 화면에 들어올 때 아",
+        "expected": "메인 섹션은 화면에 들어올 때 아래에서 위로 나타나야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-code",
+        "group": "인터랙션",
+        "screen": "home",
+        "title": "히어로 코드 패널은 한 줄씩 나타",
+        "expected": "히어로 코드 패널은 한 줄씩 나타나고, 휠을 위로 올리면 다시 숨겨져야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-career-chart",
+        "group": "인터랙션",
+        "screen": "home",
+        "title": "경력 그래프 카드는 경력 섹션이 ",
+        "expected": "경력 그래프 카드는 경력 섹션이 화면을 지나가는 동안 위치에 따라 움직여야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-skill-tip",
+        "group": "인터랙션",
+        "screen": "home",
+        "title": "사용 기술의 라이브러리 칩에 마우",
+        "expected": "사용 기술의 라이브러리 칩에 마우스를 올리면 사용처가 말풍선으로 보여야 한다. 기본 언어와 도구에는 말풍선이 없어야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-carousel",
+        "group": "인터랙션",
+        "screen": "projects",
+        "title": "03 프로젝트는 가운데 카드가 강",
+        "expected": "03 프로젝트는 가운데 카드가 강조되고 양옆 카드가 작아져야 하며, 화살표·드래그·휠로 넘길 수 있어야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-carousel-enter",
+        "group": "인터랙션",
+        "screen": "projects",
+        "title": "03 프로젝트 섹션에 들어설 때마",
+        "expected": "03 프로젝트 섹션에 들어설 때마다 카드가 가운데에 모였다가 좌우로 펼쳐져야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-latest",
+        "group": "인터랙션",
+        "screen": "projects",
+        "title": "마지막 카드 옆 둥근 버튼을 누르",
+        "expected": "마지막 카드 옆 둥근 버튼을 누르면 카드가 빠르게 넘어가 최근 프로젝트 카드에서 멈춰야 한다. 왼쪽 버튼은 추후 업데이트 예정 카드로 가지 않아야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-detail-nav",
+        "group": "인터랙션",
+        "screen": "detail",
+        "title": "상세 화면의 이전·다음·홈 버튼은",
+        "expected": "상세 화면의 이전·다음·홈 버튼은 화면 모서리에 고정되고, 끝에 도달하면 다음 프로젝트를 안내해야 한다.",
+        "origin": "source"
+      },
+      {
+        "id": "int-filmstrip",
+        "group": "인터랙션",
+        "screen": "detail",
+        "title": "상세 캡처는 가로 한 줄로 놓이고",
+        "expected": "상세 캡처는 가로 한 줄로 놓이고 드래그와 스와이프로 넘어가야 한다.",
+        "origin": "source"
       }
     ],
     "audit": {

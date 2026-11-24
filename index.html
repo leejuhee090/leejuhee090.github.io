@@ -434,9 +434,12 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           stage.appendChild(latest);
           stage.classList.add('wk-stage--ready');
           function measure() {
+            // 모든 카드의 높이를 가장 높은 카드 기준으로 맞춘다
+            items.forEach(function (it) { it.style.height = ''; });
             var h = 0;
-            items.forEach(function (it) { h = Math.max(h, it.offsetHeight * 1.05); });
-            stage.style.height = (h + 32) + 'px';
+            items.forEach(function (it) { h = Math.max(h, it.offsetHeight); });
+            items.forEach(function (it) { it.style.height = h + 'px'; });
+            stage.style.height = (Math.round(h * 1.05) + 32) + 'px';
           }
           function layout() {
             var unit = Math.min(230, window.innerWidth * 0.2);
@@ -460,7 +463,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
             latest.hidden = !isLast;
             if (isLast) {
               var lastItem = items[items.length - 1];
-              var h = Math.round(lastItem.offsetHeight * 1.05);
+              var h = Math.round(lastItem.getBoundingClientRect().height);
               latest.style.setProperty('width', '240px', 'important');
               latest.style.setProperty('height', h + 'px', 'important');
               latest.style.top = '16px';
@@ -680,6 +683,11 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     <style id="card-thumb-bg">
       /* 카드 썸네일 기본 배경: 흰색 */
       [class*="bg-[linear-gradient(135deg,var(--color-surface-muted)"] { background-color: #ffffff !important; background-image: none !important; }
+    </style>
+    <style id="card-bottom-link">
+      /* 03 카드: 상세보기 줄을 카드 맨 아래에 고정 */
+      .wk-stage article { display: flex; flex-direction: column; }
+      .wk-stage article > div:last-child { margin-top: auto; }
     </style>
   </head>
   <body>

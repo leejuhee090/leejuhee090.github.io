@@ -645,6 +645,10 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         setTimeout(function () { clearInterval(t); }, 10000);
       })();
     </script>
+    <style id="method-card-height">
+      /* 작업 방식 카드: 기본 높이 300px */
+      section#method [class*="rounded-2xl"][class*="border-border"][class*="bg-surface-card"][class*="pb-[22px]"] { min-height: 300px; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

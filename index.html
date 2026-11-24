@@ -869,5 +869,69 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         mo.observe(document.body, { childList: true, subtree: true });
       })();
     </script>
-  </body>
+  
+<script>
+(function () {
+  var BASE = 'assets/custom-ui/';
+  var SEL_HTML = '<div class="cui-demo-box">' +
+    '<div class="custom-select-box" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0" aria-labelledby="cui-sel-label">' +
+    '<label id="cui-sel-label" class="visually-hidden">선택</label>' +
+    '<div class="selected-option" role="textbox" aria-readonly="true"><span>선택</span></div>' +
+    '<ul class="options-list" role="listbox">' +
+    ['선택1','선택2','선택3','선택4','선택5'].map(function (t) { return '<li role="option" data-value="' + t + '" tabindex="-1">' + t + '</li>'; }).join('') +
+    '</ul></div></div>';
+  var DAYS = '<div class="day-label">일</div><div class="day-label">월</div><div class="day-label">화</div><div class="day-label">수</div><div class="day-label">목</div><div class="day-label">금</div><div class="day-label">토</div>';
+  function calHtml(size, label) {
+    return '<div class="cui-demo-box"><p style="margin:0 0 8px;font-size:12px;color:#666">' + label + '</p>' +
+      '<div class="datepicker dp ' + size + '">' +
+      '<input type="text" class="datepicker-input" placeholder="YYYY-MM-DD" readonly/>' +
+      '<div class="dtDropdown"><div class="datepicker-header">' +
+      '<div class="arrow-btn-area"><button class="arrow-btn year-prev" title="이전 연도">이전 연도</button><button class="arrow-btn mon-prev" title="이전 월">이전 월</button></div>' +
+      '<div class="cd-custom-select-area"><div class="cd-custom-select yearSel" tabindex="0"><div class="selected"></div><div class="options"></div></div>' +
+      '<div class="cd-custom-select monSel" tabindex="0"><div class="selected"></div><div class="options"></div></div></div>' +
+      '<div class="arrow-btn-area"><button class="arrow-btn mon-next" title="다음 월">다음 월</button><button class="arrow-btn year-next" title="다음 연도">연도</button></div>' +
+      '</div><div class="datepicker-grid">' + DAYS + '<div class="days-container"></div></div>' +
+      '<div class="datepicker-footer"><button class="today-button">Today</button><span class="today-date"></span></div>' +
+      '</div></div></div>';
+  }
+  var CAL_HTML = calHtml('', '32px') + calHtml('size-m', '40px') + calHtml('size-b', '48px');
+  var loads = {};
+  function loadScript(file) {
+    var src = BASE + file;
+    if (!loads[src]) {
+      loads[src] = new Promise(function (res, rej) {
+        var sc = document.createElement('script');
+        sc.src = src; sc.onload = res; sc.onerror = rej;
+        document.head.appendChild(sc);
+      });
+    }
+    return loads[src];
+  }
+  function fillSource(id, file) {
+    fetch(BASE + file).then(function (r) { return r.text(); }).then(function (t) {
+      var el = document.getElementById(id); if (el) el.textContent = t;
+    }).catch(function () {});
+  }
+  function mount() {
+    var root = document.getElementById('cui-demo');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    if (!document.getElementById('cui-css')) {
+      var l = document.createElement('link'); l.id = 'cui-css'; l.rel = 'stylesheet'; l.href = BASE + 'ui.css';
+      document.head.appendChild(l);
+    }
+    document.getElementById('cui-select').innerHTML = SEL_HTML;
+    document.getElementById('cui-cal').innerHTML = CAL_HTML;
+    fillSource('cui-src-select', 'select.js');
+    fillSource('cui-src-cal', 'calendar.js');
+    Promise.all([loadScript('select.js'), loadScript('calendar.js')]).then(function () {
+      if (window.initCustomSelect) window.initCustomSelect(root);
+      if (window.initCalendars) window.initCalendars(root);
+    });
+  }
+  new MutationObserver(mount).observe(document.body, { childList: true, subtree: true });
+  mount();
+})();
+</script>
+</body>
 </html>

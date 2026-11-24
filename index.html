@@ -777,6 +777,43 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         setTimeout(function () { clearInterval(t); }, 12000);
       })();
     </script>
+    <script>
+      (function () {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var targets = [];
+        function collect() {
+          var career = document.getElementById('career');
+          if (!career) return false;
+          var cards = Array.prototype.filter.call(career.querySelectorAll('[class*="border-border"]'), function (e) {
+            return e.querySelector('svg') || e.querySelector('[style*="width"]');
+          });
+          // 가장 바깥 차트 카드만 (안쪽 중복 제외)
+          targets = cards.filter(function (e) { return !cards.some(function (o) { return o !== e && o.contains(e); }); });
+          return targets.length > 0;
+        }
+        var ticking = false;
+        function update() {
+          ticking = false;
+          var career = document.getElementById('career');
+          if (!career || !targets.length) return;
+          var r = career.getBoundingClientRect();
+          var vh = window.innerHeight;
+          // 섹션이 화면 아래에서 위로 지나가는 동안 0 → 1
+          var p = (vh - r.top) / (vh + r.height);
+          p = Math.max(0, Math.min(1, p));
+          var y = (0.5 - p) * 70;
+          targets.forEach(function (t) {
+            t.style.transition = 'none';
+            t.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+          });
+        }
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        var t = setInterval(function () { if (collect()) { clearInterval(t); update(); } }, 300);
+        setTimeout(function () { clearInterval(t); }, 12000);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

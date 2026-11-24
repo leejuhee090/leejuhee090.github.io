@@ -354,8 +354,8 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       .wk-soon {
         display: flex; align-items: center; justify-content: center; text-align: center;
         min-height: 420px; padding: 24px; box-sizing: border-box; border-radius: 14px;
-        border: 1px dashed rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.03);
-        color: rgba(255, 255, 255, 0.6); font-size: 14px; letter-spacing: 0.02em;
+        border: 1px dashed var(--color-border-strong); background: var(--color-surface-muted);
+        color: var(--color-text-tertiary); font-size: 14px; letter-spacing: 0.02em;
       }
       .wk-carousel-btn[disabled] { opacity: 0.3; pointer-events: none; }
       .wk-carousel-btn--prev { left: 4px; }
@@ -370,8 +370,8 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       .wk-latest-card[hidden] { display: none; }
       .wk-latest-card:hover { box-shadow: 0 12px 28px rgba(0,0,0,.18); }
       .wk-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
-      .wk-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.28); cursor: pointer; }
-      .wk-dots button[aria-current="true"] { background: #ffffff; }
+      .wk-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: var(--color-border-strong); cursor: pointer; }
+      .wk-dots button[aria-current="true"] { background: var(--color-text-primary); }
       @media (max-width: 640px) {
         .wk-carousel-btn { width: 34px; height: 34px; }
       }

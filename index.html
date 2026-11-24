@@ -720,6 +720,63 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         setTimeout(function () { clearInterval(t); }, 12000);
       })();
     </script>
+    <style id="code-reveal">
+      /* 코드 패널: 한 줄씩 나타나며, 위로 되돌아가기 전까지 그대로 유지 */
+      .wk-code-line { opacity: 0; transform: translateX(-8px); transition: opacity 320ms ease, transform 320ms ease; }
+      .wk-code-line.is-on { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) { .wk-code-line { opacity: 1; transform: none; transition: none; } }
+    </style>
+    <script>
+      (function () {
+        var timers = [];
+        var resets = [];
+        var lastY = window.scrollY;
+        window.addEventListener('scroll', function () {
+          var y = window.scrollY;
+          if (y < lastY - 2) resets.forEach(function (r) { r(); }); // 휠을 위로 올리면 다시 숨긴다
+          lastY = y;
+        }, { passive: true });
+        function setup(box) {
+          if (box.dataset.codeReveal) return;
+          var lines = Array.prototype.slice.call(box.children);
+          if (lines.length < 2) return;
+          box.dataset.codeReveal = '1';
+          lines.forEach(function (l) { l.classList.add('wk-code-line'); });
+          function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+          function play() {
+            clearTimers();
+            lines.forEach(function (l, i) {
+              timers.push(setTimeout(function () { l.classList.add('is-on'); }, i * 130));
+            });
+          }
+          function reset() {
+            clearTimers();
+            lines.forEach(function (l) { l.classList.remove('is-on'); });
+          }
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var top = en.boundingClientRect.top;
+              if (en.isIntersecting && top < window.innerHeight * 0.85 && top > -en.boundingClientRect.height && !box.dataset.played) { box.dataset.played = '1'; play(); }
+              else if (top > window.innerHeight) { box.dataset.played = ''; reset(); }
+            });
+          }, { threshold: [0, 0.3] });
+          io.observe(box);
+          resets.push(reset);
+        }
+        function scan() {
+          var boxes = document.querySelectorAll('div');
+          var found = false;
+          Array.prototype.forEach.call(boxes, function (d) {
+            if (d.className && typeof d.className === 'string' && d.className.indexOf('overflow-x-auto') >= 0 && d.className.indexOf('leading-[2]') >= 0) {
+              setup(d); found = true;
+            }
+          });
+          return found;
+        }
+        var t = setInterval(function () { if (scan()) clearInterval(t); }, 300);
+        setTimeout(function () { clearInterval(t); }, 12000);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

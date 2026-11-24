@@ -922,6 +922,10 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     }
     document.getElementById('cui-select').innerHTML = '<iframe src="' + BASE + 'demo.html" title="셀렉트와 캘린더 데모" loading="lazy" class="cui-frame"></iframe>';
     document.getElementById('cui-cal').innerHTML = '';
+    var fr = document.querySelector('#cui-select iframe.cui-frame');
+    if (fr) fr.addEventListener('load', function () {
+      try { fr.style.height = (fr.contentDocument.documentElement.scrollHeight + 8) + 'px'; } catch (e) {}
+    });
     fillSource('cui-src-select', 'select.js');
     fillSource('cui-src-cal', 'calendar.js');
   }

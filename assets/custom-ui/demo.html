@@ -11,6 +11,10 @@
   #PC { padding: 16px; }
   .demo-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
   .demo-cap { font-size: 12px; color: #666; margin: 0 0 6px; }
+  /* 데모에서는 세 캘린더를 펼친 상태로 보여 줌 (클릭 동작은 그대로) */
+  #PC .datepicker .dtDropdown { position: static !important; display: block !important; width: 280px; margin-top: 6px; }
+  #PC .datepicker, #PC .datepicker.size-m, #PC .datepicker.size-b { display: block; height: auto !important; min-height: 0 !important; position: relative; }
+  #PC .datepicker .datepicker-input { position: relative; }
 </style>
 </head>
 <body>
@@ -34,7 +38,7 @@
   <div class="demo-row" style="margin-top:16px">
     <div>
       <p class="demo-cap">캘린더 32px</p>
-      <div class="datepicker dp" style="width:280px">
+      <div class="datepicker open dp" style="width:280px">
         <input type="text" class="datepicker-input" placeholder="YYYY-MM-DD" readonly/>
         <div class="dtDropdown">
           <div class="datepicker-header">
@@ -66,7 +70,7 @@
     </div>
     <div>
       <p class="demo-cap">캘린더 40px</p>
-      <div class="datepicker dp size-m" style="width:280px">
+      <div class="datepicker open dp size-m" style="width:280px">
         <input type="text" class="datepicker-input" placeholder="YYYY-MM-DD" readonly/>
         <div class="dtDropdown">
           <div class="datepicker-header">
@@ -93,6 +97,31 @@
             <button class="today-button">Today</button>
             <span class="today-date"></span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="demo-row" style="margin-top:16px">
+    <div>
+      <p class="demo-cap">캘린더 48px</p>
+      <div class="datepicker open dp size-b" style="width:280px">
+        <input type="text" class="datepicker-input" placeholder="YYYY-MM-DD" readonly/>
+        <div class="dtDropdown">
+          <div class="datepicker-header">
+            <div class="arrow-btn-area"><button class="arrow-btn year-prev" title="이전 연도">이전 연도</button><button class="arrow-btn mon-prev" title="이전 월">이전 월</button></div>
+            <div class="cd-custom-select-area">
+              <div class="cd-custom-select yearSel" tabindex="0"><div class="selected"></div><div class="options"></div></div>
+              <div class="cd-custom-select monSel" tabindex="0"><div class="selected"></div><div class="options"></div></div>
+            </div>
+            <div class="arrow-btn-area"><button class="arrow-btn mon-next" title="다음 월">다음 월</button><button class="arrow-btn year-next" title="다음 연도">연도</button></div>
+          </div>
+          <div class="datepicker-grid">
+            <div class="day-label">일</div><div class="day-label">월</div><div class="day-label">화</div>
+            <div class="day-label">수</div><div class="day-label">목</div><div class="day-label">금</div>
+            <div class="day-label">토</div>
+            <div class="days-container"></div>
+          </div>
+          <div class="datepicker-footer"><button class="today-button">Today</button><span class="today-date"></span></div>
         </div>
       </div>
     </div>

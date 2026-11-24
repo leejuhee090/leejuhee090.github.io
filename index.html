@@ -933,5 +933,24 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
   mount();
 })();
 </script>
+<style id="detail-nav-middle">
+  /* 이전/다음 버튼: 상세 본문(article.block) 세로 가운데 좌우에 배치 */
+  article.block { position: relative; }
+  .detail-nav-top { position: absolute !important; top: 50% !important; left: 0 !important; right: 0 !important; width: auto !important; height: 0 !important; transform: translateY(-50%); padding: 0 !important; display: flex !important; justify-content: space-between !important; align-items: center; pointer-events: none; z-index: 5; }
+  .detail-nav-top .detail-nav-chip { pointer-events: auto; }
+  .detail-nav-top .detail-nav-chip[style*="hidden"] { pointer-events: none; }
+</style>
+<script id="detail-nav-middle-js">
+(function () {
+  function place() {
+    var nav = document.querySelector('.detail-nav-top');
+    var article = document.querySelector('article.block');
+    if (nav && article && nav.parentElement !== article) article.appendChild(nav);
+  }
+  new MutationObserver(place).observe(document.body, { childList: true, subtree: true });
+  window.addEventListener('hashchange', place);
+  place();
+})();
+</script>
 </body>
 </html>

@@ -329,10 +329,19 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       })();
     </script>
     <style id="work-carousel">
-      /* 03 프로젝트 카드 캐러셀: 좌우 버튼과 마우스 드래그로 카드 넘기기 */
+      /* 03 프로젝트: 가운데 카드를 강조하고 양옆 카드는 작아져 뒤로 물러나는 목록 */
       .wk-carousel { position: relative; }
+      .wk-stage { position: relative; width: 100%; overflow: hidden; touch-action: pan-y; }
+      .wk-stage.wk-stage--ready > * {
+        position: absolute !important; top: 0; left: 50%; flex: none !important;
+        width: min(320px, 80vw) !important;
+        transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 520ms ease, filter 520ms ease;
+        will-change: transform, opacity;
+        cursor: pointer;
+      }
+      .wk-stage.is-dragging > * { transition: none; }
       .wk-carousel-btn {
-        position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+        position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
         width: 40px; height: 40px; border-radius: 50%; padding: 0;
         display: flex; align-items: center; justify-content: center;
         background: rgba(20, 22, 28, 0.55); color: #fff;
@@ -342,73 +351,108 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       }
       .wk-carousel-btn:hover { background: rgba(255, 255, 255, 0.94); color: #0a0a0a; }
       .wk-carousel-btn[disabled] { opacity: 0.3; pointer-events: none; }
-      .wk-carousel-btn--prev { left: -8px; }
-      .wk-carousel-btn--next { right: -8px; }
-      .wk-carousel-track { cursor: grab; user-select: none; }
-      .wk-carousel-track.is-dragging { cursor: grabbing; scroll-snap-type: none !important; }
-      .wk-carousel-track.is-dragging * { pointer-events: none; }
+      .wk-carousel-btn--prev { left: 4px; }
+      .wk-carousel-btn--next { right: 4px; }
+      .wk-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+      .wk-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.28); cursor: pointer; }
+      .wk-dots button[aria-current="true"] { background: #ffffff; }
       @media (max-width: 640px) {
         .wk-carousel-btn { width: 34px; height: 34px; }
-        .wk-carousel-btn--prev { left: 0; }
-        .wk-carousel-btn--next { right: 0; }
       }
     </style>
     <script>
       (function () {
+        var POS = [
+          { x: 0,    s: 1,    o: 1,    z: 3 },
+          { x: 0.74, s: 0.86, o: 0.55, z: 2 },
+          { x: 1.3,  s: 0.74, o: 0.25, z: 1 }
+        ];
         function enhance(track) {
           if (track.dataset.wk) return;
           track.dataset.wk = '1';
-          track.classList.add('wk-carousel-track');
+          var items = Array.prototype.slice.call(track.children);
+          if (items.length < 2) return;
           var wrap = track.parentElement;
           wrap.classList.add('wk-carousel');
-          function step(dir) {
-            var first = track.firstElementChild;
-            var w = first ? first.getBoundingClientRect().width + 14 : track.clientWidth * 0.8;
-            track.scrollBy({ left: dir * w, behavior: 'smooth' });
-          }
-          var prev = document.createElement('button');
-          prev.type = 'button'; prev.className = 'wk-carousel-btn wk-carousel-btn--prev';
-          prev.setAttribute('aria-label', '이전 프로젝트');
-          prev.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-          var next = document.createElement('button');
-          next.type = 'button'; next.className = 'wk-carousel-btn wk-carousel-btn--next';
-          next.setAttribute('aria-label', '다음 프로젝트');
-          next.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-          prev.addEventListener('click', function () { step(-1); });
-          next.addEventListener('click', function () { step(1); });
-          wrap.appendChild(prev); wrap.appendChild(next);
-          function sync() {
-            var max = track.scrollWidth - track.clientWidth - 2;
-            prev.disabled = track.scrollLeft <= 2;
-            next.disabled = track.scrollLeft >= max;
-          }
-          track.addEventListener('scroll', sync, { passive: true });
-          window.addEventListener('resize', sync);
-          sync();
-          // 마우스 드래그
-          var down = false, startX = 0, startLeft = 0, moved = false;
-          track.addEventListener('pointerdown', function (e) {
-            if (e.pointerType !== 'mouse') return;
-            down = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
+          var stage = document.createElement('div');
+          stage.className = 'wk-stage';
+          track.parentElement.insertBefore(stage, track);
+          items.forEach(function (it) { stage.appendChild(it); });
+          track.remove();
+          var active = 0;
+          var dots = document.createElement('div');
+          dots.className = 'wk-dots';
+          items.forEach(function (_, i) {
+            var d = document.createElement('button');
+            d.type = 'button'; d.setAttribute('aria-label', (i + 1) + '번째 프로젝트');
+            d.addEventListener('click', function () { go(i); });
+            dots.appendChild(d);
           });
+          function btn(cls, label, path) {
+            var b = document.createElement('button');
+            b.type = 'button'; b.className = 'wk-carousel-btn ' + cls; b.setAttribute('aria-label', label);
+            b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="' + path + '" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            return b;
+          }
+          var prev = btn('wk-carousel-btn--prev', '이전 프로젝트', 'M15 5l-7 7 7 7');
+          var next = btn('wk-carousel-btn--next', '다음 프로젝트', 'M9 5l7 7-7 7');
+          prev.addEventListener('click', function () { go(active - 1); });
+          next.addEventListener('click', function () { go(active + 1); });
+          stage.after(dots); stage.after(next); stage.after(prev);
+          stage.classList.add('wk-stage--ready');
+          function measure() {
+            var h = 0;
+            items.forEach(function (it) { h = Math.max(h, it.offsetHeight); });
+            stage.style.height = h + 'px';
+          }
+          function layout() {
+            var unit = Math.min(230, window.innerWidth * 0.2);
+            items.forEach(function (it, i) {
+              var d = i - active;
+              var ad = Math.abs(d);
+              var pos = POS[Math.min(ad, 2)];
+              var x = d === 0 ? 0 : Math.sign(d) * (ad === 1 ? unit : unit * 1.75);
+              it.style.transform = 'translateX(-50%) translateX(' + x + 'px) scale(' + pos.s + ')';
+              it.style.opacity = ad > 2 ? '0' : String(pos.o);
+              it.style.zIndex = String(pos.z);
+              it.style.pointerEvents = ad > 2 ? 'none' : 'auto';
+              it.style.filter = ad === 0 ? 'none' : 'saturate(0.7)';
+              it.setAttribute('aria-hidden', ad > 2 ? 'true' : 'false');
+            });
+            prev.disabled = active === 0;
+            next.disabled = active === items.length - 1;
+            [].forEach.call(dots.children, function (d, i) { d.setAttribute('aria-current', i === active ? 'true' : 'false'); });
+            measure();
+          }
+          function go(i) {
+            active = Math.max(0, Math.min(items.length - 1, i));
+            layout();
+          }
+          // 옆 카드를 누르면 그 카드를 가운데로
+          items.forEach(function (it, i) {
+            it.addEventListener('click', function (e) {
+              if (i !== active) { e.preventDefault(); e.stopPropagation(); go(i); }
+            }, true);
+          });
+          // 마우스·터치 드래그
+          var sx = 0, dragging = false, moved = false;
+          stage.addEventListener('pointerdown', function (e) { dragging = true; moved = false; sx = e.clientX; });
           window.addEventListener('pointermove', function (e) {
-            if (!down) return;
-            var dx = e.clientX - startX;
-            if (!moved && Math.abs(dx) > 5) { moved = true; track.classList.add('is-dragging'); }
-            if (moved) track.scrollLeft = startLeft - dx;
+            if (!dragging) return;
+            var dx = e.clientX - sx;
+            if (!moved && Math.abs(dx) > 8) { moved = true; stage.classList.add('is-dragging'); }
           });
-          window.addEventListener('pointerup', function () {
-            if (!down) return;
-            down = false;
-            if (moved) {
-              track.classList.remove('is-dragging');
-              track.dataset.justDragged = '1';
-              setTimeout(function () { delete track.dataset.justDragged; }, 0);
-            }
+          window.addEventListener('pointerup', function (e) {
+            if (!dragging) return;
+            dragging = false;
+            stage.classList.remove('is-dragging');
+            var dx = e.clientX - sx;
+            if (moved && Math.abs(dx) > 50) go(active + (dx < 0 ? 1 : -1));
+            if (moved) { stage.dataset.drag = '1'; setTimeout(function () { delete stage.dataset.drag; }, 0); }
           });
-          track.addEventListener('click', function (e) {
-            if (track.dataset.justDragged) { e.preventDefault(); e.stopPropagation(); }
-          }, true);
+          stage.addEventListener('click', function (e) { if (stage.dataset.drag) { e.preventDefault(); e.stopPropagation(); } }, true);
+          window.addEventListener('resize', layout);
+          layout();
         }
         function scan() {
           var work = document.getElementById('work');
@@ -419,6 +463,73 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
         }
         var t = setInterval(function () { if (scan()) clearInterval(t); }, 150);
         setTimeout(function () { clearInterval(t); }, 8000);
+      })();
+    </script>
+    <style id="capture-strip">
+      /* 상세 캡처: 화면 캡처를 가로 필름스트립으로 놓고 드래그·스와이프로 넘긴다 */
+      .cap-strip {
+        display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
+        align-items: flex-start !important; gap: 23px !important;
+        overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
+        padding: 8px 120px 24px !important; box-sizing: border-box;
+        scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+      }
+      .cap-strip::-webkit-scrollbar { display: none; }
+      .cap-strip > * { flex: 0 0 240px !important; width: 240px !important; min-width: 0 !important; scroll-snap-align: start; }
+      .cap-strip img { pointer-events: none; -webkit-user-drag: none; user-select: none; }
+      .cap-strip.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+      .cap-strip.is-dragging * { pointer-events: none; }
+      @media (max-width: 640px) {
+        .cap-strip { padding: 8px 20px 20px !important; gap: 14px !important; }
+        .cap-strip > * { flex: 0 0 190px !important; width: 190px !important; }
+      }
+    </style>
+    <script>
+      (function () {
+        function enhance(container) {
+          if (container.dataset.capStrip) return;
+          container.dataset.capStrip = '1';
+          container.classList.add('cap-strip');
+          var sx = 0, sl = 0, down = false, moved = false;
+          container.addEventListener('pointerdown', function (e) {
+            if (e.pointerType !== 'mouse') return;
+            down = true; moved = false; sx = e.clientX; sl = container.scrollLeft;
+          });
+          window.addEventListener('pointermove', function (e) {
+            if (!down) return;
+            var dx = e.clientX - sx;
+            if (!moved && Math.abs(dx) > 5) { moved = true; container.classList.add('is-dragging'); }
+            if (moved) container.scrollLeft = sl - dx;
+          });
+          window.addEventListener('pointerup', function () {
+            if (!down) return;
+            down = false;
+            if (moved) {
+              container.classList.remove('is-dragging');
+              container.dataset.drag = '1';
+              setTimeout(function () { delete container.dataset.drag; }, 0);
+            }
+          });
+          container.addEventListener('click', function (e) {
+            if (container.dataset.drag) { e.preventDefault(); e.stopPropagation(); }
+          }, true);
+        }
+        function scan() {
+          var anchors = document.querySelectorAll('a[href] img[src*="captures/"]');
+          anchors.forEach(function (img) {
+            var a = img.closest('a');
+            // 캡처 한 장이 들어 있는 칸(열)의 부모가 그 칸들을 모은 그룹 컨테이너
+            var col = a && a.parentElement;
+            var group = col && col.parentElement;
+            if (!group) return;
+            var caps = Array.prototype.filter.call(group.children, function (c) { return c.querySelector('img[src*="captures/"]'); });
+            if (caps.length >= 2 && !group.dataset.capStrip) enhance(group);
+          });
+        }
+        var t = setInterval(scan, 300);
+        window.addEventListener('hashchange', scan);
+        setTimeout(function () { clearInterval(t); }, 20000);
       })();
     </script>
   </head>

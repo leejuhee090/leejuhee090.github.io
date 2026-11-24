@@ -419,7 +419,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           }
           var prev = btn('wk-carousel-btn--prev', '이전 프로젝트', '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>');
           var next = btn('wk-carousel-btn--next', '다음 프로젝트', '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg>');
-          prev.addEventListener('click', function () { go(active - 1); });
+          prev.addEventListener('click', function () { if (active > 2) go(active - 1); });
           next.addEventListener('click', function () { go(active + 1); });
           var sw = document.createElement('div');
           sw.className = 'wk-stage-wrap';
@@ -470,7 +470,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
               it.style.filter = ad === 0 ? 'none' : 'saturate(0.7)';
               it.setAttribute('aria-hidden', ad > 2 ? 'true' : 'false');
             });
-            prev.disabled = active === 0;
+            prev.disabled = active <= 2; // 왼쪽 버튼은 추후 업데이트 예정 카드(0,1)로 가지 않는다
             next.disabled = active === items.length - 1;
             var isLast = active === items.length - 1;
             latest.hidden = !isLast;

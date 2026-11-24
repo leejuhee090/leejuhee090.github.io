@@ -737,8 +737,8 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     </script>
     <style id="code-reveal">
       /* 코드 패널: 한 줄씩 나타나며, 위로 되돌아가기 전까지 그대로 유지 */
-      .wk-code-line { opacity: 0; transform: translateX(-8px); transition: opacity 320ms ease, transform 320ms ease; }
-      .wk-code-line.is-on { opacity: 1; transform: none; }
+      .wk-code-line { clip-path: inset(0 100% 0 0); }
+      .wk-code-line.is-on { clip-path: inset(0 0 0 0); transition: clip-path 620ms steps(26, end); }
       @media (prefers-reduced-motion: reduce) { .wk-code-line { opacity: 1; transform: none; transition: none; } }
     </style>
     <script>
@@ -756,28 +756,29 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           var lines = Array.prototype.slice.call(box.children);
           if (lines.length < 2) return;
           box.dataset.codeReveal = '1';
-          // 기본은 모든 줄이 보인다. 아래에서 올라와 들어올 때만 한 줄씩 나타나도록 숨긴다.
-          var armed = false;
-          function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+          lines.forEach(function (l) { l.classList.add('wk-code-line'); });
+          var typed = false;
           function hideAll() {
-            clearTimers();
-            lines.forEach(function (l) { l.classList.add('wk-code-line'); l.classList.remove('is-on'); });
+            timers.forEach(clearTimeout); timers = [];
+            lines.forEach(function (l) { l.classList.remove('is-on'); l.style.transitionDelay = '0ms'; });
+            typed = false;
           }
-          function play() {
-            hideAll();
-            armed = false;
+          // 화면에 들어서면 한 줄씩 코딩하듯 타이핑되고, 위로 올려 패널이 아래로 빠질 때까지 유지한다
+          function type() {
+            if (typed) return;
+            typed = true;
             lines.forEach(function (l, i) {
-              timers.push(setTimeout(function () { l.classList.add('is-on'); }, 60 + i * 130));
+              timers.push(setTimeout(function () { l.classList.add('is-on'); }, 150 + i * 700));
             });
           }
-          resets.push(function () { if (armed || box.dataset.played) { box.dataset.played = ''; hideAll(); armed = true; } });
+          resets.push(hideAll);
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (en) {
               var top = en.boundingClientRect.top;
-              if (top > window.innerHeight) { armed = true; box.dataset.played = ''; return; }
-              if (en.isIntersecting && armed && top < window.innerHeight * 0.85) { box.dataset.played = '1'; play(); }
+              if (top > window.innerHeight) { hideAll(); return; } // 위로 올려 아래로 빠짐 → 다시 준비
+              if (en.isIntersecting && en.intersectionRatio >= 0.25) type();
             });
-          }, { threshold: [0, 0.3] });
+          }, { threshold: [0, 0.25] });
           io.observe(box);
         }
         function scan() {

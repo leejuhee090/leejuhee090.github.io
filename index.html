@@ -756,27 +756,29 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           var lines = Array.prototype.slice.call(box.children);
           if (lines.length < 2) return;
           box.dataset.codeReveal = '1';
-          lines.forEach(function (l) { l.classList.add('wk-code-line'); });
+          // 기본은 모든 줄이 보인다. 아래에서 올라와 들어올 때만 한 줄씩 나타나도록 숨긴다.
+          var armed = false;
           function clearTimers() { timers.forEach(clearTimeout); timers = []; }
-          function play() {
+          function hideAll() {
             clearTimers();
+            lines.forEach(function (l) { l.classList.add('wk-code-line'); l.classList.remove('is-on'); });
+          }
+          function play() {
+            hideAll();
+            armed = false;
             lines.forEach(function (l, i) {
-              timers.push(setTimeout(function () { l.classList.add('is-on'); }, i * 130));
+              timers.push(setTimeout(function () { l.classList.add('is-on'); }, 60 + i * 130));
             });
           }
-          function reset() {
-            clearTimers();
-            lines.forEach(function (l) { l.classList.remove('is-on'); });
-          }
+          resets.push(function () { if (armed || box.dataset.played) { box.dataset.played = ''; hideAll(); armed = true; } });
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (en) {
               var top = en.boundingClientRect.top;
-              if (en.isIntersecting && top < window.innerHeight * 0.85 && top > -en.boundingClientRect.height && !box.dataset.played) { box.dataset.played = '1'; play(); }
-              else if (top > window.innerHeight) { box.dataset.played = ''; reset(); }
+              if (top > window.innerHeight) { armed = true; box.dataset.played = ''; return; }
+              if (en.isIntersecting && armed && top < window.innerHeight * 0.85) { box.dataset.played = '1'; play(); }
             });
           }, { threshold: [0, 0.3] });
           io.observe(box);
-          resets.push(reset);
         }
         function scan() {
           var boxes = document.querySelectorAll('div');

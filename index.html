@@ -920,14 +920,10 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       var l = document.createElement('link'); l.id = 'cui-css'; l.rel = 'stylesheet'; l.href = BASE + 'ui.css';
       document.head.appendChild(l);
     }
-    document.getElementById('cui-select').innerHTML = SEL_HTML;
-    document.getElementById('cui-cal').innerHTML = CAL_HTML;
+    document.getElementById('cui-select').innerHTML = '<iframe src="' + BASE + 'demo.html" title="셀렉트와 캘린더 데모" loading="lazy" class="cui-frame"></iframe>';
+    document.getElementById('cui-cal').innerHTML = '';
     fillSource('cui-src-select', 'select.js');
     fillSource('cui-src-cal', 'calendar.js');
-    Promise.all([loadScript('select.js'), loadScript('calendar.js')]).then(function () {
-      if (window.initCustomSelect) window.initCustomSelect(root);
-      if (window.initCalendars) window.initCalendars(root);
-    });
   }
   new MutationObserver(mount).observe(document.body, { childList: true, subtree: true });
   mount();

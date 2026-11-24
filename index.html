@@ -57,15 +57,15 @@
       html:not(.dark) .bg-blob-brand,
       html:not(.dark) .bg-blob-violet,
       html:not(.dark) .bg-stage-brand,
-      html:not(.dark) .bg-stage-violet :not(#components *) {
+      html:not(.dark) .bg-stage-violet:not(#components *) {
         background-image: radial-gradient(60% 60% at 50% 50%, rgba(195, 207, 107, 0.4), transparent 70%) !important;
       }
       html:not(.dark) button[role="switch"][aria-checked="true"],
-      html:not(.dark) [aria-checked="true"].bg-brand :not(#components *) {
+      html:not(.dark) [aria-checked="true"].bg-brand:not(#components *) {
         background-image: none !important;
         background-color: #0c1a0c !important;
       }
-      html:not(.dark) [class*="bg-[linear-gradient"] :not(#components *) {
+      html:not(.dark) [class*="bg-[linear-gradient(135deg,var(--color-brand"]:not(#components *) {
         background-image: linear-gradient(135deg, #c3cf6b, #a9c46a) !important;
       }
       html:not(.dark) .max-\[640px\]\:bg-ios-wallpaper {
@@ -111,15 +111,15 @@
       html.dark .bg-blob-brand,
       html.dark .bg-blob-violet,
       html.dark .bg-stage-brand,
-      html.dark .bg-stage-violet :not(#components *) {
+      html.dark .bg-stage-violet:not(#components *) {
         background-image: none !important;
       }
       html.dark [aria-checked="true"].bg-brand,
-      html.dark button[role="switch"][aria-checked="true"] :not(#components *) {
+      html.dark button[role="switch"][aria-checked="true"]:not(#components *) {
         background-image: none !important;
         background-color: var(--color-brand) !important;
       }
-      html.dark [class*="bg-[linear-gradient"] :not(#components *) {
+      html.dark [class*="bg-[linear-gradient(135deg,var(--color-brand"]:not(#components *) {
         background-image: none !important;
         background-color: var(--color-brand) !important;
         color: var(--color-text-on-brand);
@@ -695,9 +695,9 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     </style>
     <style id="card-thumb-bg">
       /* 카드 썸네일 기본 배경: 흰색 */
-      [class*="bg-[linear-gradient(135deg,var(--color-surface-muted)"] { background-color: #ffffff !important; background-image: none !important; }
+      html body [class*="bg-[linear-gradient(135deg,var(--color-surface-muted)"] { background-color: #ffffff !important; background-image: none !important; }
       /* 썸네일 안의 기본 자리표시 블록(하늘색)도 흰색으로 */
-      [class*="bg-[linear-gradient(135deg,var(--color-surface-muted)"] span { background-color: #ffffff !important; background-image: none !important; opacity: 1 !important; }
+      html body [class*="bg-[linear-gradient(135deg,var(--color-surface-muted)"] span { background-color: #ffffff !important; background-image: none !important; opacity: 1 !important; }
     </style>
     <style id="card-bottom-link">
       /* 03 카드: 상세보기 줄을 카드 맨 아래에 고정 */

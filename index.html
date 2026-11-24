@@ -434,6 +434,7 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
               it.style.transform = 'translateX(-50%) translateX(' + x + 'px) translateY(' + lift + 'px) scale(' + pos.s + ')';
               it.style.opacity = ad > 2 ? '0' : String(pos.o);
               it.style.zIndex = String(pos.z);
+              it.style.transitionDelay = intro ? (ad * 110) + 'ms' : '0ms';
               it.style.pointerEvents = ad > 2 ? 'none' : 'auto';
               it.style.filter = ad === 0 ? 'none' : 'saturate(0.7)';
               it.setAttribute('aria-hidden', ad > 2 ? 'true' : 'false');
@@ -486,7 +487,39 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
             }
           }, { passive: false });
           window.addEventListener('resize', layout);
-          layout();
+          // 등장 액션: 03 섹션에 스크롤이 닿을 때마다 카드가 가운데에 모였다가 좌우로 펼쳐진다
+          var intro = false, introTimer = null;
+          function gather() {
+            items.forEach(function (it) {
+              it.style.transition = 'none';
+              it.style.transform = 'translateX(-50%) scale(0.5)';
+              it.style.opacity = '0';
+            });
+            stage.offsetHeight; // 강제 리플로우: 모인 상태를 먼저 그린다
+            items.forEach(function (it) { it.style.transition = ''; });
+          }
+          function play() {
+            intro = true;
+            layout();
+            clearTimeout(introTimer);
+            introTimer = setTimeout(function () { intro = false; }, 1100);
+          }
+          function enter() {
+            gather();
+            requestAnimationFrame(function () { requestAnimationFrame(play); });
+          }
+          if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+              entries.forEach(function (en) {
+                if (en.isIntersecting && en.intersectionRatio >= 0.2) enter();
+              });
+            }, { threshold: [0, 0.2] });
+            io.observe(document.getElementById('work') || stage);
+            gather();
+          } else {
+            play();
+          }
+          measure();
         }
         function scan() {
           var work = document.getElementById('work');

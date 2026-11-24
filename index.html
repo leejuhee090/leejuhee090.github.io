@@ -689,6 +689,37 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       .wk-stage article { display: flex; flex-direction: column; }
       .wk-stage article > div:last-child { margin-top: auto; }
     </style>
+    <style id="card-libs">
+      .wk-lib-chip { display:inline-block; margin:0 6px 6px 0; padding:4px 10px; border-radius:999px; border:1px solid rgba(127,127,127,.4); font-size:12px; line-height:1.4; }
+    </style>
+    <script>
+      (function () {
+        var EXTRA = {"국가통합바이오빅데이터": ["sbGrid", "sbChart", "kupload"], "고려해운 내부전산": ["REST API"], "글로비스 내부전산": ["REST API"]};
+        function apply() {
+          var articles = document.querySelectorAll('#work article');
+          if (!articles.length) return false;
+          Array.prototype.forEach.call(articles, function (a) {
+            if (a.dataset.libs) return;
+            var text = a.textContent || '';
+            Object.keys(EXTRA).forEach(function (key) {
+              if (a.dataset.libs || text.indexOf(key) < 0) return;
+              a.dataset.libs = '1';
+              var row = document.createElement('div');
+              row.className = 'wk-lib-row';
+              row.innerHTML = EXTRA[key].map(function (l) { return '<span class="wk-lib-chip">' + l + '</span>'; }).join('');
+              // 기존 태그 줄 바로 뒤에 붙인다
+              var chips = a.querySelectorAll('[class*="rounded-full"]');
+              var last = chips.length ? chips[chips.length - 1] : null;
+              var host = last ? (last.parentElement || a) : a;
+              host.appendChild(row);
+            });
+          });
+          return true;
+        }
+        var t = setInterval(function () { if (apply()) clearInterval(t); }, 300);
+        setTimeout(function () { clearInterval(t); }, 12000);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

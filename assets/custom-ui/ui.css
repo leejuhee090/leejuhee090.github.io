@@ -728,7 +728,7 @@ input[type='text'].datepicker-input:disabled {
 /* 상세 페이지 데모 레이아웃 */
 #cui-demo { display: grid; gap: 16px; grid-template-columns: 1fr; }
 #cui-demo .cui-col { display: grid; gap: 10px; min-width: 0; }
-#cui-demo h5 { font-size: 13px; font-weight: 700; color: #222; margin: 0; }
+#cui-demo h5 { font-size: 13px; font-weight: 700; color: inherit; margin: 0; }
 #cui-demo .cui-demo-box { background: #fff; border: 1px solid #d6d6db; border-radius: 10px; padding: 14px; color: #222; }
 #cui-demo .cui-src { margin: 0; max-height: 260px; overflow: auto; background: #111; color: #e6e6e6; border-radius: 10px; padding: 12px; font: 11px/1.6 ui-monospace, Menlo, monospace; white-space: pre; }
 @media (min-width: 900px) { #cui-demo { grid-template-columns: 1fr 1fr; } }
@@ -774,3 +774,10 @@ input[type='text'].datepicker-input:disabled {
 @media (min-width: 900px) { #cui-select .cui-frame { height: 820px; } }
 #cui-select .cui-frame { height: auto; min-height: 300px; }
 @media (min-width: 900px) { #cui-select .cui-frame { height: auto; min-height: 300px; } }
+
+/* 상세 페이지: PC에서는 데모를 본문 전체 폭으로 표시 (블록 4개가 한 줄) */
+#cui-demo { grid-template-columns: 1fr !important; }
+#cui-demo > .cui-col:first-child { grid-column: 1 / -1; }
+
+/* 소스 제목은 페이지 테마 색을 따름 */
+#cui-demo h5 { color: var(--color-text-primary, inherit); }

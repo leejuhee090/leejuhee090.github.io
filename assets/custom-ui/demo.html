@@ -35,6 +35,17 @@
     #PC .demo-block .datepicker .dtDropdown { max-width: 100% !important; }
     #PC .demo-group h6::after { content: '  ← 옆으로 밀어서 보기'; font-weight: 400; color: #888; font-size: 11px; }
   }
+  /* PC: 블록 4개를 한 줄에 전부 표시 */
+  @media (min-width: 900px) {
+    #PC { padding: 8px 0; }
+    #PC .demo-row { flex-wrap: nowrap; gap: 12px; }
+    #PC .demo-block { flex: 1 1 0; min-width: 0; width: auto; max-width: none; }
+    #PC .demo-block .datepicker .dtDropdown { max-width: 100% !important; width: 100% !important; }
+    #PC .demo-block .datepicker { max-width: 100% !important; width: 100% !important; }
+    #PC .demo-block .datepicker-header { gap: 2px; }
+    #PC .demo-block .cd-custom-select { min-width: 0; }
+    #PC .demo-block .arrow-btn { width: 24px; }
+  }
   @media (max-width: 480px) { #PC { padding: 8px; } }
 </style>
 </head>

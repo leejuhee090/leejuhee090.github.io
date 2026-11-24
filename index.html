@@ -257,10 +257,10 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
     </style>
     <script>
       (function () {
-        var PREV = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        var NEXT = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        var HOME = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
-        var UP = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        var PREV = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>';
+        var NEXT = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg>';
+        var HOME = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM13 19H18V9.15745L12 3.7029L6 9.15745V19H11V13H13V19Z"></path></svg>';
+        var UP = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M11.9999 10.8284L7.0502 15.7782L5.63599 14.364L11.9999 8L18.3639 14.364L16.9497 15.7782L11.9999 10.8284Z"></path></svg>';
         var top, home, toprBtn, toast, toastName;
         function build() {
           top = document.createElement('div'); top.className = 'detail-nav-top';
@@ -361,11 +361,12 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
       .wk-carousel-btn--prev { left: 4px; }
       .wk-carousel-btn--next { right: 4px; }
       .wk-latest-card {
-        position: absolute; left: 50%; top: 16px; z-index: 4; display: flex; align-items: center; justify-content: center;
-        padding: 16px; box-sizing: border-box; border: 0; border-radius: 14px; background: #ffffff; color: #0a0a0a;
-        font-size: 15px; font-weight: 600; text-align: center; cursor: pointer;
-        box-shadow: 0 8px 22px rgba(0,0,0,.12); transition: transform 520ms cubic-bezier(0.22,1,0.36,1), opacity 520ms ease;
+        position: absolute; left: 50%; z-index: 4; display: flex; align-items: center; justify-content: center;
+        padding: 0; box-sizing: border-box; border: 0; border-radius: 50%; background: #ffffff; color: #0a0a0a;
+        cursor: pointer; box-shadow: 0 8px 22px rgba(0,0,0,.14); transition: transform 520ms cubic-bezier(0.22,1,0.36,1), opacity 520ms ease, box-shadow 200ms ease;
       }
+      .wk-latest-card svg { width: 22px; height: 22px; display: block; }
+      .wk-latest-card:hover { box-shadow: 0 12px 28px rgba(0,0,0,.2); }
       .wk-latest-card[hidden] { display: none; }
       .wk-latest-card:hover { box-shadow: 0 12px 28px rgba(0,0,0,.18); }
       .wk-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
@@ -413,11 +414,11 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           function btn(cls, label, path) {
             var b = document.createElement('button');
             b.type = 'button'; b.className = 'wk-carousel-btn ' + cls; b.setAttribute('aria-label', label);
-            b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="' + path + '" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            b.innerHTML = path;
             return b;
           }
-          var prev = btn('wk-carousel-btn--prev', '이전 프로젝트', 'M15 5l-7 7 7 7');
-          var next = btn('wk-carousel-btn--next', '다음 프로젝트', 'M9 5l7 7-7 7');
+          var prev = btn('wk-carousel-btn--prev', '이전 프로젝트', '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>');
+          var next = btn('wk-carousel-btn--next', '다음 프로젝트', '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg>');
           prev.addEventListener('click', function () { go(active - 1); });
           next.addEventListener('click', function () { go(active + 1); });
           var sw = document.createElement('div');
@@ -428,7 +429,8 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           // 마지막 카드 오른쪽의 카드형 버튼: 같은 레이어(스테이지 안)에 두고, 높이는 마지막 카드와 같게 맞춘다
           var latest = document.createElement('button');
           latest.type = 'button'; latest.className = 'wk-latest-card';
-          latest.innerHTML = '<span>&lt;&lt; 최근 프로젝트로 가기</span>';
+          latest.innerHTML = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z"></path></svg>';
+          latest.setAttribute('aria-label', '최근 프로젝트로 가기');
           latest.hidden = true;
           latest.addEventListener('click', function () { go(2); });
           stage.appendChild(latest);
@@ -464,9 +466,9 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
             if (isLast) {
               var lastItem = items[items.length - 1];
               var h = Math.round(lastItem.getBoundingClientRect().height);
-              latest.style.setProperty('width', '240px', 'important');
-              latest.style.setProperty('height', h + 'px', 'important');
-              latest.style.top = '16px';
+              latest.style.setProperty('width', '56px', 'important');
+              latest.style.setProperty('height', '56px', 'important');
+              latest.style.top = 'calc(50% - 28px)';
               latest.style.transform = 'translateX(-50%) translateX(' + (unit * 1.75) + 'px)';
               latest.style.opacity = '1';
               latest.style.zIndex = '4';

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이주희 포트폴리오</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css" />
-    <script type="module" crossorigin src="/assets/index-Ajc3QKXz.js?v=7"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CACxsV76.css?v=7">
+    <script type="module" crossorigin src="/assets/index-Dq5Sjn2H.js?v=8"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CACxsV76.css?v=8">
     <style>
       button[aria-label="화면 테마 전환"] > span[aria-hidden="true"] {
         position: relative; display: inline-block; width: 38px; height: 21px; border-radius: 999px;
@@ -474,19 +474,23 @@ body:not(.is-detail) .detail-nav-top,body:not(.is-detail) .detail-home-btn,body:
           }
           function layout() {
             var unit = Math.min(230, window.innerWidth * 0.2);
+            // 좁은 화면은 옆 카드가 가운데 카드를 거의 다 덮어 겹쳐 보인다. 한 장만 보여 준다.
+            var solo = window.innerWidth < 768;
             items.forEach(function (it, i) {
               var d = i - active;
               var ad = Math.abs(d);
               var pos = POS[Math.min(ad, 2)];
-              var x = d === 0 ? 0 : Math.sign(d) * (ad === 1 ? unit : unit * 1.75);
+              var off = solo ? unit * 2.6 : unit;
+              var x = d === 0 ? 0 : Math.sign(d) * (ad === 1 ? off : off * 1.75);
               var lift = 0;
+              var hidden = ad > 2 || (solo && ad > 0);
               it.style.transform = 'translateX(-50%) translateX(' + x + 'px) translateY(' + lift + 'px) scale(' + pos.s + ')';
-              it.style.opacity = ad > 2 ? '0' : String(pos.o);
+              it.style.opacity = hidden ? '0' : String(pos.o);
               it.style.zIndex = String(pos.z);
               it.style.transitionDelay = intro ? (ad * 110) + 'ms' : '0ms';
-              it.style.pointerEvents = ad > 2 ? 'none' : 'auto';
+              it.style.pointerEvents = hidden ? 'none' : 'auto';
               it.style.filter = ad === 0 ? 'none' : 'saturate(0.7)';
-              it.setAttribute('aria-hidden', ad > 2 ? 'true' : 'false');
+              it.setAttribute('aria-hidden', hidden ? 'true' : 'false');
             });
             prev.disabled = active <= 2; // 왼쪽 버튼은 추후 업데이트 예정 카드(0,1)로 가지 않는다
             next.disabled = active === items.length - 1;

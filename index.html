@@ -10,5 +10,12 @@
   </head>
   <body>
     <div id="root"></div>
-  </body>
+  <style id="wireflow-mobile-fix">
+  /* 모바일(640px 이하): 업무 플로우(흐름검증) 영역 전체를 숨김 */
+  @media (max-width: 640px) {
+    #wireflow-embed { display: none !important; }
+  }
+</style>
+
+</body>
 </html>

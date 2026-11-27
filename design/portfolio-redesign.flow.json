@@ -199,34 +199,6 @@
                 "value": "23건"
               }
             ]
-          },
-          {
-            "type": "notice",
-            "label": "읽는 순서를 만들려고 한 줄 소개 → 숫자 요약 → 고객사 차례로 뒀어요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "첫 화면 목표",
-                "value": "무엇을 하는 사람인지 판단"
-              },
-              {
-                "label": "숫자 세 칸",
-                "value": "라벨을 항상 칸 맨 아래로"
-              },
-              {
-                "label": "코드 패널",
-                "value": "한 줄씩 찍어 직무를 보여 줌"
-              }
-            ],
-            "planTag": true
           }
         ]
       },
@@ -245,12 +217,6 @@
           "id": "see-contact",
           "label": "연락처",
           "to": "contact",
-          "kind": "secondary"
-        },
-        {
-          "id": "see-components",
-          "label": "공통 컴포넌트",
-          "to": "components",
           "kind": "secondary"
         }
       ]
@@ -280,34 +246,6 @@
                 "value": "2회"
               }
             ]
-          },
-          {
-            "type": "notice",
-            "label": "연도 나열 대신 분야 비중과 단독·공동 비율, 두 가지만 답해요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "분야별 참여",
-                "value": "도넛 하나로"
-              },
-              {
-                "label": "작업 방식",
-                "value": "한 줄 막대로"
-              },
-              {
-                "label": "차트 색",
-                "value": "테마별로 따로 지정"
-              }
-            ],
-            "planTag": true
           }
         ]
       },
@@ -344,43 +282,7 @@
           "to": "career",
           "kind": "back"
         }
-      ],
-      "ui": {
-        "blocks": [
-          {
-            "type": "notice",
-            "label": "신규 구축이 아니라 운영 중인 소스를 이어받는 순서라 네 단계로 고정했어요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "1단계",
-                "value": "기존 소스 먼저 확인"
-              },
-              {
-                "label": "2단계",
-                "value": "규칙부터 합의"
-              },
-              {
-                "label": "3단계",
-                "value": "검토와 백업"
-              },
-              {
-                "label": "4단계",
-                "value": "인계와 접근성"
-              }
-            ],
-            "planTag": true
-          }
-        ]
-      }
+      ]
     },
     {
       "id": "contact",
@@ -403,26 +305,6 @@
                 "value": "github.com/leejuhee090"
               }
             ]
-          },
-          {
-            "type": "notice",
-            "label": "메일과 GitHub 둘만 남겼어요. 선택지가 적어야 실제로 눌러요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "들어오는 길",
-                "value": "메인 상단 · 상세 하단"
-              }
-            ],
-            "planTag": true
           }
         ]
       },
@@ -443,41 +325,7 @@
       "origin": "source",
       "body": "현재 필터: {{filter}}. 카드를 누르면 상세를 볼 수 있어요.",
       "ui": {
-        "bar": "프로젝트",
-        "blocks": [
-          {
-            "type": "notice",
-            "label": "22건을 한 번에 깔면 고르기 어려워 한 장씩 크게 보여 줘요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "카드 배치",
-                "value": "가운데 1.05배 · 양옆 0.86배"
-              },
-              {
-                "label": "넘기는 법",
-                "value": "화살표 · 드래그 · 휠"
-              },
-              {
-                "label": "768px 미만",
-                "value": "한 장만 · 최근 버튼 숨김"
-              },
-              {
-                "label": "필터",
-                "value": "상세 다녀와도 유지"
-              }
-            ],
-            "planTag": true
-          }
-        ]
+        "bar": "프로젝트"
       },
       "actions": [
         {
@@ -512,12 +360,6 @@
           "set": {
             "filter": "React"
           },
-          "kind": "secondary"
-        },
-        {
-          "id": "see-personal",
-          "label": "개인 프로젝트",
-          "to": "personal",
           "kind": "secondary"
         },
         {
@@ -557,43 +399,10 @@
           {
             "type": "text",
             "label": "작업 포인트와 스타일 / 코드 기준을 이어서 보여 줘요."
-          },
-          {
-            "type": "notice",
-            "label": "캡처가 많아 화면이 길어져요. 돌아갈 버튼을 모서리에 고정했어요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "캡처",
-                "value": "가로 한 줄 · 드래그로 넘김"
-              },
-              {
-                "label": "고정 버튼",
-                "value": "이전 · 다음 · 홈"
-              },
-              {
-                "label": "끝에서",
-                "value": "다음 프로젝트를 안내"
-              }
-            ],
-            "planTag": true
           }
         ]
       },
       "actions": [
-        {
-          "id": "see-captures",
-          "label": "화면 캡처 보기",
-          "to": "captures"
-        },
         {
           "id": "back-projects",
           "label": "프로젝트 목록",
@@ -604,275 +413,6 @@
           "id": "see-contact",
           "label": "연락처",
           "to": "contact",
-          "kind": "secondary"
-        }
-      ]
-    },
-    {
-      "id": "components",
-      "number": "01.05",
-      "title": "공통 컴포넌트",
-      "stage": 0,
-      "origin": "source",
-      "body": "실무에서 쓰는 버튼·배지·셀렉트를 눌러 볼 수 있게 뒀어요.",
-      "ui": {
-        "blocks": [
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "버튼",
-                "value": "크기 · 상태별"
-              },
-              {
-                "label": "배지",
-                "value": "의미별 색 고정"
-              },
-              {
-                "label": "셀렉트 · 달력",
-                "value": "직접 만든 것"
-              }
-            ]
-          },
-          {
-            "type": "notice",
-            "label": "코드를 붙여 놓는 대신 눌러 볼 수 있게 했어요. 동작까지 봐야 품질이 보여요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "planTag": true,
-            "rows": [
-              {
-                "label": "보여 주는 법",
-                "value": "설명 대신 동작하는 예시"
-              },
-              {
-                "label": "색",
-                "value": "토큰으로만, 테마 따라 교체"
-              },
-              {
-                "label": "접근성",
-                "value": "키보드로도 조작"
-              }
-            ]
-          }
-        ]
-      },
-      "actions": [
-        {
-          "id": "see-skills",
-          "label": "기술 보기",
-          "to": "skills"
-        },
-        {
-          "id": "back-home",
-          "label": "메인",
-          "to": "home",
-          "kind": "back"
-        }
-      ]
-    },
-    {
-      "id": "skills",
-      "number": "01.06",
-      "title": "기술",
-      "stage": 0,
-      "origin": "source",
-      "body": "사용 기술과 라이브러리를 한 묶음으로 보여 줘요.",
-      "ui": {
-        "blocks": [
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "언어 · 마크업",
-                "value": "HTML · CSS · JS · TS"
-              },
-              {
-                "label": "프레임워크",
-                "value": "Vue · React"
-              },
-              {
-                "label": "라이브러리",
-                "value": "ag-Grid · ECharts 외"
-              }
-            ]
-          },
-          {
-            "type": "notice",
-            "label": "이름만 적으면 어디에 썼는지 알 수 없어, 라이브러리에만 사용처를 붙였어요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "planTag": true,
-            "rows": [
-              {
-                "label": "말풍선",
-                "value": "라이브러리에만"
-              },
-              {
-                "label": "기본 언어 · 도구",
-                "value": "말풍선 없음"
-              },
-              {
-                "label": "숙련도",
-                "value": "상 · 중만 표기"
-              }
-            ]
-          }
-        ]
-      },
-      "actions": [
-        {
-          "id": "see-contact",
-          "label": "연락처",
-          "to": "contact"
-        },
-        {
-          "id": "back-home",
-          "label": "메인",
-          "to": "home",
-          "kind": "back"
-        }
-      ]
-    },
-    {
-      "id": "personal",
-      "number": "02.02",
-      "title": "개인 프로젝트",
-      "stage": 1,
-      "origin": "source",
-      "body": "회사 일과 별개로 만든 작업을 따로 모아 뒀어요.",
-      "ui": {
-        "blocks": [
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "MyVoiceApp",
-                "value": "React Native · Expo"
-              },
-              {
-                "label": "쇼핑몰 스킨",
-                "value": "카페24"
-              }
-            ]
-          },
-          {
-            "type": "notice",
-            "label": "업무 프로젝트와 섞으면 참여 범위가 흐려져 묶음을 나눴어요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "planTag": true,
-            "rows": [
-              {
-                "label": "분리 이유",
-                "value": "담당 범위를 분명히"
-              },
-              {
-                "label": "들어오는 길",
-                "value": "하단 도크에서 바로"
-              }
-            ]
-          }
-        ]
-      },
-      "actions": [
-        {
-          "id": "open-nh",
-          "label": "업무 프로젝트 보기",
-          "to": "projects"
-        },
-        {
-          "id": "back-home",
-          "label": "메인",
-          "to": "home",
-          "kind": "back"
-        }
-      ]
-    },
-    {
-      "id": "captures",
-      "number": "03.02",
-      "title": "화면 캡처 보기",
-      "stage": 2,
-      "origin": "source",
-      "body": "상세 안에서 캡처를 가로로 넘겨 봐요.",
-      "ui": {
-        "blocks": [
-          {
-            "type": "rows",
-            "rows": [
-              {
-                "label": "배치",
-                "value": "가로 한 줄"
-              },
-              {
-                "label": "넘기는 법",
-                "value": "드래그 · 스와이프"
-              }
-            ]
-          },
-          {
-            "type": "notice",
-            "label": "세로로 쌓으면 상세가 너무 길어져 아래 내용까지 닿지 못해요.",
-            "planTag": true
-          },
-          {
-            "type": "text",
-            "label": "기획 결정",
-            "planTag": true
-          },
-          {
-            "type": "rows",
-            "planTag": true,
-            "rows": [
-              {
-                "label": "세로 쌓기",
-                "value": "쓰지 않음"
-              },
-              {
-                "label": "확대",
-                "value": "눌러서 원본 크기"
-              },
-              {
-                "label": "돌아갈 길",
-                "value": "모서리 버튼 그대로"
-              }
-            ]
-          }
-        ]
-      },
-      "actions": [
-        {
-          "id": "back-detail",
-          "label": "상세로",
-          "to": "detail",
-          "kind": "back"
-        },
-        {
-          "id": "back-projects",
-          "label": "프로젝트 목록",
-          "to": "projects",
           "kind": "secondary"
         }
       ]
